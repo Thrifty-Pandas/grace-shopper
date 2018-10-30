@@ -1,7 +1,7 @@
 {
-  "name": "grace-shopper",
+  "name": "boilermaker",
   "version": "1.0.0",
-  "description": "grace shopper project",
+  "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -96,14 +96,5 @@
     "supertest": "^3.1.0",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Thrifty-Pandas/grace-shopper.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/Thrifty-Pandas/grace-shopper/issues"
-  },
-  "homepage": "https://github.com/Thrifty-Pandas/grace-shopper#readme"
+  }
 }
