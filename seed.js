@@ -6,7 +6,7 @@ const products = [
     name: 'Panda Mug',
     description: 'cup',
     imageUrl: '/images/mug.jpeg',
-    quantity: 15,
+    stock: 15,
     price: 5,
     category: [
         { name: 'kitchen'},
@@ -16,7 +16,7 @@ const products = [
     name: 'Panda at the back',
     description: 'backpack',
     imageUrl: '/images/mug.jpeg',
-    quantity: 10,
+    stock: 10,
     price: 35,
     category: [
         { name: 'accesories'},
@@ -27,7 +27,7 @@ const products = [
     name: 'Panda family',
     description: 'toys',
     imageUrl: '/images/toys.jpg',
-    quantity: 5,
+    stock: 5,
     price: 15,
     category: [
         { name: 'toys'},
@@ -37,7 +37,7 @@ const products = [
     name: 'Cute Keychain',
     description: 'keychain',
     imageUrl: '/images/keychain.jpg',
-    quantity: 4,
+    stock: 4,
     price: 9,
     category: [
         { name: 'accesories'},
@@ -47,7 +47,7 @@ const products = [
     name: 'Panda on my phone',
     description: 'phonecase',
     imageUrl: '/images/phonecase.jpg',
-    quantity: 8,
+    stock: 8,
     price: 16,
     category: [
         { name: 'accesories'},
@@ -57,7 +57,7 @@ const products = [
     name: 'Panda umbrella',
     description: 'umbrella',
     imageUrl: '/images/umbrella.jpg',
-    quantity: 1,
+    stock: 1,
     price: 14,
     category: [
         { name: 'home'},
@@ -68,7 +68,7 @@ const products = [
     name: 'Comfy panda',
     description: 'pillow',
     imageUrl: '/images/pillow.jpg',
-    quantity: 6,
+    stock: 6,
     price: 20,
     category: [
         { name: 'home'},
