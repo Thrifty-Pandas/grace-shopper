@@ -1,6 +1,11 @@
 const User = require('./user')
-const Categories = require('./categories')
-const Products = require('./products')
+
+const Category = require('./category')
+const Product = require('./product')
+
+Product.belongsToMany(Category, {through: 'ProductCategory'})
+
+Category.belongsToMany(Product, {through: 'ProductCategory'})
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -16,7 +21,7 @@ const Products = require('./products')
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User
+  User,
+  Category,
+  Product
 }
-
-Categories.belongsToMany(Products, {through: 'ProductCategories'})
