@@ -1,6 +1,6 @@
 const User = require('./user')
 const Category = require('./category')
-const Product = require('./products')
+const Product = require('./product')
 
 Category.belongsToMany(Product, {through: 'ProductCategory'})
 Product.belongsToMany(Category, {through: 'ProductCategory'})
