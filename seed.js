@@ -8,9 +8,6 @@ const products = [
     imageUrl: '/images/mug.jpeg',
     stock: 15,
     price: 5,
-    category: [
-        { name: 'kitchen'},
-      ]
     },
   {
     name: 'Panda at the back',
@@ -18,10 +15,6 @@ const products = [
     imageUrl: '/images/mug.jpeg',
     stock: 10,
     price: 35,
-    category: [
-        { name: 'accesories'},
-        { name: 'home'},
-      ]
   },
   {
     name: 'Panda family',
@@ -29,9 +22,6 @@ const products = [
     imageUrl: '/images/toys.jpg',
     stock: 5,
     price: 15,
-    category: [
-        { name: 'toys'},
-      ]
   },
   {
     name: 'Cute Keychain',
@@ -39,9 +29,6 @@ const products = [
     imageUrl: '/images/keychain.jpg',
     stock: 4,
     price: 9,
-    category: [
-        { name: 'accesories'},
-      ]
   },
   {
     name: 'Panda on my phone',
@@ -49,9 +36,6 @@ const products = [
     imageUrl: '/images/phonecase.jpg',
     stock: 8,
     price: 16,
-    category: [
-        { name: 'accesories'},
-      ]
   },
   {
     name: 'Panda umbrella',
@@ -59,10 +43,6 @@ const products = [
     imageUrl: '/images/umbrella.jpg',
     stock: 1,
     price: 14,
-    category: [
-        { name: 'home'},
-        { name: 'accesories'},
-      ]
   },
   {
     name: 'Comfy panda',
@@ -70,9 +50,6 @@ const products = [
     imageUrl: '/images/pillow.jpg',
     stock: 6,
     price: 20,
-    category: [
-        { name: 'home'},
-      ]
   }
 ]
 
@@ -111,14 +88,23 @@ const users = [
     },
 ]
 
+const productCategories = [
+    {productId: 1, categoryId: 3},
+    {productId: 2, categoryId: 2},
+    {productId: 3, categoryId: 4},
+    {productId: 4, categoryId: 2},
+    {productId: 5, categoryId: 2},
+    {productId: 6, categoryId: 1},
+    {productId: 6, categoryId: 2},
+    {productId: 7, categoryId: 1},
+]
+
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await Product.bulkCreate(products, {  include: [{
-        model: Categories,
-        as: 'ProductCategory'
-      }]});
+    await Product.bulkCreate(products);
     await Category.bulkCreate(categories);
+    await ProductCategories.bulkCreate(productCategories);
     await User.bulkCreate(users);
   } catch (err) {
     console.log(red(err));
