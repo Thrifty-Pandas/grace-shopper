@@ -16,7 +16,7 @@ const products = [
   {
     name: 'Panda at the back',
     description: 'backpack',
-    imageUrl: '/images/bag.jpeg',
+    imageUrl: '/images/bag.jpg',
     stock: 10,
     price: 35,
   },
