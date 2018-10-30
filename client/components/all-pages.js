@@ -7,9 +7,9 @@ const mapState = ({products}) => ({products})
 
 //requires thunk
 
-const mapProps = {fetchProducts}
+const mapDispatch = {fetchProducts}
 
-export class AllPages extends Component {
+class AllPages extends Component {
   componentDidMount() {
     this.props.fetchProducts()
   }
@@ -26,4 +26,4 @@ export class AllPages extends Component {
   }
 }
 
-export default AllPages
+export default connect(mapState, mapDispatch)(AllPages)
