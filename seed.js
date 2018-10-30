@@ -101,6 +101,14 @@ const users = [
         lastName: 'Dog',
         billingAddress: '100 Superior st, Chicago, IL'
     },
+    {
+        email: 'meow@amail.com',
+        userName: 'meowthecat',
+        password: abcde,
+        firstName: 'Meow',
+        lastName: 'Cat',
+        billingAddress: '200 Super st, Chicago, IL'
+    },
 ]
 
 const seed = async () => {
