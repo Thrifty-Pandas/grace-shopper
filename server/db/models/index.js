@@ -2,28 +2,25 @@ const db = require('../db')
 const User = require('./user')
 const Category = require('./category')
 const Product = require('./product')
+const Reviews = require('./reviews')
 
 const ProductCategory = db.define('productCategory')
 
 Category.belongsToMany(Product, {through: ProductCategory})
 Product.belongsToMany(Category, {through: ProductCategory})
 
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
+Reviews.belongsTo(Product)
+Reviews.belongsTo(User)
 
-/**
- * We'll export all of our models here, so that any time a module needs a model,
- * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
- */
+// including the association on both models instead of just on Reviews so that we can access Sequelize Magic Methods on either model
+
+Product.hasMany(Reviews)
+User.hasMany(Reviews)
+
 module.exports = {
   User,
   Product,
   Category,
-  ProductCategory
+  ProductCategory,
+  Reviews
 }
