@@ -3,15 +3,15 @@ import {Card, Icon, Image, Button} from 'semantic-ui-react'
 
 //expects an entire product object as props
 const ProductCard = props => {
-  const {id, name, description, price, photo} = props
+  const {id, name, description, price, imageUrl} = props
 
   return (
     <Card>
-      <Image src={`/public/${photo}`} />
+      <Image src={`/public${imageUrl}`} />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
         <Card.Meta>
-          <span className="price">{price}</span>
+          <span className="price">${price}</span>
         </Card.Meta>
         <Card.Description>{description}</Card.Description>
       </Card.Content>
