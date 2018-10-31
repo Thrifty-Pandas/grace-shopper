@@ -1,16 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Container, Grid, Card, Divider} from 'semantic-ui-react'
+import {Container, Grid, Card, Divider, Image} from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
 
 class SingleProduct extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      product: this.props.oneProduct
+    }
+  }
+
   componentDidMount() {
     const productId = Number(this.props.match.params.productId)
-    this.props.fetchOneProduct(productId)
+    this.props.fetchProduct(productId)
   }
 
   render() {
-    const product = this.props.oneProduct
+    const product = this.state.product
     return (
       <Grid columns={2} relaxed>
         <Grid.Column>
@@ -38,13 +45,13 @@ class SingleProduct extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    oneProduct: state.selectedProduct
+    oneProduct: state.products.selectedProduct
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchOneProduct: productId => {
+    fetchProduct: productId => {
       dispatch(fetchOneProduct(productId))
     }
   }
