@@ -38,17 +38,10 @@ const User = db.define('user', {
     }
   },
   billingAddress: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isAlphanumeric: true
-    }
+    type: Sequelize.STRING
   },
   shippingAddress: {
-    type: Sequelize.STRING,
-    validate: {
-      isAlphanumeric: true
-    }
+    type: Sequelize.STRING
   },
   password: {
     type: Sequelize.STRING,
