@@ -43,7 +43,6 @@ const User = db.define('user', {
     validate: {
       isAlphanumeric: true
     }
-
   },
   shippingAddress: {
     type: Sequelize.STRING,
@@ -54,8 +53,8 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
     validate: {
-        notEmpty: true,
-        len: [10, 100],
+      notEmpty: true,
+      len: [5, 100]
     },
 
     // Making `.password` act like a func hides it when serializing to JSON.
