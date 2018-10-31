@@ -40,13 +40,13 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
+    const {name, description, stock, price} = req.body
     const [numberOfAffectedRows, affectedRows] = await Product.update(
       {
-        name: req.body.name,
-        description: req.body.description,
-        stock: req.body.stock,
-        price: req.body.price,
-        photo: req.body.photo
+        name,
+        description,
+        stock,
+        price
       },
       {
         where: {id: req.params.productId},
