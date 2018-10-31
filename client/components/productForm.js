@@ -4,15 +4,20 @@ import {connect} from 'react-redux'
 import {addNewProduct, editOneProduct} from '../store/products'
 
 class ProductForm extends Component {
-  state = {
-    name: '',
-    description: '',
-    stock: 0,
-    price: 0
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      description: '',
+      stock: 0,
+      price: 0
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    if (this.props.product) {
+    if (this.props.product.id) {
       const {name, description, stock, price} = this.props.product
       this.setState({name, description, stock, price})
     }
