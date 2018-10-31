@@ -9,7 +9,6 @@ import {categoriesReducer} from './categories'
 
 import {filterReducer} from './filter'
 
-
 const reducer = combineReducers({
   user,
   products: productsReducer,
@@ -17,7 +16,6 @@ const reducer = combineReducers({
   categories: categoriesReducer,
 
   filter: filterReducer
-
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -28,3 +26,4 @@ export default store
 export * from './user'
 export * from './products'
 export * from './categories'
+export * from './filter'
