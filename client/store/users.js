@@ -1,22 +1,21 @@
-import axios from "axios";
+import axios from 'axios'
 
 // action types
-const GET_USERS = "GET_USERS";
-const GET_USER_BY_ID = "GET_USER_BY_ID";
-const CREATE_USER = "CREATE_USER"
+const GET_USERS = 'GET_USERS'
+const GET_USER_BY_ID = 'GET_USER_BY_ID'
+const CREATE_USER = 'CREATE_USER'
 
 //initial state
-const users = []
-
+const initialUsers = []
 
 //action creators
-export const setUsers = (users) => {
+export const setUsers = users => {
   return {
     type: GET_USERS,
     users
   }
 }
-export const addUser = (user) => {
+export const addUser = user => {
   return {
     type: ADD_USER,
     user
@@ -26,7 +25,7 @@ export const addUser = (user) => {
 
 export const fetchUsers = () => async dispatch => {
   try {
-    const res = await axios.get("/api/users")
+    const res = await axios.get('/api/users')
     dispatch(setUsers(res.data))
   } catch (err) {
     console.error(err)
@@ -34,18 +33,18 @@ export const fetchUsers = () => async dispatch => {
 }
 
 //note: may not be needed as this resets the state to the single user that is returned.
-export const fetchUserById = (userId) => async dispatch => {
+export const fetchUserById = userId => async dispatch => {
   try {
-    const res = await axios.get(`api/users/${userId}`);
-    dispatch(setUsers(res.data));
+    const res = await axios.get(`api/users/${userId}`)
+    dispatch(setUsers(res.data))
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 }
-export const createUser = (user) => async dispatch => {
+export const createUser = user => async dispatch => {
   try {
-    const res = await axios.post("/api/users", user);
-    dispatch(addUser(res.data));
+    const res = await axios.post('/api/users', user)
+    dispatch(addUser(res.data))
   } catch (err) {
     console.error(err)
   }
@@ -53,12 +52,12 @@ export const createUser = (user) => async dispatch => {
 //reducer
 
 export const usersReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_USERS:
       return action.users
     case ADD_USER:
       return [...state, action.user]
     default:
-      return state;
+      return state
   }
 }
