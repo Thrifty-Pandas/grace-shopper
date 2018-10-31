@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const initialState = []
+const initialState = {allProducts: [], selectedProduct: {}}
 
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_ONEPRODUCT = 'GET_ONEPRODUCT'
@@ -25,9 +25,9 @@ export const fetchProducts = () => async dispatch => {
   }
 }
 
-export const fetchOneProduct = product => async dispatch => {
+export const fetchOneProduct = productId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/products/${product.id}`)
+    const {data} = await axios.get(`/api/products/${productId}`)
     dispatch(getOneProduct(data))
   } catch (err) {
     console.error(err)
@@ -37,9 +37,9 @@ export const fetchOneProduct = product => async dispatch => {
 export const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return action.products
+      return {...state, allProducts: [...action.products]}
     case GET_ONEPRODUCT:
-      return action.product
+      return {...state, selectedProduct: action.product}
     default:
       return state
   }
