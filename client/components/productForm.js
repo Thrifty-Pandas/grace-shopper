@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Form} from 'semantic-ui-react'
 import {connect} from 'react-redux'
+import {addNewProduct, editOneProduct} from '../store/products'
 
 class ProductForm extends Component {
   state = {
@@ -23,7 +24,11 @@ class ProductForm extends Component {
     evt.preventDefault()
     const {name, description, stock, price} = this.state
     const product = {name, description, stock, price}
-
+    if (this.props.product) {
+      this.props.editProduct(product)
+    } else {
+      this.props.newProduct(product)
+    }
     this.setState({
       name: '',
       description: '',
@@ -33,7 +38,7 @@ class ProductForm extends Component {
   }
 
   render() {
-    const {name, email} = this.state
+    const {name, description, stock, price} = this.state
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -45,9 +50,21 @@ class ProductForm extends Component {
             onChange={this.handleChange}
           />
           <Form.Input
-            placeholder="Email"
-            name="email"
-            value={email}
+            placeholder="Description"
+            name="description"
+            value={description}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            placeholder="Stock"
+            name="stock"
+            value={stock}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            placeholder="Price"
+            name="price"
+            value={price}
             onChange={this.handleChange}
           />
           <Form.Button content="Submit" />
@@ -66,7 +83,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     newProduct: product => {
-      dispatch()
+      dispatch(addNewProduct(product))
+    },
+    editProduct: product => {
+      dispatch(editOneProduct(product))
     }
   }
 }
