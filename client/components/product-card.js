@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
 
 //expects an entire product object as props
-const CardExampleCard = props => {
+const ProductCard = props => {
   const {id, name, description, price, photo} = props
 
   return (
@@ -25,4 +25,4 @@ const CardExampleCard = props => {
   )
 }
 
-export default CardExampleCard
+export default ProductCard
