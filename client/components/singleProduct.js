@@ -17,7 +17,7 @@ class SingleProduct extends React.Component {
           <Card>
             <Image src={product.imageUrl} />
             <Card.Content>
-              <Card.Header>{product.name}</Card.Header>
+              <Card.Header> Product{product.name}</Card.Header>
             </Card.Content>
           </Card>
         </Grid.Column>
