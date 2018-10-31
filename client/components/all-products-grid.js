@@ -18,13 +18,11 @@ class AllProductsGrid extends Component {
     const {allProducts} = products
     return (
       <Grid>
-        <Grid.Row>
-          {allProducts.map(product => (
-            <Grid.Column key={product.id}>
-              <ProductCard {...product} />
-            </Grid.Column>
-          ))}
-        </Grid.Row>
+        {allProducts.map(product => (
+          <Grid.Column key={product.id} width={4}>
+            <ProductCard {...product} />
+          </Grid.Column>
+        ))}
       </Grid>
     )
   }
