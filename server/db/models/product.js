@@ -10,7 +10,7 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT,
     allowNull: false,
-    validate: {allowEmpty: false, len: [50, 500]}
+    validate: {allowEmpty: false, len: [5, 500]}
   },
   stock: {
     type: Sequelize.INTEGER,
