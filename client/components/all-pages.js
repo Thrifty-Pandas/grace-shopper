@@ -2,10 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/products'
 
-//requires store
 const mapState = ({products}) => ({products})
-
-//requires thunk
 
 const mapDispatch = {fetchProducts}
 
