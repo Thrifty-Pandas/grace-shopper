@@ -5,6 +5,7 @@ const initialState = {allProducts: [], selectedProduct: {}}
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_ONEPRODUCT = 'GET_ONEPRODUCT'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
+export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
 export const getProducts = products => ({
   type: GET_PRODUCTS,
@@ -18,6 +19,11 @@ export const getOneProduct = product => ({
 
 export const addProduct = product => ({
   type: ADD_PRODUCT,
+  product
+})
+
+export const editProduct = product => ({
+  type: EDIT_PRODUCT,
   product
 })
 
@@ -48,6 +54,15 @@ export const addNewProduct = product => async dispatch => {
   }
 }
 
+export const editOneProduct = (id, product) => async dispatch => {
+  try {
+    const {data} = await axios.put(`api/products/${id}`, product)
+    dispatch(editProduct(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
@@ -56,6 +71,13 @@ export const productsReducer = (state = initialState, action) => {
       return {...state, selectedProduct: action.product}
     case ADD_PRODUCT:
       return {...state, allProducts: [...state.allProducts, action.product]}
+    case EDIT_PRODUCT:
+      const objIndex = state.allProducts.findIndex(
+        obj => obj.id === action.product.id
+      )
+      const newArr = [...state.allProducts]
+      newArr[objIndex] = action.product
+      return {...state, allProducts: newArr}
     default:
       return state
   }
