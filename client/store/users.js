@@ -23,6 +23,7 @@ export const addUser = user => {
 }
 //thunk creators
 
+// note: admin may never need to see all the users, so this may not be needed.
 export const fetchUsers = () => async dispatch => {
   try {
     const res = await axios.get('/api/users')
@@ -32,7 +33,6 @@ export const fetchUsers = () => async dispatch => {
   }
 }
 
-//note: may not be needed as this resets the state to the single user that is returned.
 export const fetchUserById = userId => async dispatch => {
   try {
     const res = await axios.get(`api/users/${userId}`)
