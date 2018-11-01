@@ -13,7 +13,7 @@ Category.belongsToMany(Product, {through: ProductCategory})
 Product.belongsToMany(Category, {through: ProductCategory})
 
 Product.belongsToMany(Order, {through: OrderProduct})
-Order.belongstoMany(Product, {through: OrderProduct})
+Order.belongsToMany(Product, {through: OrderProduct})
 
 User.hasMany(Order)
 
