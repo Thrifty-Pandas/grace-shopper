@@ -19,11 +19,11 @@ User.hasMany(Order)
 
 Reviews.belongsTo(Product, {
   onDelete: 'CASCADE',
-  foreignKey: {name: 'product_id', allowNull: false}
+  foreignKey: {name: 'productId', allowNull: false}
 })
 Reviews.belongsTo(User, {
   onDelete: 'CASCADE',
-  foreignKey: {name: 'user_id', allowNull: false}
+  foreignKey: {name: 'userId', allowNull: false}
 })
 
 Product.belongsToMany(Cart, {through: CartProduct})
