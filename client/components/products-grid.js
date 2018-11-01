@@ -6,10 +6,9 @@ import {Grid} from 'semantic-ui-react'
 
 const ProductsGrid = props => {
   const {products} = props
-  const {allProducts} = products
   return (
     <Grid>
-      {allProducts.map(product => (
+      {products.map(product => (
         <Grid.Column key={product.id} width={4}>
           <ProductCard {...product} />
         </Grid.Column>

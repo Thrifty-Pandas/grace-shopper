@@ -3,14 +3,21 @@ import {ProductsGrid, FilterForm} from './index'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
 
-const mapState = ({products, filter}) => ({products, filter})
+const mapState = ({products, filter}) => ({
+  products: products.allProducts,
+  filter
+})
 
 const mapDispatch = {fetchProducts}
 
 const filterProducts = (products, categoryFilters) => {
   if (categoryFilters.length) {
     return products.filter(product => {
-      product.categories.includes(...categoryFilters)
+      //at least one of the product's categories should be included in the category filter selection
+
+      return product.categories.some(category =>
+        categoryFilters.includes(category.id)
+      )
     })
   } else {
     return products
@@ -18,28 +25,14 @@ const filterProducts = (products, categoryFilters) => {
 }
 
 export class AllProducts extends Component {
-  constructor() {
-    super()
-    this.state = {
-      productsToDisplay: []
-    }
-  }
-
   async componentDidMount() {
     await this.props.fetchProducts()
-    const {products, filter} = this.props
-    const filteredProducts = filterProducts(products, filter)
-    this.setState({productsToDisplay: filteredProducts})
-  }
-
-  componentDidUpdate() {
-    const {products, filter} = this.props
-    const filteredProducts = filterProducts(products, filter)
-    this.setState({productsToDisplay: filteredProducts})
   }
 
   render() {
-    const {productsToDisplay} = this.state
+    const {products, filter} = this.props
+    const productsToDisplay = filterProducts(products, filter)
+    console.log('products to display: ', productsToDisplay)
     return (
       <div>
         <FilterForm />
