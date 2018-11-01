@@ -15,7 +15,6 @@ Product.belongsToMany(Order, {through: OrderProduct})
 Order.belongstoMany(Product, {through: OrderProduct})
 
 User.hasMany(Order)
-Order.belongsTo(User)
 
 Reviews.belongsTo(Product)
 Reviews.belongsTo(User)
