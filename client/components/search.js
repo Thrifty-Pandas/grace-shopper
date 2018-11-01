@@ -53,7 +53,7 @@ class Search extends Component {
     )
   }
 }
-const mapDispatch = dispatch => {
+const mapDispatch = {setResults}
   return {
     setResults: resultArray => dispatch(setResults(resultArray))
   }
