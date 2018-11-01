@@ -23,9 +23,9 @@ class Search extends Component {
     this.props.setResults(resultArray)
   }
   createSearchResults = searchString => {
-    const state = store.getState()
+    const products = this.props.products.allProducts
 
-    const results = state.products.allProducts.filter(product => {
+    const results = products.filter(product => {
       if (product.name.toLowerCase() === searchString.toLowerCase()) {
         return product.id
       }
@@ -53,9 +53,7 @@ class Search extends Component {
     )
   }
 }
+const mapState = ({products}) => ({products})
 const mapDispatch = {setResults}
-  return {
-    setResults: resultArray => dispatch(setResults(resultArray))
-  }
-}
-export default connect(null, mapDispatch)(Search)
+
+export default connect(mapState, mapDispatch)(Search)
