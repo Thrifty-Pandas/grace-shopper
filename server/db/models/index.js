@@ -3,12 +3,19 @@ const User = require('./user')
 const Category = require('./category')
 const Product = require('./product')
 const Reviews = require('./reviews')
+const Order = require('./order')
 const Cart = require('./cart')
 const CartProduct = require('./cartProduct')
-
 const ProductCategory = db.define('productCategory')
+const OrderProduct = db.define('OrderProduct')
+
 Category.belongsToMany(Product, {through: ProductCategory})
 Product.belongsToMany(Category, {through: ProductCategory})
+
+Product.belongsToMany(Order, {through: OrderProduct})
+Order.belongstoMany(Product, {through: OrderProduct})
+
+User.hasMany(Order)
 
 Reviews.belongsTo(Product, {
   onDelete: 'CASCADE',
@@ -18,6 +25,7 @@ Reviews.belongsTo(User, {
   onDelete: 'CASCADE',
   foreignKey: {name: 'user_id', allowNull: false}
 })
+
 Product.belongsToMany(Cart, {through: CartProduct})
 Cart.belongsToMany(Product, {through: CartProduct})
 
