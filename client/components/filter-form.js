@@ -55,7 +55,7 @@ export class FilterForm extends Component {
           ))}
         </Form.Group>
 
-        <Button>
+        <Button type="submit">
           <Icon name="filter" />
           Apply Filter
         </Button>
