@@ -10,7 +10,7 @@ const mapState = ({products, filter}) => ({
 
 const mapDispatch = {fetchProducts}
 
-const filterProducts = (products, categoryFilters) => {
+const filterProducts = (products, categoryFilters, searchResultIds) => {
   if (categoryFilters.length) {
     return products.filter(product => {
       //at least one of the product's categories should be included in the category filter selection
@@ -25,14 +25,13 @@ const filterProducts = (products, categoryFilters) => {
 }
 
 export class AllProducts extends Component {
-  async componentDidMount() {
-    await this.props.fetchProducts()
+  componentDidMount() {
+    this.props.fetchProducts()
   }
 
   render() {
     const {products, filter} = this.props
     const productsToDisplay = filterProducts(products, filter)
-    console.log('products to display: ', productsToDisplay)
     return (
       <div>
         <FilterForm />
