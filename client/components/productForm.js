@@ -4,15 +4,18 @@ import {connect} from 'react-redux'
 import {addNewProduct, editOneProduct} from '../store/products'
 
 class ProductForm extends Component {
-  state = {
-    name: '',
-    description: '',
-    stock: 0,
-    price: 0
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      description: '',
+      stock: 0,
+      price: 0
+    }
   }
 
   componentDidMount() {
-    if (this.props.product) {
+    if (this.props.product.id) {
       const {name, description, stock, price} = this.props.product
       this.setState({name, description, stock, price})
     }
@@ -22,8 +25,9 @@ class ProductForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    const {name, description, stock, price} = this.state
-    const product = {name, description, stock, price}
+    const {name, description, stock, price, imageUrl} = this.state
+    const product = {name, description, stock, price, imageUrl}
+    
     if (this.props.product) {
       this.props.editProduct(product)
     } else {
@@ -33,38 +37,50 @@ class ProductForm extends Component {
       name: '',
       description: '',
       stock: 0,
-      price: 0
+      price: 0,
+      imageUrl: ''
     })
   }
 
   render() {
-    const {name, description, stock, price} = this.state
+    const {name, description, stock, price, imageUrl} = this.state
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
+          <label>Product Name</label>
           <Form.Input
             placeholder="Name"
             name="name"
             value={name}
             onChange={this.handleChange}
           />
+          <label>Description</label>
           <Form.Input
             placeholder="Description"
             name="description"
             value={description}
             onChange={this.handleChange}
           />
+          <label>Stock</label>
           <Form.Input
             placeholder="Stock"
             name="stock"
             value={stock}
             onChange={this.handleChange}
           />
+          <label>Price</label>
           <Form.Input
             placeholder="Price"
             name="price"
             value={price}
+            onChange={this.handleChange}
+          />
+          <label>Image</label>
+          <Form.Input
+            placeholder="Image URL"
+            name="imageUrl"
+            value={imageUrl}
             onChange={this.handleChange}
           />
           <Form.Button content="Submit" />
@@ -76,7 +92,7 @@ class ProductForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.products.selectedproduct
+    product: state.products.selectedProduct
   }
 }
 
