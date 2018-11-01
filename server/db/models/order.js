@@ -17,6 +17,11 @@ const Order = db.define('order', {
       isEmail: true
     }
   },
+  price: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {isNumeric: true, min: 0}
+  },
   temporaryUserId: {
     type: Sequelize.INTEGER,
     allowNull: true
