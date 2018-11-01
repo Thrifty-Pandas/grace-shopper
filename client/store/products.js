@@ -77,7 +77,7 @@ export const productsReducer = (state = initialState, action) => {
       )
       const newArr = [...state.allProducts]
       newArr[objIndex] = action.product
-      return {...state, allProducts: newArr}
+      return {...state, allProducts: newArr, selectedProduct: action.product}
     default:
       return state
   }
