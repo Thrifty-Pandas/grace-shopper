@@ -4,18 +4,20 @@ import {connect} from 'react-redux'
 import {addNewProduct, editOneProduct} from '../store/products'
 
 class ProductForm extends Component {
-  state = {
-    name: '',
-    description: '',
-    stock: 0,
-    price: 0,
-    imageUrl: ''
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      description: '',
+      stock: 0,
+      price: 0
+    }
   }
 
   componentDidMount() {
     if (this.props.product.id) {
-      const {name, description, stock, price, imageUrl} = this.props.product
-      this.setState({name, description, stock, price, imageUrl})
+      const {name, description, stock, price} = this.props.product
+      this.setState({name, description, stock, price})
     }
   }
 

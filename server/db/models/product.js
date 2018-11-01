@@ -5,22 +5,22 @@ const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {allowEmpty: false}
+    validate: {notEmpty: true}
   },
   description: {
     type: Sequelize.TEXT,
     allowNull: false,
-    validate: {allowEmpty: false, len: [5, 500]}
+    validate: {notEmpty: true, len: [5, 500]}
   },
   stock: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    validate: {allowEmpty: false, min: 0}
+    validate: {isNumeric: true, min: 0}
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false,
-    validate: {allowEmpty: false, isNumeric: true, min: 0}
+    validate: {isNumeric: true, min: 0}
   },
   imageUrl: {
     type: Sequelize.STRING,
