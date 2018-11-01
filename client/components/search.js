@@ -27,7 +27,7 @@ class Search extends Component {
 
     const results = state.products.allProducts.filter(product => {
       if (product.name.toLowerCase() === searchString.toLowerCase()) {
-        return product
+        return product.id
       }
     })
 
