@@ -12,8 +12,6 @@ class ProductForm extends Component {
       stock: 0,
       price: 0
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
