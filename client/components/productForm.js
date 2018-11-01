@@ -28,7 +28,7 @@ class ProductForm extends Component {
     const {name, description, stock, price, imageUrl} = this.state
     const product = {name, description, stock, price, imageUrl}
     
-    if (this.props.product) {
+    if (this.props.product.id) {
       this.props.editProduct(product)
     } else {
       this.props.newProduct(product)
