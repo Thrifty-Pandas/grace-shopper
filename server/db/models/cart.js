@@ -6,7 +6,7 @@ const Cart = db.define('cart', {
     type: Sequelize.INTEGER,
     allowNull: true
   },
-  uuid: {
+  temporaryUserId: {
     type: Sequelize.INTEGER,
     allowNull: true
   }
