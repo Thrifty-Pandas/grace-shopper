@@ -39,6 +39,7 @@ class Search extends Component {
         <form onSubmit={this.handleSubmit}>
           <div>
             <Input
+              icon="search"
               name="search"
               type="text"
               placeholder="Search..."
