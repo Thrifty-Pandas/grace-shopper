@@ -25,7 +25,7 @@ router.post('/:productId', async (req, res, next) => {
     // Find product:
     const product = await Product.findById(req.params.id)
 
-    // Take cart and product and create instance on CartProduct with foreign keys to each model
+    // Take cart and product and create instance on CartProduct with foreign keys referring to Cart model and Product model
     const newProductInCart = await CartProduct.create({
       CartId: cart.id,
       ProductId: product.id,
