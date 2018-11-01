@@ -14,15 +14,16 @@ export class FilterForm extends Component {
   }
 
   handleUpdate = e => {
-    if (this.state.filterSelection.includes(e.target.id)) {
+    const categoryId = Number(e.target.id)
+    if (this.state.filterSelection.includes(categoryId)) {
       this.setState({
         filterSelection: this.state.filterSelection.filter(
-          id => id !== e.target.id
+          id => id !== categoryId
         )
       })
     } else {
       this.setState({
-        filterSelection: [...this.state.filterSelection, e.target.id]
+        filterSelection: [...this.state.filterSelection, categoryId]
       })
     }
   }
