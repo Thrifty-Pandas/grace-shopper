@@ -5,7 +5,8 @@ const {
   User,
   Product,
   Category,
-  ProductCategory
+  ProductCategory,
+  Review
 } = require('../server/db/models')
 
 const products = [
@@ -106,6 +107,69 @@ const productCategories = [
   {productId: 7, categoryId: 1}
 ]
 
+const reviews = [
+  {
+    text: 'Love this mug!',
+    stars: 5,
+    productId: 1,
+    userId: 1
+  },
+  {
+    text: 'Good mug. Has yet to break',
+    stars: 4,
+    productId: 1,
+    userId: 1
+  },
+  {
+    text: 'I did not get wet in the rain after using this umbrella',
+    stars: 5,
+    productId: 6,
+    userId: 1
+  },
+  {
+    text: 'Not nearly as comfortable as advertised. DO NOT BUY!!!',
+    stars: 1,
+    productId: 1,
+    userId: 1
+  },
+  {
+    text:
+      'Every time I reach into my pocket I am greeted with a lovely panda. A+',
+    stars: 5,
+    productId: 5,
+    userId: 1
+  },
+  {
+    text: 'This family has a good group dynamic',
+    stars: 3,
+    productId: 1,
+    userId: 1
+  },
+  {
+    text: 'This product did NOT solve our plumbing problem',
+    stars: 2,
+    productId: 4,
+    userId: 1
+  },
+  {
+    text: 'Very cute!!',
+    stars: 5,
+    productId: 4,
+    userId: 1
+  }
+]
+const orders = [
+  {
+    shippingAddress: 'fdsaf',
+    email: '',
+    price: 44,
+    temporaryUserId: 'fdsf',
+    status: 'pending'
+  }
+]
+// const carts = []
+// const cartProduct = []
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -113,6 +177,7 @@ async function seed() {
   await Product.bulkCreate(products)
   await Category.bulkCreate(categories)
   await User.bulkCreate(users)
+  await Review.bulkCreate(reviews)
   await ProductCategory.bulkCreate(productCategories)
 
   console.log(`seeded successfully`)
