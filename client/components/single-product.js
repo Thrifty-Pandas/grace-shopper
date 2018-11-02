@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Container, Button, Icon, Input, Item} from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
 import {addToCartThunk} from '../store/cart'
-import {ProductReviews} from './index'
+import {ProductReviews, ReviewForm} from './index'
 
 class SingleProduct extends React.Component {
   state = {
@@ -56,6 +56,7 @@ class SingleProduct extends React.Component {
           </Item.Group>
         )}
         <ProductReviews />
+        <ReviewForm />
       </Container>
     )
   }

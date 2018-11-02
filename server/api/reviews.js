@@ -1,6 +1,6 @@
 const {Review} = require('../db/models')
 const router = require('express').Router()
-
+module.exports = router
 router.post('/', async (req, res, next) => {
   const {text, stars, userId} = req.body
   try {

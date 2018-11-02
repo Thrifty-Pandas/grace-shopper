@@ -11,7 +11,8 @@ const ProductReviews = props => {
   const {product} = props
   return (
     <Item.Group>
-      {product.reviews.map(review => <Review key={review.id} {...review} />)}
+      {product.reviews &&
+        product.reviews.map(review => <Review key={review.id} {...review} />)}
     </Item.Group>
   )
 }
