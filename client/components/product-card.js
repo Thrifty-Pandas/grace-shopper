@@ -22,9 +22,11 @@ const ProductCard = props => {
       <Button
         onClick={() => {
           if (props.cart.findIndex(product => product.id === id) === -1) {
-            props.addToCart(id, 1)
+            console.log('truthy')
+            props.addToCart(id)
           } else {
-            props.editProductInCart(id, 1)
+            console.log('falsy')
+            props.editProductInCart(id)
           }
         }}
       >
