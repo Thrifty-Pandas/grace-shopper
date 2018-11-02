@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {ProductsGrid, FilterForm} from './index'
+import {PaginatedProducts, FilterForm} from './index'
+import {Header} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
 
@@ -54,7 +55,11 @@ export class AllProducts extends Component {
     return (
       <div>
         <FilterForm />
-        <ProductsGrid products={productsToDisplay} />
+        {search[0] === 'not found' ? (
+          <Header>Sorry, we couldn't find any results</Header>
+        ) : (
+          <PaginatedProducts products={productsToDisplay} />
+        )}
       </div>
     )
   }
