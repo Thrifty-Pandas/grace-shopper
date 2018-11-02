@@ -4,10 +4,12 @@ const {User, Cart, Product, CartProduct} = require('../db/models')
 async function findCart(sessionInfo) {
   let existingUser = {}
   if (sessionInfo.user) {
+    // if there is an authenticated user logged in, load that user
     existingUser = await User.findById(sessionInfo.userId)
   }
   let cart = {}
   if (!existingUser.id) {
+    // if there is no authenticated user , create or find a cart for the guest
     const cartinstance = await Cart.findOrCreate({
       where: {
         temporaryUserId: sessionInfo.id
@@ -18,6 +20,7 @@ async function findCart(sessionInfo) {
       : sessionInfo.id
     cart = cartinstance[0]
   } else {
+    // if there is an authenticated user, create or find a cart for that user
     const cartinstance = await Cart.findOrCreate({
       where: {userId: existingUser.id}
     })

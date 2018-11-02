@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
-import {Link} f, cartReducerrom 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {addToCartThunk, editProductInCart} from '../store/cart'
 import {connect} from 'react-redux'
 
@@ -19,12 +19,15 @@ const ProductCard = props => {
           description={description}
         />
       </Link>
-      <Button onClick={() => {
-        if (props.cart.findIndex(product => product.id === id)=== -1)
-        {props.addToCart(id, 1)} else {
-          props.editProductInCart(id, 1)
-        }
-        }}>
+      <Button
+        onClick={() => {
+          if (props.cart.findIndex(product => product.id === id) === -1) {
+            props.addToCart(id, 1)
+          } else {
+            props.editProductInCart(id, 1)
+          }
+        }}
+      >
         <Icon name="cart" />
         Add to Cart
       </Button>
