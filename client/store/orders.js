@@ -63,7 +63,7 @@ export const editOneOrder = (id, order) => async dispatch => {
   }
 }
 
-export const orderReducer = (state = initialState, action) => {
+export const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDERS:
       return {...state, allOrders: [...action.orders]}
