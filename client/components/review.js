@@ -1,11 +1,15 @@
 import React from 'react'
-import {Item, Rating} from 'semantic-ui-react'
+import {Item, Rating, Container} from 'semantic-ui-react'
 
 const Review = props => {
-  const {id, title, text, user, rating} = props
+  const {title, text, user, stars} = props
   return (
-    <Item key={id} header={title} description={text} meta={user.firstName}>
-      <Rating icon="star" defaultRating={rating} maxRating={5} disabled />
+    <Item>
+      <Item.Content>
+        <Item.Header>{title}</Item.Header>
+        <Item.Description>{text}</Item.Description>
+      </Item.Content>
+      <Rating icon="star" defaultRating={stars} maxRating={5} disabled />
     </Item>
   )
 }
