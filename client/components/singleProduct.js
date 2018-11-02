@@ -10,6 +10,7 @@ import {
   Item
 } from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
+import {addToCartThunk} from '../store/cart'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -35,7 +36,7 @@ class SingleProduct extends React.Component {
                   {description}
                 </Item.Description>
                 <Item.Extra>
-                  <Button>
+                  <Button onClick={() => this.props.addToCart(id, 1)}>
                     <Icon name="cart" />
                     Add to Cart
                   </Button>
@@ -55,7 +56,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProduct: productId => {
       dispatch(fetchOneProduct(productId))
-    }
+    },
+    addToCart: (productId, quantity) =>
+      dispatch(addToCartThunk(productId, quantity))
   }
 }
 
