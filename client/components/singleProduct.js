@@ -1,6 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Container, Grid, Card, Divider, Image} from 'semantic-ui-react'
+import {
+  Container,
+  Grid,
+  Card,
+  Divider,
+  Button,
+  Icon,
+  Item
+} from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
 
 class SingleProduct extends React.Component {
@@ -11,29 +19,32 @@ class SingleProduct extends React.Component {
 
   render() {
     const product = this.props.products.selectedProduct
+    const {id, imageUrl, stock, price, description, name} = product
     return (
-      product.id && (
-        <Grid columns={2} relaxed>
-          <Grid.Column>
-            <Card>
-              <Image src={product.imageUrl} />
-              <Card.Content>
-                <Card.Header> Product{product.name}</Card.Header>
-              </Card.Content>
-            </Card>
-          </Grid.Column>
-          <Divider vertical hidden />
-          <Grid.Column>
-            <Grid columns={2} relaxed>
-              <Grid.Column>{product.price}</Grid.Column>
-              <Grid.Column>{product.stock}</Grid.Column>
-            </Grid>
-            <Container>
-              <p> {product.description} </p>
-            </Container>
-          </Grid.Column>
-        </Grid>
-      )
+      <div className="ui container">
+        {product.id && (
+          <Item.Group>
+            <Item>
+              <Item.Image src={imageUrl} size="large" />
+              <Item.Content>
+                <Item.Header>{name}</Item.Header>
+                <Item.Meta>
+                  <span>{price}</span>
+                </Item.Meta>
+                <Item.Description verticalAlign="middle">
+                  {description}
+                </Item.Description>
+                <Item.Extra>
+                  <Button>
+                    <Icon name="cart" />
+                    Add to Cart
+                  </Button>
+                </Item.Extra>
+              </Item.Content>
+            </Item>
+          </Item.Group>
+        )}
+      </div>
     )
   }
 }
