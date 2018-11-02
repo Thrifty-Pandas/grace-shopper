@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const GET_CART = 'GET_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'
-export const EDIT_PRODUCT = 'EDIT_PRODUCT'
+export const EDIT_PRODUCT_IN_CART = 'EDIT_PRODUCT_IN_CART'
 
 export const getCartItems = productsInCart => ({
   type: GET_CART,
@@ -15,7 +15,7 @@ export const addProduct = productInCart => ({
 })
 
 export const editProduct = productInCart => ({
-  type: EDIT_PRODUCT,
+  type: EDIT_PRODUCT_IN_CART,
   productInCart
 })
 
@@ -41,9 +41,10 @@ export const addToCartThunk = (productId, quantity) => async dispatch => {
 
 export const editProductInCart = (productId, quantity) => async dispatch => {
   try {
-    const {data} = await axios.put(`api/cart/${productId}`, {
+    const {data} = await axios.put(`/api/cart/${productId}`, {
       quantity: quantity
     })
+    console.log('axios result', data)
     dispatch(editProduct(data))
   } catch (err) {
     console.error(err)
@@ -56,13 +57,13 @@ export const cartReducer = (state = [], action) => {
       return [...action.productsInCart]
     case ADD_TO_CART:
       return [...state, action.productInCart]
-    case EDIT_PRODUCT:
+    case EDIT_PRODUCT_IN_CART:
       const objIndex = state.findIndex(
-        obj => obj.id === action.productInCart.id
+        product => product.productId === action.productInCart.productId
       )
       const newArr = [...state]
       newArr[objIndex] = action.productInCart
-      return newArr
+      return [...newArr]
     default:
       return state
   }

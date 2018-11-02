@@ -11,7 +11,7 @@ import {
   Item
 } from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
-import {addToCartThunk} from '../store/cart'
+import {addToCartThunk, editProductInCart} from '../store/cart'
 
 class SingleProduct extends React.Component {
   state = {
@@ -47,7 +47,17 @@ class SingleProduct extends React.Component {
                   <Input
                     action={
                       <Button
-                        onClick={() => this.props.addToCart(id, quantity)}
+                        onClick={() => {
+                          if (
+                            this.props.cart.findIndex(
+                              obj => obj.productId === id
+                            ) === -1
+                          ) {
+                            this.props.addToCart(id, quantity)
+                          } else {
+                            this.props.editProductInCart(id, quantity)
+                          }
+                        }}
                       >
                         <Icon name="cart" />
                         Add to Cart
@@ -68,7 +78,7 @@ class SingleProduct extends React.Component {
   }
 }
 
-const mapStateToProps = ({products}) => ({products})
+const mapStateToProps = state => ({products: state.products, cart: state.cart})
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -76,7 +86,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchOneProduct(productId))
     },
     addToCart: (productId, quantity) =>
-      dispatch(addToCartThunk(productId, quantity))
+      dispatch(addToCartThunk(productId, quantity)),
+    editProductInCart: (productId, quantity) => {
+      dispatch(editProductInCart(productId, quantity))
+    }
   }
 }
 
