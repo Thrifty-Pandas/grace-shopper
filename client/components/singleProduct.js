@@ -28,7 +28,7 @@ class SingleProduct extends React.Component {
   render() {
     const product = this.props.products.selectedProduct
     const {id, imageUrl, stock, price, description, name} = product
-    const quantity = this.state.quantity
+    const quantity = this.state.quantity ? this.state.quantity : 1
     return (
       <div className="ui container">
         {product.id && (
