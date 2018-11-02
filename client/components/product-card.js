@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
-import {addToCartThunk} from '../store/cart'
+import {Link} f, cartReducerrom 'react-router-dom'
+import {addToCartThunk, editProductInCart} from '../store/cart'
 import {connect} from 'react-redux'
 
 //expects an entire product object as props
@@ -19,7 +19,12 @@ const ProductCard = props => {
           description={description}
         />
       </Link>
-      <Button onClick={() => props.addToCart(id, 1)}>
+      <Button onClick={() => {
+        if (props.cart.findIndex(product => product.id === id)=== -1)
+        {props.addToCart(id, 1)} else {
+          props.editProductInCart(id, 1)
+        }
+        }}>
         <Icon name="cart" />
         Add to Cart
       </Button>
@@ -27,11 +32,18 @@ const ProductCard = props => {
   )
 }
 
+const mapStateToProps = state => {
+  return {cart: state.cart}
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     addToCart: (productId, quantity) =>
-      dispatch(addToCartThunk(productId, quantity))
+      dispatch(addToCartThunk(productId, quantity)),
+    editProductInCart: (productId, quantity) => {
+      dispatch(editProductInCart(productId, quantity))
+    }
   }
 }
 
-export default connect(null, mapDispatchToProps)(ProductCard)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
