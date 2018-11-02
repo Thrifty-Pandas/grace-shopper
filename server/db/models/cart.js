@@ -3,7 +3,7 @@ const db = require('../db')
 
 const Cart = db.define('cart', {
   temporaryUserId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: true
   }
 })
