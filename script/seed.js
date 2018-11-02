@@ -9,7 +9,8 @@ const {
   Order,
   Review,
   Cart,
-  CartProduct
+  CartProduct,
+  OrderProduct
 } = require('../server/db/models')
 
 const products = [
@@ -182,66 +183,48 @@ const orders = [
     shippingAddress: '123 Hello World Ln.',
     email: 'cody@email.com',
     price: 44,
-    temporaryUserId: 'uirh1ohfor',
+    temporaryUserId: 413254,
     status: 'pending'
   },
   {
     shippingAddress: '234 Fullstack Rd.',
     email: 'ben@email.com',
     price: 42,
-    temporaryUserId: 'fdsf',
+    temporaryUserId: 324125,
     status: 'confirmed'
+  },
+  {
+    shippingAddress: '456 Milky Way',
+    email: 'collin@email.com',
+    price: 15,
+    temporaryUserId: 12345,
+    userId: 1,
+    status: 'shipped'
   }
-  // {
-  //   shippingAddress: 'fdsaf',
-  //   email: '',
-  //   price: 44,
-  //   temporaryUserId: 'fdsf',
-  //   status: 'shipped'
-  // },
-  // {
-  //   shippingAddress: 'fdsaf',
-  //   email: '',
-  //   price: 44,
-  //   temporaryUserId: 'fdsf',
-  //   status: 'delivered'
-  // },
-  // {
-  //   shippingAddress: 'fdsaf',
-  //   email: '',
-  //   price: 44,
-  //   temporaryUserId: 'fdsf',
-  //   status: 'pending'
-  // },
-  // {
-  //   shippingAddress: 'fdsaf',
-  //   email: '',
-  //   price: 44,
-  //   temporaryUserId: 'fdsf',
-  //   status: 'pending'
-  // },
-  // {
-  //   shippingAddress: 'fdsaf',
-  //   email: '',
-  //   price: 44,
-  //   temporaryUserId: 'fdsf',
-  //   status: 'pending'
-  // },
-  // {
-  //   shippingAddress: 'fdsaf',
-  //   email: '',
-  //   price: 44,
-  //   temporaryUserId: 'fdsf',
-  //   status: 'pending'
-  // },
-  // {
-  //   shippingAddress: 'fdsaf',
-  //   email: '',
-  //   price: 44,
-  //   temporaryUserId: 'fdsf',
-  //   status: 'pending'
-  // }
 ]
+
+const orderProducts = [
+  {orderId: 1, productId: 1},
+  {orderId: 1, productId: 2},
+  {orderId: 1, productId: 3},
+  {orderId: 2, productId: 1},
+  {orderId: 2, productId: 3}
+]
+
+const carts = [
+  {temporaryUserId: 132134, userId: 1},
+  {temporaryUserId: 456},
+  {temporaryUserId: 1321970, userId: 2}
+]
+
+const cartProducts = [
+  {cartId: 1, productId: 1, quantity: 1},
+  {cartId: 1, productId: 2, quantity: 2},
+  {cartId: 1, productId: 3, quantity: 3},
+  {cartId: 2, productId: 1, quantity: 1},
+  {cartId: 2, productId: 3, quantity: 2}
+]
+
 // const carts = []
 // const cartProduct = []
 
@@ -254,6 +237,9 @@ async function seed() {
   await User.bulkCreate(users)
   await Review.bulkCreate(reviews)
   await Order.bulkCreate(orders)
+  await OrderProduct.bulkCreate(orderProducts)
+  await Cart.bulkCreate(carts)
+  await CartProduct.bulkCreate(cartProducts)
   await ProductCategory.bulkCreate(productCategories)
 
   console.log(`seeded successfully`)
