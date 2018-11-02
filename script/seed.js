@@ -61,6 +61,20 @@ const products = [
     imageUrl: '/images/pillow.jpg',
     stock: 6,
     price: 20
+  },
+  {
+    name: 'Panda beanie',
+    description: 'A warm and fuzzy panda beanie',
+    imageUrl: '/images/beanie.jpg',
+    stock: 8,
+    price: 25
+  },
+  {
+    name: 'Panda bowl',
+    description: 'Great for cereal!',
+    imageUrl: '/images/bowl.jpg',
+    stock: 25,
+    price: 10
   }
 ]
 
@@ -107,7 +121,9 @@ const productCategories = [
   {productId: 5, categoryId: 2},
   {productId: 6, categoryId: 1},
   {productId: 6, categoryId: 2},
-  {productId: 7, categoryId: 1}
+  {productId: 7, categoryId: 1},
+  {productId: 8, categoryId: 2},
+  {productId: 9, categoryId: 3}
 ]
 
 const reviews = [

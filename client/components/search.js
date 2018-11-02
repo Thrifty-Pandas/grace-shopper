@@ -25,13 +25,14 @@ class Search extends Component {
   createSearchResults = searchString => {
     const products = this.props.products.allProducts
 
-    const results = products.filter(product => {
-      if (product.name.toLowerCase() === searchString.toLowerCase()) {
-        return product.id
-      }
-    })
+    const results = products
+      .filter(product =>
+        product.name.toLowerCase().includes(searchString.toLowerCase())
+      )
+      .map(product => product.id)
 
-    return results
+    if (results.length) return results
+    else return ['not found'] //need this to differentiate between an empty array which is interpreted as "we haven't yet attempted to search for results"
   }
   render() {
     return (
