@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Review = db.define('review', {
+<<<<<<< HEAD:server/db/models/review.js
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -9,6 +10,8 @@ const Review = db.define('review', {
       notEmpty: true
     }
   },
+=======
+>>>>>>> master:server/db/models/review.js
   text: {
     type: Sequelize.TEXT,
     validate: {
