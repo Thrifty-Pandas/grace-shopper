@@ -6,7 +6,10 @@ const {
   Product,
   Category,
   ProductCategory,
-  Review
+  Order,
+  Review,
+  Cart,
+  CartProduct
 } = require('../server/db/models')
 
 const products = [
@@ -160,12 +163,68 @@ const reviews = [
 ]
 const orders = [
   {
-    shippingAddress: 'fdsaf',
-    email: '',
+    shippingAddress: '123 Hello World Ln.',
+    email: 'cody@email.com',
     price: 44,
-    temporaryUserId: 'fdsf',
+    temporaryUserId: 'uirh1ohfor',
     status: 'pending'
+  },
+  {
+    shippingAddress: '234 Fullstack Rd.',
+    email: 'ben@email.com',
+    price: 42,
+    temporaryUserId: 'fdsf',
+    status: 'confirmed'
   }
+  // {
+  //   shippingAddress: 'fdsaf',
+  //   email: '',
+  //   price: 44,
+  //   temporaryUserId: 'fdsf',
+  //   status: 'shipped'
+  // },
+  // {
+  //   shippingAddress: 'fdsaf',
+  //   email: '',
+  //   price: 44,
+  //   temporaryUserId: 'fdsf',
+  //   status: 'delivered'
+  // },
+  // {
+  //   shippingAddress: 'fdsaf',
+  //   email: '',
+  //   price: 44,
+  //   temporaryUserId: 'fdsf',
+  //   status: 'pending'
+  // },
+  // {
+  //   shippingAddress: 'fdsaf',
+  //   email: '',
+  //   price: 44,
+  //   temporaryUserId: 'fdsf',
+  //   status: 'pending'
+  // },
+  // {
+  //   shippingAddress: 'fdsaf',
+  //   email: '',
+  //   price: 44,
+  //   temporaryUserId: 'fdsf',
+  //   status: 'pending'
+  // },
+  // {
+  //   shippingAddress: 'fdsaf',
+  //   email: '',
+  //   price: 44,
+  //   temporaryUserId: 'fdsf',
+  //   status: 'pending'
+  // },
+  // {
+  //   shippingAddress: 'fdsaf',
+  //   email: '',
+  //   price: 44,
+  //   temporaryUserId: 'fdsf',
+  //   status: 'pending'
+  // }
 ]
 // const carts = []
 // const cartProduct = []
@@ -178,6 +237,7 @@ async function seed() {
   await Category.bulkCreate(categories)
   await User.bulkCreate(users)
   await Review.bulkCreate(reviews)
+  await Order.bulkCreate(orders)
   await ProductCategory.bulkCreate(productCategories)
 
   console.log(`seeded successfully`)
