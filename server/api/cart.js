@@ -38,7 +38,7 @@ router.post('/:productId', async (req, res, next) => {
     const newProductInCart = await CartProduct.create({
       cartId: cart.id,
       productId: product.id,
-      quantity: req.body.quantity
+      quantity: req.body.quantity ? req.body.quantity : null
     })
     res.status(201).json(newProductInCart)
   } catch (err) {
