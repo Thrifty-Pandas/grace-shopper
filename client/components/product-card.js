@@ -1,5 +1,6 @@
 import React from 'react'
-import {Card, Icon, Button} from 'semantic-ui-react'
+import {Card, Icon, Image, Button} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import {addToCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 
@@ -9,13 +10,15 @@ const ProductCard = props => {
 
   return (
     <div>
-      <Card
-        size="large"
-        image={imageUrl}
-        header={name}
-        meta={`$ ${price}`}
-        description={description}
-      />
+      <Link to={`/products/${id}`}>
+        <Card
+          size="large"
+          image={imageUrl}
+          header={name}
+          meta={`$ ${price}`}
+          description={description}
+        />
+      </Link>
       <Button onClick={() => props.addToCart(id, 1)}>
         <Icon name="cart" />
         Add to Cart
