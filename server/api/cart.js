@@ -26,6 +26,20 @@ async function findCart(sessionInfo) {
   return cart
 }
 
+router.get('/', async (req, res, next) => {
+  try {
+    const cart = await findCart(req.session)
+    const productsInCart = await CartProduct.findAll({
+      where: {
+        cartId: cart.id
+      }
+    })
+    res.status(200).json(productsInCart)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/:productId', async (req, res, next) => {
   try {
     const cart = await findCart(req.session)
