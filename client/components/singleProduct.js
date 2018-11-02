@@ -15,7 +15,7 @@ import {addToCartThunk, editProductInCart} from '../store/cart'
 
 class SingleProduct extends React.Component {
   state = {
-    quantity: 0
+    quantity: 1
   }
 
   componentDidMount() {
@@ -63,6 +63,7 @@ class SingleProduct extends React.Component {
                         Add to Cart
                       </Button>
                     }
+                    type="number"
                     name="quantity"
                     placeholder="quantity"
                     value={this.state.quantity}
