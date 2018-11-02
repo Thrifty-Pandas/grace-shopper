@@ -11,20 +11,24 @@ export class ReviewForm extends Component {
       rating: 0
     }
   }
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+  handleChange = (e, {rating}) => {
+    if (rating) {
+      this.setState({rating})
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
   }
   handleSubmit = e => {
     e.preventDefault()
     const {title, text, rating} = this.state
-    axios.post('/api/reviews', {title, text, rating})
+    axios.post('/api/reviews', {title, text, rating, userId: 1, productId: 1})
   }
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Group>
           <Form.Input
             label="Title"

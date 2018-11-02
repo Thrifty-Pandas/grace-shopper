@@ -2,7 +2,7 @@ const db = require('../db')
 const User = require('./user')
 const Category = require('./category')
 const Product = require('./product')
-const Reviews = require('./reviews')
+const Review = require('./review')
 const Order = require('./order')
 const Cart = require('./cart')
 const CartProduct = require('./cartProduct')
@@ -17,11 +17,11 @@ Order.belongsToMany(Product, {through: OrderProduct})
 
 User.hasMany(Order)
 
-Reviews.belongsTo(Product, {
+Review.belongsTo(Product, {
   onDelete: 'CASCADE',
   foreignKey: {name: 'productId', allowNull: false}
 })
-Reviews.belongsTo(User, {
+Review.belongsTo(User, {
   onDelete: 'CASCADE',
   foreignKey: {name: 'userId', allowNull: false}
 })
@@ -31,17 +31,17 @@ Cart.belongsToMany(Product, {through: CartProduct})
 
 Cart.belongsTo(User, {constraints: false, foreignKeyConstraint: false}) //allow a null foreignkey userId to exist on an instance of Cart
 
-// including the association on both models instead of just on Reviews so that we can access Sequelize Magic Methods on either model
+// including the association on both models instead of just on Review so that we can access Sequelize Magic Methods on either model
 
-Product.hasMany(Reviews)
-User.hasMany(Reviews)
+Product.hasMany(Review)
+User.hasMany(Review)
 
 module.exports = {
   User,
   Product,
   Category,
   ProductCategory,
-  Reviews,
+  Review,
   Cart,
   CartProduct
 }
