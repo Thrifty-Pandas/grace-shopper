@@ -153,7 +153,7 @@ const reviews = [
     title: 'Beanie is very itchy!!',
     text: 'Not nearly as comfortable as advertised. DO NOT BUY!!!',
     stars: 1,
-    productId: 1,
+    productId: 8,
     userId: 1
   },
   {
@@ -168,7 +168,7 @@ const reviews = [
     title: 'Well adjusted family',
     text: 'This family has a good group dynamic',
     stars: 3,
-    productId: 1,
+    productId: 3,
     userId: 1
   },
   {
