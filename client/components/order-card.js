@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card, Icon, Button} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
-//expects an entire product object as props
 const OrderCard = props => {
   const {id, createdAt, status} = props
 
@@ -13,10 +13,12 @@ const OrderCard = props => {
         meta={`Order placed: ${createdAt}`}
         description={`Status: ${status}`}
       />
-      <Button>
-        <Icon name="cart" />
-        View Details
-      </Button>
+      <Link to={`/orders/${id}`}>
+        <Button>
+          <Icon name="order" />
+          View Details
+        </Button>
+      </Link>
     </div>
   )
 }
