@@ -1,18 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Item, Rating} from 'semantic-ui-react'
+import {Item} from 'semantic-ui-react'
 import {Review} from './index'
 
-//renders the reviews for the selected product
+//renders the reviews from the store (for the selected product)
 
-const mapState = ({products}) => ({product: products.selectedProduct})
+const mapState = ({reviews}) => ({reviews})
 
 const ProductReviews = props => {
-  const {product} = props
+  const {reviews} = props
   return (
     <Item.Group>
-      {product.reviews &&
-        product.reviews.map(review => <Review key={review.id} {...review} />)}
+      {reviews && reviews.map(review => <Review key={review.id} {...review} />)}
     </Item.Group>
   )
 }

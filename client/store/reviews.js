@@ -1,3 +1,4 @@
+import axios from 'axios'
 export const GET_REVIEWS = 'GET_REVIEWS'
 export const ADD_REVIEW = 'ADD_REVIEW'
 
@@ -11,6 +12,15 @@ export const addReview = review => ({
   type: ADD_REVIEW,
   review
 })
+
+export const postReview = review => async dispatch => {
+  try {
+    const {data} = await axios.post('/api/reviews', review)
+    dispatch(addReview(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const reviewsReducer = (state = initialState, action) => {
   switch (action.type) {

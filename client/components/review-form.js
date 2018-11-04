@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import {Rating, Form, Button, Icon} from 'semantic-ui-react'
-import axios from 'axios'
+import {postReview} from '../store'
+import {connect} from 'react-redux'
+
+const mapState = ({user, products}) => ({user, products})
+const mapDispatch = {postReview}
 
 export class ReviewForm extends Component {
   constructor() {
@@ -23,7 +27,10 @@ export class ReviewForm extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const {title, text, rating} = this.state
-    axios.post('/api/reviews', {title, text, rating, userId: 1, productId: 1})
+    const {user, products} = this.props
+    const userId = user.id
+    const productId = products.selectedProduct.id
+    postReview({title, text, rating, userId, productId})
   }
 
   render() {
@@ -58,4 +65,4 @@ export class ReviewForm extends Component {
   }
 }
 
-export default ReviewForm
+export default connect(mapState, mapDispatch)(ReviewForm)

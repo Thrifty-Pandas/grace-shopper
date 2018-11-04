@@ -1,5 +1,5 @@
 import React from 'react'
-import {Item, Rating, Container} from 'semantic-ui-react'
+import {Item, Rating} from 'semantic-ui-react'
 
 const Review = props => {
   const {title, text, user, stars} = props
