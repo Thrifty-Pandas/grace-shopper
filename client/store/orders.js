@@ -4,6 +4,7 @@ export const GET_ORDERS = 'GET_ORDERS'
 export const GET_ONEORDER = 'GET_ONEORDER'
 export const ADD_ORDER = 'ADD_ORDER'
 export const EDIT_ORDER = 'EDIT_ORDER'
+
 export const getOrders = orders => ({
   type: GET_ORDERS,
   orders
@@ -20,6 +21,7 @@ export const editOrder = order => ({
   type: EDIT_ORDER,
   order
 })
+
 export const fetchOrders = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/orders')
