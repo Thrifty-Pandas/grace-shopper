@@ -1,7 +1,7 @@
 // middleware for doing role-based permissions
 //expects allowed user roles as params and returns a middleware which will either
 //pass to the next middleware or send a 403 based on the user role
-export default function permit(...allowed) {
+const permit = (...allowed) => {
   const isAllowed = role => allowed.indexOf(role) > -1
 
   // return a middleware
@@ -17,3 +17,5 @@ export default function permit(...allowed) {
     }
   }
 }
+
+module.exports = permit
