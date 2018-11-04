@@ -45,15 +45,15 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
-// addd new order to a specific user
+// add new order to a specific user
 router.post('/', async (req, res, next) => {
   const {
     shippingAddress,
     email,
     price,
     temporaryUserId,
-    status,
-    userId
+    userId,
+    status
   } = req.body
   try {
     const order = await Order.create({
@@ -64,7 +64,7 @@ router.post('/', async (req, res, next) => {
       userId,
       status
     })
-    res.json(order)
+    res.status(201).json(order)
   } catch (err) {
     next(err)
   }
