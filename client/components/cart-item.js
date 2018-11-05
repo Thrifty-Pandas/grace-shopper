@@ -2,13 +2,12 @@ import React from 'react'
 import {Table, Link, Button} from 'semantic-ui-react'
 
 class CartItem extends React.Component {
-  componentDidMount() {
-    this.props.fetchProducts()
-  }
-
   render() {
+    console.log('product: ', this.props.productInfo)
+    console.log('cart product: ', this.props.cartInfo)
     const {quantity} = this.props.cartInfo
     const {id, price, imageUrl, name} = this.props.productInfo
+    console.log('quantity: ', quantity)
     return (
       <React.Fragment>
         <Table.Cell>

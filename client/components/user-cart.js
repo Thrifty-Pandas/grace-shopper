@@ -1,17 +1,21 @@
 import React from 'react'
 import {Table} from 'semantic-ui-react'
-import {CartItem} from './index'
+import CartItem from './cart-item'
 import {connect} from 'react-redux'
 import {getProductsInCartThunk} from '../store/cart'
+import {fetchProducts} from '../store'
 
 class UserCart extends React.Component {
   state = {}
 
   componentDidMount() {
     this.props.getProductsInCart()
+    this.props.fetchProducts()
   }
 
   render() {
+    // console.log('product list: ', this.props.products)
+    // console.log('cart: ', this.props.cart)
     return (
       <Table celled padded>
         <Table.Header>
@@ -24,9 +28,11 @@ class UserCart extends React.Component {
         </Table.Header>
 
         <Table.Body>
-          {this.props.products.forEach(product => {
+          {this.props.products.map(product => {
             this.props.cart.map(cartProduct => {
-              if (cartProduct.productId === product.id) {
+              if (product.id === cartProduct.productId) {
+                // console.log('should render cartItem')
+                // console.log('product: ', product)
                 return (
                   <CartItem
                     key={product.id}
@@ -50,7 +56,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getProductsInCart: () => dispatch(getProductsInCartThunk())
+  getProductsInCart: () => dispatch(getProductsInCartThunk()),
+  fetchProducts: () => dispatch(fetchProducts())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserCart)
