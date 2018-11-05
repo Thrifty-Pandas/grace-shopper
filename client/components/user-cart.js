@@ -2,9 +2,14 @@ import React from 'react'
 import {Table} from 'semantic-ui-react'
 import {CartItem} from './index'
 import {connect} from 'react-redux'
+import {getProductsInCartThunk} from '../store/cart'
 
 class UserCart extends React.Component {
   state = {}
+
+  componentDidMount() {
+    this.props.getProductsInCartThunk()
+  }
 
   render() {
     return (
@@ -43,4 +48,9 @@ const mapStateToProps = state => {
     cart: state.cart
   }
 }
-export default connect(mapStateToProps)(UserCart)
+
+const mapDispatchToProps = dispatch => ({
+  getProductsInCart: () => dispatch(getProductsInCartThunk())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserCart)

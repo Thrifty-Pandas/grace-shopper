@@ -11,7 +11,7 @@ import {connect} from 'react-redux'
 //expects an entire product object as props
 class ProductCard extends React.Component {
   componentDidMount() {
-    this.props.getProductsInCartThunk()
+    this.props.getProductsInCartThunk() //should dispatch action GET_CART
   }
 
   render() {
@@ -29,7 +29,7 @@ class ProductCard extends React.Component {
         </Link>
         <Button
           onClick={() => {
-            console.log('props.cart', props.cart)
+            console.log('props.cart', this.props.cart)
             if (
               this.props.cart.findIndex(product => product.productId === id) ===
               -1

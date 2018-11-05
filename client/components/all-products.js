@@ -14,7 +14,7 @@ const mapState = ({products, filter, search, cart}) => ({
 
 const mapDispatch = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
-  getProductsInCartThunk: () => dispatch(getProductsInCartThunk())
+  getProductsInCart: () => dispatch(getProductsInCartThunk())
 })
 
 const filterProducts = (products, categoryFilters, searchResultIds) => {
@@ -51,8 +51,8 @@ const filterProducts = (products, categoryFilters, searchResultIds) => {
 
 export class AllProducts extends Component {
   componentDidMount() {
+    this.props.getProductsInCart()
     this.props.fetchProducts()
-    this.props.getProductsInCartThunk()
   }
 
   render() {
