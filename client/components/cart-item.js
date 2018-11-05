@@ -36,7 +36,7 @@ class CartItem extends React.Component {
                 }}
               >
                 <Icon name="cart" />
-                Add to Quantity
+                Update Total Quantity
               </Button>
             }
             type="number"
