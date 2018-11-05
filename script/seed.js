@@ -99,7 +99,7 @@ const users = [
     isAdmin: true,
     email: 'cody@email.com',
     userName: 'codythedog',
-    password: 12345,
+    password: '12345',
     firstName: 'Cody',
     lastName: 'Dog',
     billingAddress: '100 Superior st, Chicago, IL'
@@ -242,7 +242,8 @@ async function seed() {
 
   await Product.bulkCreate(products)
   await Category.bulkCreate(categories)
-  await User.bulkCreate(users)
+  // await User.bulkCreate(users)
+  await Promise.all(users.map(user => User.create(user)))
   await Review.bulkCreate(reviews)
   await Order.bulkCreate(orders)
   await OrderProduct.bulkCreate(orderProducts)
