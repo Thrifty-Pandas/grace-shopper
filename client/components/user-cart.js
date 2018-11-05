@@ -8,7 +8,7 @@ class UserCart extends React.Component {
   state = {}
 
   componentDidMount() {
-    this.props.getProductsInCartThunk()
+    this.props.getProductsInCart()
   }
 
   render() {
