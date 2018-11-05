@@ -68,11 +68,10 @@ router.put('/:productId', async (req, res, next) => {
         productId: product.id
       }
     })
-    const updatedProduct = await currentProductInCart.update({
-      quantity:
-        currentProductInCart.quantity +
-        (req.body.quantity ? req.body.quantity : 1)
+    const updatedProduct = await currentProductInCart.increment({
+      quantity: req.body.quantity ? req.body.quantity : 1
     })
+    console.log('updatedProduct', updatedProduct)
     res.status(204).json(updatedProduct)
   } catch (err) {
     next(err)
