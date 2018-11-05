@@ -9,27 +9,27 @@ class AddProduct extends Component {
     this.state = {
       name: '',
       description: '',
-      stock: 0,
-      price: 0,
-      imageUrl: '',
-      productCategories: []
+      stock: '',
+      price: '',
+      imageUrl: ''
+      // productCategories: []
     }
   }
 
-  handleCategoryChange = evt => {
-    const categoryId = Number(evt.target.id)
-    if (this.state.productCategories.includes(categoryId)) {
-      this.setState({
-        productCategories: this.state.productCategories.filter(
-          id => id !== categoryId
-        )
-      })
-    } else {
-      this.setState({
-        productCategories: [...this.state.productCategories, categoryId]
-      })
-    }
-  }
+  // handleCategoryChange = evt => {
+  //   const categoryId = Number(evt.target.id)
+  //   if (this.state.productCategories.includes(categoryId)) {
+  //     this.setState({
+  //       productCategories: this.state.productCategories.filter(
+  //         id => id !== categoryId
+  //       )
+  //     })
+  //   } else {
+  //     this.setState({
+  //       productCategories: [...this.state.productCategories, categoryId]
+  //     })
+  //   }
+  // }
 
   handleChange = evt => this.setState({[evt.target.name]: evt.target.value})
 
@@ -45,8 +45,8 @@ class AddProduct extends Component {
       description: '',
       stock: null,
       price: null,
-      imageUrl: '',
-      productCategories: []
+      imageUrl: ''
+      // productCategories: []
     })
   }
 
@@ -56,7 +56,7 @@ class AddProduct extends Component {
         {...this.state}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        handleCategoryChange={this.handleCategoryChange}
+        // handleCategoryChange={this.handleCategoryChange}
         type="Add"
       />
     )

@@ -24,9 +24,9 @@ class SingleProduct extends React.Component {
     quantity: 1
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const productId = Number(this.props.match.params.productId)
-    this.props.fetchProduct(productId)
+    await this.props.fetchProduct(productId)
     this.props.getProductsInCart()
   }
 

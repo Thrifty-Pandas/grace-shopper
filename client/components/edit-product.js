@@ -9,33 +9,38 @@ class EditProduct extends Component {
     this.state = {
       name: '',
       description: '',
-      stock: 0,
-      price: 0,
-      imageUrl: '',
-      productCategories: []
+      stock: '',
+      price: '',
+      imageUrl: ''
+      // productCategories: []
     }
   }
 
   componentDidMount() {
-    const {name, description, stock, price} = this.props.product
+    const {
+      name,
+      description,
+      stock,
+      price
+    } = this.props.products.selectedProduct
     // const productCategories = this.props.product.map(category => category.id)
     this.setState({name, description, stock, price})
   }
 
-  handleCategoryChange = evt => {
-    const categoryId = Number(evt.target.id)
-    if (this.state.productCategories.includes(categoryId)) {
-      this.setState({
-        productCategories: this.state.productCategories.filter(
-          id => id !== categoryId
-        )
-      })
-    } else {
-      this.setState({
-        productCategories: [...this.state.productCategories, categoryId]
-      })
-    }
-  }
+  // handleCategoryChange = evt => {
+  //   const categoryId = Number(evt.target.id)
+  //   if (this.state.productCategories.includes(categoryId)) {
+  //     this.setState({
+  //       productCategories: this.state.productCategories.filter(
+  //         id => id !== categoryId
+  //       )
+  //     })
+  //   } else {
+  //     this.setState({
+  //       productCategories: [...this.state.productCategories, categoryId]
+  //     })
+  //   }
+  // }
 
   handleChange = evt => this.setState({[evt.target.name]: evt.target.value})
 
@@ -62,14 +67,14 @@ class EditProduct extends Component {
         {...this.state}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        handleCategoryChange={this.handleCategoryChange}
+        // handleCategoryChange={this.handleCategoryChange}
         type="Edit"
       />
     )
   }
 }
 
-const mapStateToProps = ({products}) => ({product: products.selectedProduct})
+const mapStateToProps = ({products}) => ({products})
 
 const mapDispatchToProps = {editOneProduct}
 

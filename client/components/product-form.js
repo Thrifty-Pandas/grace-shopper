@@ -10,11 +10,11 @@ const mapState = ({user, categories}) => ({user, categories})
 const ProductForm = props => {
   const {
     handleChange,
-    handleCategoryChange,
+    //   handleCategoryChange,
     handleSubmit,
     name,
     description,
-    categories,
+    //categories,
     stock,
     price,
     imageUrl,
@@ -23,51 +23,62 @@ const ProductForm = props => {
   return (
     <Form onSubmit={handleSubmit} size="big">
       <Form.Group>
-        <Form.Field
-          label="Product Name"
-          control={Input}
-          placeholder="Product Name"
-          name="name"
-          value={name}
-          onChange={handleChange}
-        />
-        <Form.Field
-          label="Description"
-          control={Input}
-          placeholder="Description"
-          name="description"
-          value={description}
-          onChange={handleChange}
-        />
+        <Form.Field>
+          <label>Product Name</label>
+          <Input
+            type="text"
+            placeholder="Product Name"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Description</label>
+          <Input
+            type="text"
+            placeholder="Description"
+            name="description"
+            value={description}
+            onChange={handleChange}
+          />
+        </Form.Field>
       </Form.Group>
       <Form.Group>
-        <Form.Field
-          label="Stock"
-          control={Input}
-          placeholder="Stock"
-          name="stock"
-          value={stock}
-          onChange={handleChange}
-        />
-        <Form.Field
-          label="Price"
-          control={Input}
-          placeholder="Price"
-          name="price"
-          value={price}
-          onChange={handleChange}
-        />
+        <Form.Field>
+          <label>Stock</label>
+          <Input
+            type="number"
+            placeholder="Stock"
+            name="stock"
+            value={stock}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Price</label>
+          <Input
+            type="number"
+            placeholder="Price"
+            name="price"
+            value={price}
+            onChange={handleChange}
+          />
+        </Form.Field>
       </Form.Group>
       <Form.Group>
-        <Form.Field
-          label="Image URL"
-          control={Input}
-          placeholder="Image URL"
-          name="imageUrl"
-          value={imageUrl}
-          onChange={handleChange}
-        />
-        <label htmlFor="">Categories</label>
+        <Form.Field>
+          <label>Image URL</label>
+          <Input
+            type="text"
+            placeholder="Image URL"
+            name="imageUrl"
+            value={imageUrl}
+            onChange={handleChange}
+          />
+        </Form.Field>
+
+        {/* <label htmlFor="">Categories</label>
         <Form.Group>
           {categories.map(category => (
             <Form.Field
@@ -81,7 +92,7 @@ const ProductForm = props => {
               onChange={handleCategoryChange}
             />
           ))}
-        </Form.Group>
+        </Form.Group> */}
         <Form.Button type="submit">
           <Icon name={type.toLowerCase()} /> {type} Product
         </Form.Button>
