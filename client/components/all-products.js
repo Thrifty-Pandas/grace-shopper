@@ -3,14 +3,16 @@ import {PaginatedProducts, FilterForm} from './index'
 import {Header} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
+import {getProductsInCartThunk} from '../store/cart'
 
-const mapState = ({products, filter, search}) => ({
+const mapState = ({products, filter, search, cart}) => ({
   products: products.allProducts,
   filter,
-  search
+  search,
+  cart
 })
 
-const mapDispatch = {fetchProducts}
+const mapDispatch = {fetchProducts, getProductsInCartThunk}
 
 const filterProducts = (products, categoryFilters, searchResultIds) => {
   //case where we filter based on categories and search bar
@@ -47,6 +49,7 @@ const filterProducts = (products, categoryFilters, searchResultIds) => {
 export class AllProducts extends Component {
   componentDidMount() {
     this.props.fetchProducts()
+    this.props.getProductsInCartThunk()
   }
 
   render() {
