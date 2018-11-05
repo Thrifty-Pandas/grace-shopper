@@ -1,5 +1,6 @@
 const {Product, ProductCategory} = require('../db/models')
 const router = require('express').Router()
+const Op = require('sequelize').Op
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -10,7 +11,8 @@ router.get('/', async (req, res, next) => {
           all: true
           //as: 'Instruments'
         }
-      ]
+      ],
+      where: {stock: {[Op.gt]: 0}}
     })
     res.json(products)
   } catch (err) {

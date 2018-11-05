@@ -5,6 +5,7 @@ import {
   Grid,
   Card,
   Divider,
+  Header,
   Button,
   Icon,
   Input,
@@ -44,20 +45,24 @@ class SingleProduct extends React.Component {
                   {description}
                 </Item.Description>
                 <Item.Extra>
-                  <Input
-                    action={
-                      <Button
-                        onClick={() => this.props.addToCart(id, quantity)}
-                      >
-                        <Icon name="cart" />
-                        Add to Cart
-                      </Button>
-                    }
-                    name="quantity"
-                    placeholder="quantity"
-                    value={this.state.quantity}
-                    onChange={this.handleChange}
-                  />
+                  {stock ? (
+                    <Input
+                      action={
+                        <Button
+                          onClick={() => this.props.addToCart(id, quantity)}
+                        >
+                          <Icon name="cart" />
+                          Add to Cart
+                        </Button>
+                      }
+                      name="quantity"
+                      placeholder="quantity"
+                      value={this.state.quantity}
+                      onChange={this.handleChange}
+                    />
+                  ) : (
+                    <Header>This product is currently out of stock</Header>
+                  )}
                 </Item.Extra>
               </Item.Content>
             </Item>

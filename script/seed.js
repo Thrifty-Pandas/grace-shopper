@@ -60,7 +60,7 @@ const products = [
     name: 'Comfy panda',
     description: 'pillow',
     imageUrl: '/images/pillow.jpg',
-    stock: 6,
+    stock: 0,
     price: 20
   },
   {
