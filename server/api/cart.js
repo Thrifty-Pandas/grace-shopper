@@ -29,8 +29,9 @@ async function findCart(req) {
     })
     if (unAuthedCart) {
       await unAuthedCart.update({
-        userId: req.user.id
+        userId: req.user.dataValues.id
       })
+      cart = unAuthedCart
     } else {
       const cartinstance = await Cart.findOrCreate({
         where: {userId: existingUser.id}
