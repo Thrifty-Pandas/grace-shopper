@@ -24,11 +24,8 @@ const ProductCard = props => {
           if (
             props.cart.findIndex(product => product.productId === id) === -1
           ) {
-            console.log('id', id)
-            console.log('truthy')
             props.addToCart(id)
           } else {
-            console.log('falsy')
             props.editProductInCart(id)
           }
         }}
