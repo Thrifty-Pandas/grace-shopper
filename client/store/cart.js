@@ -21,7 +21,7 @@ export const editProduct = productInCart => ({
 
 export const getProductsInCartThunk = () => async dispatch => {
   try {
-    const {data} = await axios.get(`api/cart`)
+    const {data} = await axios.get(`/api/cart`)
     dispatch(getCartItems(data))
   } catch (err) {
     console.error(err)
