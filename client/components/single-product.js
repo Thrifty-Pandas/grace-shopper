@@ -1,16 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-  Container,
-  Grid,
-  Card,
-  Divider,
-  Button,
-  Icon,
-  Input,
-  Item
-} from 'semantic-ui-react'
+import {Container, Button, Icon, Input, Item} from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
+import {ProductReviews, ReviewForm} from './index'
 import {
   getProductsInCartThunk,
   addToCartThunk,
@@ -35,7 +27,7 @@ class SingleProduct extends React.Component {
     const {id, imageUrl, stock, price, description, name} = product
     const quantity = this.state.quantity ? this.state.quantity : 1
     return (
-      <div className="ui container">
+      <Container>
         {product.id && (
           <Item.Group>
             <Item>
@@ -43,9 +35,11 @@ class SingleProduct extends React.Component {
               <Item.Content>
                 <Item.Header>{name}</Item.Header>
                 <Item.Meta>
-                  <span>{price}</span>
+                  <span>${price}</span>
+                  <br />
+                  <span> {stock} in stock </span>
                 </Item.Meta>
-                <Item.Description verticalAlign="middle">
+                <Item.Description verticalalign="middle">
                   {description}
                 </Item.Description>
                 <Item.Extra>
@@ -79,7 +73,9 @@ class SingleProduct extends React.Component {
             </Item>
           </Item.Group>
         )}
-      </div>
+        <ProductReviews />
+        <ReviewForm />
+      </Container>
     )
   }
 }

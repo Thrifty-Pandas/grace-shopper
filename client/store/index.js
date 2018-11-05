@@ -9,6 +9,7 @@ import {categoriesReducer} from './categories'
 import {filterReducer} from './filter'
 import {searchReducer} from './search'
 import {cartReducer} from './cart'
+import {reviewsReducer} from './reviews'
 
 const reducer = combineReducers({
   user,
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   filter: filterReducer,
   search: searchReducer,
   cart: cartReducer,
+  reviews: reviewsReducer,
   order: ordersReducer
 })
 const middleware = composeWithDevTools(
@@ -29,4 +31,6 @@ export * from './user'
 export * from './products'
 export * from './categories'
 export * from './filter'
+//export * from './cart'
+export * from './reviews'
 export * from './orders'
