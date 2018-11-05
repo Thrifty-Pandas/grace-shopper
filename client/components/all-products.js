@@ -12,7 +12,10 @@ const mapState = ({products, filter, search, cart}) => ({
   cart
 })
 
-const mapDispatch = {fetchProducts, getProductsInCartThunk}
+const mapDispatch = dispatch => ({
+  fetchProducts: () => dispatch(fetchProducts()),
+  getProductsInCartThunk: () => dispatch(getProductsInCartThunk())
+})
 
 const filterProducts = (products, categoryFilters, searchResultIds) => {
   //case where we filter based on categories and search bar
