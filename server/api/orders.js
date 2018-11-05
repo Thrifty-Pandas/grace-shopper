@@ -4,27 +4,32 @@ const router = require('express').Router()
 module.exports = router
 
 async function findOrders(sessionInfo) {
-  if (sessionInfo.temporaryUserId) {
-    const orders = await Order.findAll({
-      where: {
-        temporaryUserId: sessionInfo.temporaryUserId
+  // if (sessionInfo.temporaryUserId) {
+  //   const orders = await Order.findAll({
+  //     where: {
+  //       temporaryUserId: sessionInfo.temporaryUserId
+  //     }
+  //   })
+  //   return orders
+  // } else {
+  const orders = await Order.findAll({
+    where: {
+      userId: sessionInfo.passport.user
+    },
+    include: [
+      {
+        all: true
+        //as: 'Instruments'
       }
-    })
-    return orders
-  } else {
-    const orders = await Order.findAll({
-      where: {
-        userId: sessionInfo.userId
-      }
-    })
-    return orders
-  }
+    ]
+  })
+  return orders
 }
+// }
 
 // shows all the orders for a specific user
 router.get('/', async (req, res, next) => {
   try {
-    console.log('session here', req.session)
     const orders = await findOrders(req.session)
     res.status(200).json(orders)
   } catch (err) {

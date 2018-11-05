@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Header, Icon, List} from 'semantic-ui-react'
+import {Header, Icon, List, Grid, Table} from 'semantic-ui-react'
 import {fetchOrdersById, fetchOrders} from '../store/orders'
+import SingleOrder from './singleOrder'
+import {logout} from '../store'
 
 class Account extends Component {
   async componentDidMount() {
@@ -9,7 +11,7 @@ class Account extends Component {
     console.log(this.props.orders)
   }
   render() {
-    if (this.props.orders) {
+    if (this.props.orders.allOrders[0]) {
       return (
         <div className="account-settings">
           <Header as="h2" icon>
@@ -18,20 +20,31 @@ class Account extends Component {
             <Header.Subheader>
               Hello {this.props.user.firstName}, view your past orders here
             </Header.Subheader>
+            <a href="#" onClick={this.props.logout}>
+              Logout
+            </a>
           </Header>
-          <List divided relaxed>
-            {/* {this.props.orders[0].products.map(product => {
+
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Order #</Table.HeaderCell>
+                <Table.HeaderCell>Item</Table.HeaderCell>
+                <Table.HeaderCell>Price</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+
+            {this.props.orders.allOrders.map(order => {
               return (
-                <List.Item>
-                  <List.Content>
-                    Product: {product.name}
-                    price: {product.price}
-                    Total: ${this.props.orders[0].price}
-                  </List.Content>
-                </List.Item>
+                <SingleOrder order={order} />
+                // <div>
+                //   {order.products.map(product => {
+                //     return <SingleOrder product={product} />
+                //   })}{' '}
+                // </div>
               )
-            })} */}
-          </List>
+            })}
+          </Table>
         </div>
       )
     } else {
@@ -48,7 +61,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchOrdersById: userId => dispatch(fetchOrdersById(userId)),
-    fetchOrders: () => dispatch(fetchOrders())
+    fetchOrders: () => dispatch(fetchOrders()),
+    logout: () => dispatch(logout())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Account)
