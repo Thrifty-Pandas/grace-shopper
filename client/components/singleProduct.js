@@ -12,12 +12,8 @@ import {
   Item
 } from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
-<<<<<<< HEAD
-import {addToCartThunk} from '../store/cart'
-import {AddProduct, EditProduct} from './index'
-=======
 import {addToCartThunk, editProductInCart} from '../store/cart'
->>>>>>> master
+import {AddProduct, EditProduct} from './index'
 
 class SingleProduct extends React.Component {
   state = {
@@ -50,26 +46,6 @@ class SingleProduct extends React.Component {
                   {description}
                 </Item.Description>
                 <Item.Extra>
-<<<<<<< HEAD
-                  {stock ? (
-                    <Input
-                      action={
-                        <Button
-                          onClick={() => this.props.addToCart(id, quantity)}
-                        >
-                          <Icon name="cart" />
-                          Add to Cart
-                        </Button>
-                      }
-                      name="quantity"
-                      placeholder="quantity"
-                      value={this.state.quantity}
-                      onChange={this.handleChange}
-                    />
-                  ) : (
-                    <Header>This product is currently out of stock</Header>
-                  )}
-=======
                   <Input
                     action={
                       <Button
@@ -95,7 +71,6 @@ class SingleProduct extends React.Component {
                     value={this.state.quantity}
                     onChange={this.handleChange}
                   />
->>>>>>> master
                 </Item.Extra>
               </Item.Content>
             </Item>
