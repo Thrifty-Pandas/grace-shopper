@@ -9,6 +9,7 @@ import {categoriesReducer} from './categories'
 import {filterReducer} from './filter'
 import {searchReducer} from './search'
 import {cartReducer} from './cart'
+import {ordersReducer} from './orders'
 
 const reducer = combineReducers({
   user,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   categories: categoriesReducer,
   filter: filterReducer,
   search: searchReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  orders: ordersReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
