@@ -131,28 +131,28 @@ const reviews = [
   {
     title: 'Good product',
     text: 'Love this mug!',
-    stars: 5,
+    rating: 5,
     productId: 1,
     userId: 1
   },
   {
     title: 'Cool mug!',
     text: 'Good mug. Has yet to break',
-    stars: 4,
+    rating: 4,
     productId: 1,
     userId: 1
   },
   {
     title: 'My fav umbrella!',
     text: 'I did not get wet in the rain after using this umbrella',
-    stars: 5,
+    rating: 5,
     productId: 6,
     userId: 1
   },
   {
     title: 'Beanie is very itchy!!',
     text: 'Not nearly as comfortable as advertised. DO NOT BUY!!!',
-    stars: 1,
+    rating: 1,
     productId: 8,
     userId: 1
   },
@@ -160,28 +160,28 @@ const reviews = [
     title: 'Cute panda!',
     text:
       'Every time I reach into my pocket I am greeted with a lovely panda. A+',
-    stars: 5,
+    rating: 5,
     productId: 5,
     userId: 1
   },
   {
     title: 'Well adjusted family',
     text: 'This family has a good group dynamic',
-    stars: 3,
+    rating: 3,
     productId: 3,
     userId: 1
   },
   {
     title: 'Not helping',
     text: 'This product did NOT solve our plumbing problem',
-    stars: 2,
+    rating: 2,
     productId: 4,
     userId: 1
   },
   {
     title: '!!!',
     text: 'Very cute!!',
-    stars: 5,
+    rating: 5,
     productId: 4,
     userId: 1
   }

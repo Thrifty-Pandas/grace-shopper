@@ -30,7 +30,7 @@ export class ReviewForm extends Component {
     const {user, products} = this.props
     const userId = user.id
     const productId = products.selectedProduct.id
-    postReview({title, text, rating, userId, productId})
+    this.props.postReview({title, text, rating, userId, productId})
   }
 
   render() {
