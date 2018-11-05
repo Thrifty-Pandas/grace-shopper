@@ -40,8 +40,8 @@ export class FilterForm extends Component {
     const {categories} = this.props
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Form.Group grouped>
-          <label>Categories</label>
+        <Form.Group grouped label="Categories">
+          {/* <label>Categories</label> */}
           {categories.map(category => (
             <Form.Field
               type="checkbox"

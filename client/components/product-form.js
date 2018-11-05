@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 //even though we might have this in an entirely separate page,to me it
 //makes sense to restrict access at the component level to have the
 //extra guarantee
-const mapState = ({user}) => ({user})
+const mapState = ({user, categories}) => ({user, categories})
 
 const ProductForm = props => {
   const {
@@ -66,6 +66,20 @@ const ProductForm = props => {
             value={imageUrl}
             onChange={handleChange}
           />
+          <Form.Group label="Categories">
+            {categories.map(category => (
+              <Form.Field
+                type="checkbox"
+                id={category.id}
+                key={category.id}
+                control="input"
+                name="category"
+                label={category.name}
+                value={category.id}
+                onChange={this.handleUpdate}
+              />
+            ))}
+          </Form.Group>
           <Form.Button type="submit">
             <Icon name={type.toLowerCase()} /> {type} Product
           </Form.Button>
