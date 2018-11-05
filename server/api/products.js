@@ -22,7 +22,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
-    const product = await Product.findById(Number(req.params.productId))
+    const product = await Product.eagerLoadCategoriesReviews(
+      Number(req.params.productId)
+    )
     res.json(product)
   } catch (err) {
     next(err)

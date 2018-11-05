@@ -1,6 +1,9 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+const Category = require('./category')
+const Review = require('./review')
+
 const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
@@ -27,5 +30,12 @@ const Product = db.define('product', {
     defaultValue: '/test.jpg'
   }
 })
+
+Product.eagerLoadCategoriesReviews = async productId => {
+  const product = await Product.findById(productId, {
+    include: [Category, Review]
+  })
+  return product
+}
 
 module.exports = Product
