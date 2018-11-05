@@ -1,11 +1,11 @@
 import React from 'react'
 import {Table, Link, Button, Image, Input, Icon} from 'semantic-ui-react'
-import {editProductInCart} from '../store/cart'
+import {editProductInCart, deleteCartProductThunk} from '../store/cart'
 import {connect} from 'react-redux'
 
 class CartItem extends React.Component {
   state = {
-    quantity: 1
+    formQuantity: 1
   }
 
   handleChange = evt => this.setState({[evt.target.name]: evt.target.value})
@@ -32,19 +32,28 @@ class CartItem extends React.Component {
             action={
               <Button
                 onClick={() => {
-                  this.props.editProductInCart(id, quantity)
+                  this.props.editProductInCart(id, this.state.formQuantity)
                 }}
               >
                 <Icon name="cart" />
-                Edit Quantity
+                Add to Quantity
               </Button>
             }
             type="number"
-            name="quantity"
+            name="formQuantity"
             placeholder="quantity"
-            value={this.state.quantity}
+            value={this.state.formQuantity}
             onChange={this.handleChange}
           />
+          <br />
+          <Button
+            type="submit"
+            onClick={() => {
+              this.props.deleteProductInCart(id)
+            }}
+          >
+            Delete this item
+          </Button>
         </td>
       </tr>
       // <Table.Row>
@@ -71,6 +80,9 @@ const mapDispatchToProps = dispatch => {
   return {
     editProductInCart: (productId, quantity) => {
       dispatch(editProductInCart(productId, quantity))
+    },
+    deleteProductInCart: productId => {
+      dispatch(deleteCartProductThunk(productId))
     }
   }
 }

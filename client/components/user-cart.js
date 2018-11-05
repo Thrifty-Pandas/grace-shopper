@@ -13,6 +13,12 @@ class UserCart extends React.Component {
     this.props.fetchProducts()
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.cart !== prevProps.cart) {
+  //     this.props.getProductsInCart()
+  //   }
+  // }
+
   render() {
     // console.log('product list: ', this.props.products)
     // console.log('cart: ', this.props.cart)

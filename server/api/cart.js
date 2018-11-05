@@ -95,4 +95,19 @@ router.put('/:productId', async (req, res, next) => {
   }
 })
 
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    const cart = await findCart(req.session)
+    await CartProduct.destroy({
+      where: {
+        cartId: cart.id,
+        productId: req.params.productId
+      }
+    })
+    res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
