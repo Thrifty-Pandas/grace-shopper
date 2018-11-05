@@ -6,11 +6,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      include: [
-        {
-          model: Category
-        }
-      ],
+      include: [Category],
       where: {stock: {[Op.gt]: 0}}
     })
     res.json(products)

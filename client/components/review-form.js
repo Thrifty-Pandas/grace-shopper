@@ -31,6 +31,11 @@ export class ReviewForm extends Component {
     const userId = user.id
     const productId = products.selectedProduct.id
     this.props.postReview({title, text, rating, userId, productId})
+    this.setState({
+      title: '',
+      text: '',
+      rating: 0
+    })
   }
 
   render() {

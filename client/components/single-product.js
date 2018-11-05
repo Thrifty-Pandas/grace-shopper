@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-<<<<<<< HEAD:client/components/singleProduct.js
 import {
   Container,
   Grid,
@@ -12,9 +11,6 @@ import {
   Input,
   Item
 } from 'semantic-ui-react'
-=======
-import {Container, Button, Icon, Input, Item} from 'semantic-ui-react'
->>>>>>> master:client/components/single-product.js
 import {fetchOneProduct} from '../store/products'
 import {ProductReviews, ReviewForm} from './index'
 import {
@@ -22,7 +18,6 @@ import {
   addToCartThunk,
   editProductInCart
 } from '../store/cart'
-import {AddProduct, EditProduct} from './index'
 
 class SingleProduct extends React.Component {
   state = {
@@ -88,15 +83,9 @@ class SingleProduct extends React.Component {
             </Item>
           </Item.Group>
         )}
-<<<<<<< HEAD:client/components/singleProduct.js
-        <AddProduct />
-        <EditProduct />
-      </div>
-=======
         <ProductReviews />
         <ReviewForm />
       </Container>
->>>>>>> master:client/components/single-product.js
     )
   }
 }
