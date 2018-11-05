@@ -26,6 +26,10 @@ const Order = db.define('order', {
     type: Sequelize.INTEGER,
     allowNull: true
   },
+  userId: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
   status: {
     type: Sequelize.ENUM('pending', 'confirmed', 'shipped', 'delivered'),
     defaultValue: 'pending'
