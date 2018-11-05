@@ -62,8 +62,8 @@ export const newUser = user => async dispatch => {
   try {
     const {data} = await axios.post(`api/users`, user)
     dispatch(addUser(data))
-  } catch (err) {
-    console.error(err)
+  } catch (notUniqueEntry) {
+    return dispatch(getUser({error: notUniqueEntry}))
   }
 }
 
