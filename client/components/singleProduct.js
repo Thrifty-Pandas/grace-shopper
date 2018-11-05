@@ -13,6 +13,7 @@ import {
 } from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
 import {addToCartThunk} from '../store/cart'
+import {AddProduct, EditProduct} from './index'
 
 class SingleProduct extends React.Component {
   state = {
