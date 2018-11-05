@@ -35,8 +35,24 @@ router.get('/', async (req, res, next) => {
     const productsInCart = await CartProduct.findAll({
       where: {
         cartId: cart.id
-      },
-      include: [{model: Product}]
+      }
+    })
+    res.status(200).json(productsInCart)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/current', async (req, res, next) => {
+  try {
+    const cart = await findCart(req.session)
+    const productsInCart = await Product.findAll({
+      include: [
+        {
+          model: Cart,
+          where: {id: cart.id}
+        }
+      ]
     })
     res.status(200).json(productsInCart)
   } catch (err) {

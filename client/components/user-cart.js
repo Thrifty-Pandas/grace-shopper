@@ -1,5 +1,6 @@
 import React from 'react'
 import {Table, Link, Image, Button} from 'semantic-ui-react'
+import {CartItem} from './index'
 
 class UserCart extends React.Component {
   state = {}
@@ -17,26 +18,9 @@ class UserCart extends React.Component {
         </Table.Header>
 
         <Table.Body>
-          {this.props.cart.forEach(product => {
-            return (
-              <Table.Row>
-                <Table.Cell>
-                  <Link to={`/products/${id}`}>
-                    <Image src={imageUrl} size="small" verticalAlign="middle" />
-                    <br />
-                    <h2>{name}</h2>
-                  </Link>
-                </Table.Cell>
-                <Table.Cell>{price}</Table.Cell>
-                <Table.Cell>{quantity}</Table.Cell>
-                <Table.Cell>
-                  <Button>Update quantity</Button>
-                  <br />
-                  <Button>Delete</Button>
-                </Table.Cell>
-              </Table.Row>
-            )
-          })}
+          {this.props.cart.forEach(product => (
+            <CartItem key={product.id} cartInfo={product} />
+          ))}
         </Table.Body>
       </Table>
     )
