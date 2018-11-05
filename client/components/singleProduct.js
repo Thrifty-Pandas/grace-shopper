@@ -11,7 +11,11 @@ import {
   Item
 } from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
-import {addToCartThunk, editProductInCart} from '../store/cart'
+import {
+  getProductsInCartThunk,
+  addToCartThunk,
+  editProductInCart
+} from '../store/cart'
 
 class SingleProduct extends React.Component {
   state = {
@@ -21,6 +25,7 @@ class SingleProduct extends React.Component {
   componentDidMount() {
     const productId = Number(this.props.match.params.productId)
     this.props.fetchProduct(productId)
+    this.props.getProductsInCart()
   }
 
   handleChange = evt => this.setState({[evt.target.name]: evt.target.value})
@@ -90,6 +95,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(addToCartThunk(productId, quantity)),
     editProductInCart: (productId, quantity) => {
       dispatch(editProductInCart(productId, quantity))
+    },
+    getProductsInCart: () => {
+      dispatch(getProductsInCartThunk())
     }
   }
 }
