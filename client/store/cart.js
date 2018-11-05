@@ -45,7 +45,6 @@ export const editProductInCart = (productId, quantity) => async dispatch => {
       quantity: quantity
     })
     const {data} = await axios.get(`/api/cart/`)
-    console.log('axios result', data)
     dispatch(editProduct(data))
   } catch (err) {
     console.error(err)
