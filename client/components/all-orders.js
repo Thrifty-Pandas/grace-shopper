@@ -5,7 +5,9 @@ import {OrdersGrid} from './index'
 
 const mapStateToProps = ({orders}) => ({orders})
 
-const mapDispatchToProps = {fetchOrders}
+const mapDispatchToProps = dispatch => ({
+  fetchOrders: () => dispatch(fetchOrders())
+})
 
 class AllOrders extends Component {
   componentDidMount() {
@@ -13,6 +15,7 @@ class AllOrders extends Component {
   }
   render() {
     const {orders} = this.props
+    console.log('this.props-->', this.props)
     return (
       <div>
         <OrdersGrid orders={orders} />
