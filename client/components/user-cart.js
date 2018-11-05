@@ -1,6 +1,6 @@
 import React from 'react'
-import {Table} from 'semantic-ui-react'
-import {CartItem} from './index'
+import {Table, Link, Button, Image} from 'semantic-ui-react'
+import CartItem from './cart-item'
 import {connect} from 'react-redux'
 import {getProductsInCartThunk} from '../store/cart'
 import {fetchProducts} from '../store'
@@ -29,27 +29,16 @@ class UserCart extends React.Component {
 
         <Table.Body>
           {this.props.products.map(product => {
-            this.props.cart.map(cartProduct => {
-              if (product.id === cartProduct.productId)
-                return (
+            return this.props.cart.map(
+              cartProduct =>
+                product.id === cartProduct.productId ? (
                   <CartItem
                     key={product.id}
                     cartInfo={cartProduct}
                     productInfo={product}
                   />
-                )
-              // {
-              //   // console.log('should render cartItem')
-              //   // console.log('product: ', product)
-              //   return (
-              //     <CartItem
-              //       key={product.id}
-              //       cartInfo={cartProduct}
-              //       productInfo={product}
-              //     />
-              //   )
-              // }
-            })
+                ) : null
+            )
           })}
         </Table.Body>
       </Table>
