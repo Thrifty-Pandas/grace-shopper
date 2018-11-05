@@ -1,4 +1,4 @@
-const {Product, ProductCategory} = require('../db/models')
+const {Product, ProductCategory, Review, Category} = require('../db/models')
 const router = require('express').Router()
 const Op = require('sequelize').Op
 module.exports = router
@@ -8,8 +8,7 @@ router.get('/', async (req, res, next) => {
     const products = await Product.findAll({
       include: [
         {
-          all: true
-          //as: 'Instruments'
+          model: Category
         }
       ],
       where: {stock: {[Op.gt]: 0}}
@@ -25,6 +24,7 @@ router.get('/:productId', async (req, res, next) => {
     const product = await Product.eagerLoadCategoriesReviews(
       Number(req.params.productId)
     )
+
     res.json(product)
   } catch (err) {
     next(err)
