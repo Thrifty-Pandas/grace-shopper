@@ -10,82 +10,83 @@ const mapState = ({user, categories}) => ({user, categories})
 const ProductForm = props => {
   const {
     handleChange,
+    handleCategoryChange,
     handleSubmit,
     name,
     description,
+    categories,
     stock,
     price,
     imageUrl,
     type
   } = props
   return (
-    props.user.isAdmin && (
-      <Form onSubmit={handleSubmit} size="big">
+    <Form onSubmit={handleSubmit} size="big">
+      <Form.Group>
+        <Form.Field
+          label="Product Name"
+          control={Input}
+          placeholder="Product Name"
+          name="name"
+          value={name}
+          onChange={handleChange}
+        />
+        <Form.Field
+          label="Description"
+          control={Input}
+          placeholder="Description"
+          name="description"
+          value={description}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Field
+          label="Stock"
+          control={Input}
+          placeholder="Stock"
+          name="stock"
+          value={stock}
+          onChange={handleChange}
+        />
+        <Form.Field
+          label="Price"
+          control={Input}
+          placeholder="Price"
+          name="price"
+          value={price}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Field
+          label="Image URL"
+          control={Input}
+          placeholder="Image URL"
+          name="imageUrl"
+          value={imageUrl}
+          onChange={handleChange}
+        />
+        <label htmlFor="">Categories</label>
         <Form.Group>
-          <Form.Field
-            label="Product Name"
-            control={Input}
-            placeholder="Product Name"
-            name="name"
-            value={name}
-            onChange={handleChange}
-          />
-          <Form.Field
-            label="Description"
-            control={Input}
-            placeholder="Description"
-            name="description"
-            value={description}
-            onChange={handleChange}
-          />
+          {categories.map(category => (
+            <Form.Field
+              type="checkbox"
+              id={category.id}
+              key={category.id}
+              control="input"
+              name="category"
+              label={category.name}
+              value={category.id}
+              onChange={handleCategoryChange}
+            />
+          ))}
         </Form.Group>
-        <Form.Group>
-          <Form.Field
-            label="Stock"
-            control={Input}
-            placeholder="Stock"
-            name="stock"
-            value={stock}
-            onChange={handleChange}
-          />
-          <Form.Field
-            label="Price"
-            control={Input}
-            placeholder="Price"
-            name="price"
-            value={price}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Field
-            label="Image URL"
-            control={Input}
-            placeholder="Image URL"
-            name="imageUrl"
-            value={imageUrl}
-            onChange={handleChange}
-          />
-          <Form.Group label="Categories">
-            {categories.map(category => (
-              <Form.Field
-                type="checkbox"
-                id={category.id}
-                key={category.id}
-                control="input"
-                name="category"
-                label={category.name}
-                value={category.id}
-                onChange={this.handleUpdate}
-              />
-            ))}
-          </Form.Group>
-          <Form.Button type="submit">
-            <Icon name={type.toLowerCase()} /> {type} Product
-          </Form.Button>
-        </Form.Group>
-      </Form>
-    )
+        <Form.Button type="submit">
+          <Icon name={type.toLowerCase()} /> {type} Product
+        </Form.Button>
+      </Form.Group>
+    </Form>
   )
 }
 

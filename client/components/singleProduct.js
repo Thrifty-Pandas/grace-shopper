@@ -17,6 +17,7 @@ import {
   addToCartThunk,
   editProductInCart
 } from '../store/cart'
+import {AddProduct, EditProduct} from './index'
 
 class SingleProduct extends React.Component {
   state = {
@@ -80,6 +81,8 @@ class SingleProduct extends React.Component {
             </Item>
           </Item.Group>
         )}
+        <AddProduct />
+        <EditProduct />
       </div>
     )
   }
