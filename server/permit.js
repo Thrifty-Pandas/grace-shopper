@@ -7,9 +7,9 @@ const permit = (...allowed) => {
   // return a middleware
   return (req, res, next) => {
     let userRole
-    if (req.user.isAdmin) userRole = 'Admin'
-    else if (req.user) userRole = 'Auth_User'
-    else userRole = 'Unauth_User'
+    if (!req.user) userRole = 'Unauth_User'
+    else if (req.user.isAdmin) userRole = 'Admin'
+    else userRole = 'Auth_User'
     if (req.user && isAllowed(userRole)) next()
     else {
       // role is allowed, so continue on the next middleware
