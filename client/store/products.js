@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {getReviews} from './reviews'
 
 const initialState = {allProducts: [], selectedProduct: {}}
 
@@ -40,6 +41,7 @@ export const fetchOneProduct = productId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/products/${productId}`)
     dispatch(getOneProduct(data))
+    dispatch(getReviews(data.reviews))
   } catch (err) {
     console.error(err)
   }
