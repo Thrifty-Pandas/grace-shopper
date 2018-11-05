@@ -10,7 +10,7 @@ import {
   AllOrders,
   Cart
 } from './components'
-import {me} from './store'
+import {me, fetchCategories, fetchProducts} from './store'
 import SingleProduct from './components/singleProduct'
 import UserForm from './components/userForm'
 
@@ -64,6 +64,8 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(fetchCategories())
+      dispatch(fetchProducts())
     }
   }
 }

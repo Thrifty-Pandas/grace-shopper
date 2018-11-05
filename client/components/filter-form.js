@@ -32,10 +32,6 @@ export class FilterForm extends Component {
     this.props.setFilters(this.state.filterSelection)
   }
 
-  componentDidMount() {
-    this.props.fetchCategories()
-  }
-
   render() {
     const {categories} = this.props
     return (
