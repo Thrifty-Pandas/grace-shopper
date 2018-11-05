@@ -1,13 +1,16 @@
 import React from 'react'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
-import {addToCartThunk, editProductInCart} from '../store/cart'
+import {
+  getProductsInCartThunk,
+  addToCartThunk,
+  editProductInCart
+} from '../store/cart'
 import {connect} from 'react-redux'
 
 //expects an entire product object as props
 const ProductCard = props => {
   const {id, name, description, price, imageUrl} = props
-
   return (
     <div>
       <Link to={`/products/${id}`}>
@@ -47,7 +50,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(addToCartThunk(productId, quantity)),
     editProductInCart: (productId, quantity) => {
       dispatch(editProductInCart(productId, quantity))
-    }
+    },
+    getProductsInCartThunk: () => dispatch(getProductsInCartThunk())
   }
 }
 
