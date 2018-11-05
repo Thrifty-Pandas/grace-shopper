@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Header, Icon, List} from 'semantic-ui-react'
-import {fetchOrdersById} from '../store/orders'
+import {fetchOrdersById, fetchOrders} from '../store/orders'
 
 class Account extends Component {
   async componentDidMount() {
-    await this.props.fetchOrdersById(1)
-    console.log(this.props.orders[0])
+    await this.props.fetchOrders()
+    console.log(this.props.orders)
   }
   render() {
-    if (this.props.orders[0]) {
+    if (this.props.orders) {
       return (
         <div className="account-settings">
           <Header as="h2" icon>
@@ -20,7 +20,7 @@ class Account extends Component {
             </Header.Subheader>
           </Header>
           <List divided relaxed>
-            {this.props.orders[0].products.map(product => {
+            {/* {this.props.orders[0].products.map(product => {
               return (
                 <List.Item>
                   <List.Content>
@@ -30,7 +30,7 @@ class Account extends Component {
                   </List.Content>
                 </List.Item>
               )
-            })}
+            })} */}
           </List>
         </div>
       )
@@ -47,7 +47,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    fetchOrdersById: userId => dispatch(fetchOrdersById(userId))
+    fetchOrdersById: userId => dispatch(fetchOrdersById(userId)),
+    fetchOrders: () => dispatch(fetchOrders())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Account)
