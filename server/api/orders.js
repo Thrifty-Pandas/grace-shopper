@@ -1,20 +1,25 @@
-const {Order, OrderProduct} = require('../db/models')
+const {User, Order, OrderProduct} = require('../db/models')
 const router = require('express').Router()
 
 module.exports = router
 
 async function findOrders(sessionInfo) {
-  if (sessionInfo.temporaryUserId) {
-    const orders = await Order.findAll({
+  let existingUser = {}
+  if (sessionInfo.user) {
+    existingUser = await User.findById(sessionInfo.userId)
+  }
+  let orders = {}
+  if (!existingUser.id) {
+    orders = await Order.findAll({
       where: {
-        temporaryUserId: sessionInfo.temporaryUserId
+        temporaryUserId: sessionInfo.id
       }
     })
     return orders
   } else {
-    const orders = await Order.findAll({
+    orders = await Order.findAll({
       where: {
-        userId: sessionInfo.userId
+        userId: sessionInfo.id
       }
     })
     return orders
