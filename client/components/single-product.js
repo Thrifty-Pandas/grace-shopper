@@ -35,9 +35,11 @@ class SingleProduct extends React.Component {
               <Item.Content>
                 <Item.Header>{name}</Item.Header>
                 <Item.Meta>
-                  <span>{price}</span>
+                  <span>${price}</span>
+                  <br />
+                  <span> {stock} in stock </span>
                 </Item.Meta>
-                <Item.Description verticalAlign="middle">
+                <Item.Description verticalalign="middle">
                   {description}
                 </Item.Description>
                 <Item.Extra>
