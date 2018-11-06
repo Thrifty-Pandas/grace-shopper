@@ -12,7 +12,7 @@ import {
   Item
 } from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
-import {ProductReviews, ReviewForm, EditProduct} from './index'
+import {ProductReviews, ReviewForm, EditProduct, AddProduct} from './index'
 import {
   getProductsInCartThunk,
   addToCartThunk,
@@ -85,7 +85,6 @@ class SingleProduct extends React.Component {
         )}
         <ProductReviews />
         <ReviewForm />
-        <EditProduct />
       </Container>
     )
   }

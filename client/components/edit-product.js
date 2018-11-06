@@ -12,23 +12,10 @@ const EditProduct = props => {
     )
 }
 
-// handleCategoryChange = evt => {
-//   const categoryId = Number(evt.target.id)
-//   if (this.state.productCategories.includes(categoryId)) {
-//     this.setState({
-//       productCategories: this.state.productCategories.filter(
-//         id => id !== categoryId
-//       )
-//     })
-//   } else {
-//     this.setState({
-//       productCategories: [...this.state.productCategories, categoryId]
-//     })
-//   }
-// }
-
 const mapStateToProps = ({products}) => ({product: products.selectedProduct})
 
-const mapDispatchToProps = {editOneProduct}
+const mapDispatchToProps = dispatch => ({
+  editOneProduct: (id, product) => dispatch(editOneProduct(id, product))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProduct)

@@ -29,6 +29,7 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   //TODO add in security checks using req.user
+  console.log('ACTUALLY GOT TO THE POST ROUTE')
   const {
     name,
     description,
@@ -45,7 +46,7 @@ router.post('/', async (req, res, next) => {
       price,
       imageUrl
     })
-
+    console.log('productCategories: ', productCategories)
     await product.setCategories(productCategories)
     const newProduct = await Product.findById(product.id, {
       include: [Category]
@@ -66,20 +67,8 @@ router.put('/:productId', async (req, res, next) => {
       imageUrl,
       productCategories
     } = req.body
-    // const [numberOfAffectedRows, affectedRows] = await Product.update(
-    //   {
-    //     name,
-    //     description,
-    //     stock,
-    //     price,
-    //     imageUrl
-    //   },
-    //   {
-    //     where: {id: req.params.productId},
-    //     returning: true,
-    //     plain: true
-    //   }
-    // )
+    console.log('GOT HERE', req.body)
+    console.log('productCategories: ', productCategories)
     const product = await Product.findById(Number(req.params.productId))
     const updatedProduct = await product.update({
       name,

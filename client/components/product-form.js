@@ -7,6 +7,8 @@ import {connect} from 'react-redux'
 //extra guarantee
 const mapState = ({user, categories}) => ({user, categories})
 
+// const mapDispatchToProps = {addNewProduct}
+
 export class ProductForm extends Component {
   constructor(props) {
     super(props)
@@ -47,18 +49,32 @@ export class ProductForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    const {name, description, stock, price, imageUrl} = this.state
-    const product = {name, description, stock, price, imageUrl}
-
-    this.props.action(product)
-
+    const {
+      name,
+      description,
+      stock,
+      price,
+      imageUrl,
+      productCategories
+    } = this.state
+    const {verb, action, id} = this.props
+    const product = {
+      name,
+      description,
+      stock,
+      price,
+      imageUrl,
+      productCategories
+    }
+    if (verb === 'Edit') action(id, product)
+    else action(product)
     this.setState({
       name: '',
       description: '',
       stock: '',
       price: '',
-      imageUrl: ''
-      // productCategories: []
+      imageUrl: '',
+      productCategories: []
     })
   }
 
