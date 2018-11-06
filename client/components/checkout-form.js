@@ -21,7 +21,7 @@ export class CheckoutForm extends Component {
 
   handleStripe = async () => {
     let {token} = await this.props.stripe.createToken({name: 'Name'})
-    let response = await fetch('/charge', {
+    let response = await fetch('/api/charge', {
       method: 'POST',
       headers: {'Content-Type': 'text/plain'},
       body: token.id
