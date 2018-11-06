@@ -8,4 +8,6 @@ const Cart = db.define('cart', {
   }
 })
 
+Cart.prototype.createOrder = function(orderInfo) {}
+
 module.exports = Cart
