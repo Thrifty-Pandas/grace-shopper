@@ -58,21 +58,41 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    const {name, description, stock, price, productCategories} = req.body
-    const [numberOfAffectedRows, affectedRows] = await Product.update(
-      {
-        name,
-        description,
-        stock,
-        price
-      },
-      {
-        where: {id: req.params.productId},
-        returning: true,
-        plain: true
-      }
-    )
-    res.json(affectedRows)
+    const {
+      name,
+      description,
+      stock,
+      price,
+      imageUrl,
+      productCategories
+    } = req.body
+    // const [numberOfAffectedRows, affectedRows] = await Product.update(
+    //   {
+    //     name,
+    //     description,
+    //     stock,
+    //     price,
+    //     imageUrl
+    //   },
+    //   {
+    //     where: {id: req.params.productId},
+    //     returning: true,
+    //     plain: true
+    //   }
+    // )
+    const product = await Product.findById(Number(req.params.productId))
+    const updatedProduct = await product.update({
+      name,
+      description,
+      stock,
+      price,
+      imageUrl
+    })
+    await updatedProduct.setCategories(productCategories)
+    const finalProduct = await Product.findById(Number(req.params.productId), {
+      include: [Category]
+    })
+    res.json(finalProduct)
   } catch (err) {
     next(err)
   }
