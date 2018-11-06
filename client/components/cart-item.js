@@ -11,11 +11,8 @@ class CartItem extends React.Component {
   handleChange = evt => this.setState({[evt.target.name]: evt.target.value})
 
   render() {
-    console.log('product: ', this.props.productInfo)
-    console.log('cart product: ', this.props.cartInfo)
     const {quantity} = this.props.cartInfo
     const {id, price, imageUrl, name} = this.props.productInfo
-    console.log('quantity: ', quantity)
 
     return (
       <tr>
@@ -56,22 +53,6 @@ class CartItem extends React.Component {
           </Button>
         </td>
       </tr>
-      // <Table.Row>
-      //   <Table.Cell>
-      //     <Link to={`/products/${id}`}>
-      //       <Image src={imageUrl} size="small" verticalAlign="middle" />
-      //       <br />
-      //       <h2>{name}</h2>
-      //     </Link>
-      //   </Table.Cell>
-      //   <Table.Cell>{price}</Table.Cell>
-      //   <Table.Cell>{quantity}</Table.Cell>
-      //   <Table.Cell>
-      //     <Button>Update quantity</Button>
-      //     <br />
-      //     <Button>Delete</Button>
-      //   </Table.Cell>
-      // </Table.Row>
     )
   }
 }
