@@ -1,6 +1,9 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {Order, OrderProduct, Product} = require('../db/models')
+// const {Order, OrderProduct, Product} = require('../models')
+const Order = require('./order')
+const OrderProduct = require('./orderProduct')
+const Product = require('./product')
 
 const Cart = db.define('cart', {
   temporaryUserId: {
@@ -9,19 +12,23 @@ const Cart = db.define('cart', {
   }
 })
 
-Cart.prototype.createOrder = async function(orderInfo) {
+Cart.prototype.createOrder = async function({orderInfo}) {
   //create an order
-  const order = await Order.create({ ...orderInfo })
-  // const cart = await Cart.findById(this.id, { include: [Product] })
+  console.log('orderInfo in instance method: ', orderInfo)
+  const order = await Order.create({...orderInfo})
+  const cart = await Cart.findById(this.id, {include: [Product]})
 
-  await Promise.all(
-
-    this.products.map(product =>
-      OrderProduct.create({productId:product.id,orderId:order.id,price:product.price,quantity:})
-      )
-
-  )
   //create orderProducts
+  await Promise.all(
+    cart.products.map(product => {
+      OrderProduct.create({
+        productId: product.id,
+        orderId: order.id,
+        price: product.price,
+        quantity: product.cartProduct.quantity
+      })
+    })
+  )
 }
 
 module.exports = Cart

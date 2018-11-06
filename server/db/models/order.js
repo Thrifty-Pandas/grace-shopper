@@ -6,14 +6,14 @@ const Order = db.define('order', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      allowEmpty: false
+      notEmpty: true
     }
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      allowEmpty: false,
+      notEmpty: true,
       isEmail: true
     }
   },
@@ -23,7 +23,7 @@ const Order = db.define('order', {
     validate: {isNumeric: true, min: 0}
   },
   temporaryUserId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: true
   },
   userId: {
