@@ -9,8 +9,9 @@ class OrderCard extends React.Component {
 
   render() {
     const {id, createdAt, status, totalPrice} = this.props
+    let statusUpdate
     if (this.props.user.isAdmin) {
-      const statusUpdate = <OrderStatusUpdate id={id} />
+      statusUpdate = <OrderStatusUpdate id={id} />
     }
 
     return (
