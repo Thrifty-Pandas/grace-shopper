@@ -53,7 +53,6 @@ router.put('/:orderId', async (req, res, next) => {
     if (req.user.dataValues.isAdmin) {
       if (req.body.status && req.body.status !== order.status) {
         const updatedOrder = await order.update({status: req.body.status})
-        console.log('----------->updatedOrder', updatedOrder)
         res.status(204).json(updatedOrder)
       }
     }
