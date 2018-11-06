@@ -48,18 +48,18 @@ router.get('/:orderId', async (req, res, next) => {
 
 // when admin wants to update the status of a specific order
 router.put('/:orderId', async (req, res, next) => {
-  // try {
-  //   const user = await User.findById(req.user.dataValues.id)
-  //   const order = await Order.findById(req.params.orderId)
-  //   if (user.isAdmin) {
-  //     const updatedOrder = req.body.status ? await order.update({
-  //       status:
-  //     })
-  //     res.status(204).json(updatedOrder)
-  //   }
-  // } catch (err) {
-  //   next(err)
-  // }
+  try {
+    const order = await Order.findById(req.params.orderId)
+    if (req.user.dataValues.isAdmin) {
+      if (req.body.status && req.body.status !== order.status) {
+        const updatedOrder = await order.update({status: req.body.status})
+        console.log('----------->updatedOrder', updatedOrder)
+        res.status(204).json(updatedOrder)
+      }
+    }
+  } catch (err) {
+    next(err)
+  }
 })
 
 // add new order to a specific user

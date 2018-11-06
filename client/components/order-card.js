@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card, Button} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
+import {OrderStatusUpdate} from './index'
 
 const OrderCard = props => {
   const {id, createdAt, status, totalPrice} = props
@@ -15,6 +16,7 @@ const OrderCard = props => {
           extra={`Total: $${totalPrice}.00`}
         />
       </Link>
+      <OrderStatusUpdate id={id} />
     </div>
   )
 }
