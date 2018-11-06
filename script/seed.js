@@ -190,21 +190,21 @@ const orders = [
   {
     shippingAddress: '123 Hello World Ln.',
     email: 'collin@email.com',
-    price: 44,
+    totalprice: 44,
     temporaryUserId: 413254,
     status: 'Created'
   },
   {
     shippingAddress: '234 Fullstack Rd.',
     email: 'ben@email.com',
-    price: 42,
+    totalprice: 42,
     temporaryUserId: 324125,
     status: 'Processing'
   },
   {
     shippingAddress: '200 Super st.',
     email: 'meow@amail.com',
-    price: 42,
+    totalprice: 42,
     temporaryUserId: 239875,
     userId: 2,
     status: 'Cancelled'
@@ -212,7 +212,7 @@ const orders = [
   {
     shippingAddress: '456 Milky Way',
     email: 'cody@email.com',
-    price: 15,
+    totalprice: 15,
     temporaryUserId: 12345,
     userId: 1,
     status: 'Completed'
@@ -220,7 +220,7 @@ const orders = [
   {
     shippingAddress: '456 Milky Way',
     email: 'cody@email.com',
-    price: 50,
+    totalprice: 50,
     temporaryUserId: 12345,
     userId: 1,
     status: 'Processing'

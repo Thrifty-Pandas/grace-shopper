@@ -78,7 +78,7 @@ router.post('/', async (req, res, next) => {
   const {
     shippingAddress,
     email,
-    price,
+    totalprice,
     temporaryUserId,
     userId,
     status,
@@ -87,7 +87,7 @@ router.post('/', async (req, res, next) => {
   const orderInfo = {
     shippingAddress,
     email,
-    price,
+    totalprice,
     temporaryUserId,
     userId,
     status
