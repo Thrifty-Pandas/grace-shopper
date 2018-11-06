@@ -3,7 +3,7 @@ import {Table} from 'semantic-ui-react'
 
 import OrderItem from './order-item'
 import {connect} from 'react-redux'
-import {fetchSinleOrder} from '../store/orders'
+import {fetchSingleOrder} from '../store/orders'
 
 class OrderDetail extends React.Component {
   componentDidMount() {
@@ -49,7 +49,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getProductsInOrder: id => dispatch(fetchSinleOrder(id))
+  getProductsInOrder: id => dispatch(fetchSingleOrder(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetail)
