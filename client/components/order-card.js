@@ -7,13 +7,12 @@ const OrderCard = props => {
 
   return (
     <div>
-      <Card
-        header={`Order ID: ${id}`}
-        meta={`Order placed: ${createdAt}`}
-        description={`Status: ${status}`}
-      />
       <Link to={`/orders/${id}`}>
-        <Button>View Details</Button>
+        <Card
+          header={`Order ID: ${id}`}
+          meta={`Order placed: ${createdAt}`}
+          description={`Status: ${status}`}
+        />
       </Link>
     </div>
   )

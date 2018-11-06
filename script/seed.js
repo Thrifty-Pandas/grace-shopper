@@ -202,6 +202,14 @@ const orders = [
     status: 'confirmed'
   },
   {
+    shippingAddress: '200 Super st.',
+    email: 'meow@amail.com',
+    price: 42,
+    temporaryUserId: 239875,
+    userId: 2,
+    status: 'shipped'
+  },
+  {
     shippingAddress: '456 Milky Way',
     email: 'cody@email.com',
     price: 15,
@@ -227,7 +235,8 @@ const orderProducts = [
   {orderId: 2, productId: 3},
   {orderId: 3, productId: 2},
   {orderId: 3, productId: 5},
-  {orderId: 4, productId: 2}
+  {orderId: 4, productId: 2},
+  {orderId: 5, productId: 4}
 ]
 
 const carts = [

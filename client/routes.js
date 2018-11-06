@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import {
   Login,
   Signup,
+  OrderDetail,
   UserHome,
   AllProducts,
   AllOrders,
@@ -35,6 +36,7 @@ class Routes extends Component {
         <Route path="/signup" component={UserForm} />
         <Route path="/products" component={AllProducts} />
         <Route path="/cart" component={Cart} />
+        <Route path="/orders/:ordersId" component={OrderDetail} />
         <Route path="/orders" component={AllOrders} />
         <Route exact path="/" component={AllProducts} />
 
