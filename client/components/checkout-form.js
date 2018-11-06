@@ -3,6 +3,7 @@ import {Form, Icon, Button, Container, Divider} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {addNewOrder} from '../store'
 import {CardElement, injectStripe} from 'react-stripe-elements'
+import axios from 'axios'
 
 const mapState = ({cart, user}) => ({cart, user})
 const mapDispatch = {addNewOrder}
@@ -21,13 +22,15 @@ export class CheckoutForm extends Component {
 
   handleStripe = async () => {
     let {token} = await this.props.stripe.createToken({name: 'Name'})
-    let response = await fetch('/api/charge', {
-      method: 'POST',
-      headers: {'Content-Type': 'text/plain'},
-      body: token.id
-    })
+    // let res = await axios.post('api/charge', { token.id})
+    const {data} = await axios.post('/api/charge', {token})
+    // let response = await fetch('/api/charge', {
+    //   method: 'POST',
+    //   headers: {'Content-Type': 'text/plain'},
+    //   body: token.id
+    // })
 
-    if (response.ok) this.setState({complete: true})
+    // if (response.ok) this.setState({complete: true})
   }
 
   handleForm = evt => {
@@ -36,16 +39,16 @@ export class CheckoutForm extends Component {
     const {shippingAddress, email} = this.state
     const {addNewOrder, cart, user} = this.props
     const {userId} = user
-    const {cartId} = cart
-    const price = 5 //hard coding for now since I don't have access to this data
-    const order = {shippingAddress, email, userId, cartId, price}
+    const {cartId} = cart[0]
+    const totalPrice = 5 //hard coding for now since I don't have access to this data
+    const order = {shippingAddress, email, userId, cartId, totalPrice}
     addNewOrder(order)
     //clear cart upon success
     //redirect to success page
   }
 
-  handleSubmit = evt => {
-    this.handleStripe(evt)
+  handleSubmit = async evt => {
+    await this.handleStripe(evt)
     this.handleForm(evt)
   }
 
@@ -54,7 +57,7 @@ export class CheckoutForm extends Component {
     const {email, shippingAddress} = this.state
     return (
       <Container>
-        <Form onSubmit={this.handleForm}>
+        <Form>
           <Form.Field>
             <label>Email</label>
             <input value={email} onChange={this.handleChange} name="email" />
@@ -67,15 +70,15 @@ export class CheckoutForm extends Component {
               name="shippingAddress"
             />
           </Form.Field>
+          <Button type="submit" onClick={this.handleSubmit}>
+            <Icon name="credit card outline" />
+            Complete Purchase
+          </Button>
         </Form>
         <Container>
           <CardElement />
         </Container>
         <Divider />
-        <Button type="submit" onClick={this.handleSubmit}>
-          <Icon name="credit card outline" />
-          Complete Purchase
-        </Button>
       </Container>
     )
   }
