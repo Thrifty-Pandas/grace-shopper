@@ -31,8 +31,8 @@ const Order = db.define('order', {
     allowNull: true
   },
   status: {
-    type: Sequelize.ENUM('pending', 'confirmed', 'shipped', 'delivered'),
-    defaultValue: 'pending'
+    type: Sequelize.ENUM('Created', 'Processing', 'Cancelled', 'Completed'),
+    defaultValue: 'Created'
   }
 })
 

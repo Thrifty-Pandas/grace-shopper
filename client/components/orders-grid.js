@@ -1,12 +1,14 @@
 import React from 'react'
 import {OrderCard} from './index'
 import {Grid} from 'semantic-ui-react'
+
 const OrdersGrid = props => {
-  const {orders} = props
+  const {allOrders} = props
+
   return (
-    <Grid>
-      {orders.map(order => (
-        <Grid.Column key={order.id} width={1}>
+    <Grid columns={3}>
+      {allOrders.map(order => (
+        <Grid.Column key={order.id}>
           <OrderCard {...order} />
         </Grid.Column>
       ))}

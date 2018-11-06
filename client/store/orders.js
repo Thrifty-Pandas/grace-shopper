@@ -1,5 +1,7 @@
 import axios from 'axios'
+
 const initialState = {allOrders: [], selectedOrder: {}}
+
 export const GET_ORDERS = 'GET_ORDERS'
 export const GET_ONEORDER = 'GET_ONEORDER'
 export const ADD_ORDER = 'ADD_ORDER'
@@ -9,7 +11,7 @@ export const getOrders = orders => ({
   type: GET_ORDERS,
   orders
 })
-export const getOneOrder = order => ({
+export const getSingleOrder = order => ({
   type: GET_ONEORDER,
   order
 })
@@ -30,10 +32,10 @@ export const fetchOrders = () => async dispatch => {
     console.error(err)
   }
 }
-export const fetchOneOrder = orderId => async dispatch => {
+export const fetchSinleOrder = orderId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/orders/${orderId}`)
-    dispatch(getOneOrder(data))
+    dispatch(getSingleOrder(data))
   } catch (err) {
     console.error(err)
   }
@@ -59,7 +61,7 @@ export const ordersReducer = (state = initialState, action) => {
     case GET_ORDERS:
       return {...state, allOrders: [...action.orders]}
     case GET_ONEORDER:
-      return {...state, selectedOrder: action.order}
+      return {...state, selectedOrder: action.singleOrder}
     case ADD_ORDER:
       return {...state, allOrders: [...state.allOrders, action.order]}
     case EDIT_ORDER:
