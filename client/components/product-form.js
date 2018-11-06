@@ -14,9 +14,9 @@ export class ProductForm extends Component {
     const description = props.description ? props.description : ''
     const stock = props.stock ? props.stock : ''
     const price = props.price ? props.price : ''
-    const productCategories = props.categories
-      ? props.categories.map(category => category.id)
-      : ''
+    // const productCategories = props.categories
+    //   ? props.categories.map(category => category.id)
+    //   : ''
 
     this.state = {
       name,
@@ -24,7 +24,7 @@ export class ProductForm extends Component {
       stock,
       price,
       imageUrl: '',
-      productCategories
+      productCategories: []
     }
   }
 

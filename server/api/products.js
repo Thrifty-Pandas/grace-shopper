@@ -29,10 +29,28 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   //TODO add in security checks using req.user
-  const {name, description, stock, price} = req.body
+  const {
+    name,
+    description,
+    stock,
+    price,
+    productCategories,
+    imageUrl
+  } = req.body
   try {
-    const product = await Product.create({name, description, stock, price})
-    res.json(product)
+    const product = await Product.create({
+      name,
+      description,
+      stock,
+      price,
+      imageUrl
+    })
+
+    await product.setCategories(productCategories)
+    const newProduct = await Product.findById(product.id, {
+      include: [Category]
+    })
+    res.json(newProduct)
   } catch (err) {
     next(err)
   }
@@ -40,7 +58,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    const {name, description, stock, price} = req.body
+    const {name, description, stock, price, productCategories} = req.body
     const [numberOfAffectedRows, affectedRows] = await Product.update(
       {
         name,
