@@ -28,9 +28,33 @@ async function findCart(req) {
       }
     })
     if (unAuthedCart) {
+      const originalCart = await Cart.findOne({
+        where: {userId: existingUser.id}
+      })
+      const originalProducts = await CartProduct.findAll({
+        where: {cartId: originalCart.id}
+      })
       await unAuthedCart.update({
         userId: req.user.dataValues.id
       })
+      const newProducts = await CartProduct.findAll({
+        where: {cartId: unAuthedCart.id}
+      })
+      originalProducts.forEach(async orgproduct => {
+        if (
+          newProducts.filter(product => (product.id === orgproduct.id).length)
+        ) {
+          console.log('the if statement passed')
+          console.log('unauthed cart id: ', unAuthedCart.id)
+          console.log('orgproduct', orgproduct)
+          await orgproduct.update({cartId: unAuthedCart.id}, {force: true})
+        }
+      })
+      // if (originalCart) {
+      //   await CartProduct.update(
+      //     {cartId: unAuthedCart.id},
+      //     {where: {cartId: originalCart.id}}
+      //   )}
       cart = unAuthedCart
     } else {
       const cartinstance = await Cart.findOrCreate({
