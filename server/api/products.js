@@ -1,5 +1,6 @@
 const {Product, ProductCategory, Review, Category} = require('../db/models')
 const router = require('express').Router()
+const permit = require('../permit')
 const Op = require('sequelize').Op
 module.exports = router
 
@@ -27,9 +28,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
-  //TODO add in security checks using req.user
-  console.log('ACTUALLY GOT TO THE POST ROUTE')
+router.post('/', permit('Admin'), async (req, res, next) => {
   const {
     name,
     description,
@@ -46,7 +45,6 @@ router.post('/', async (req, res, next) => {
       price,
       imageUrl
     })
-    console.log('productCategories: ', productCategories)
     await product.setCategories(productCategories)
     const newProduct = await Product.findById(product.id, {
       include: [Category]
@@ -57,7 +55,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+router.put('/:productId', permit('Admin'), async (req, res, next) => {
   try {
     const {
       name,
@@ -67,8 +65,6 @@ router.put('/:productId', async (req, res, next) => {
       imageUrl,
       productCategories
     } = req.body
-    console.log('GOT HERE', req.body)
-    console.log('productCategories: ', productCategories)
     const product = await Product.findById(Number(req.params.productId))
     const updatedProduct = await product.update({
       name,
