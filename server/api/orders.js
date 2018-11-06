@@ -24,24 +24,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// router.get('/:orderId', async (req, res, next) => {
-//   try {
-//     const order = await Order.findOne({
-//       where: {
-//         userId: req.user.dataValues.id,
-//         id: req.params.orderId
-//       },
-//       include: {
-//         model: Product
-//       }
-//     })
-//     console.log('req.body-->', req.body)
-//     res.status(200).json(order)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
 // shows one specific order for a specific user
 router.get('/:orderId', async (req, res, next) => {
   try {
@@ -65,13 +47,20 @@ router.get('/:orderId', async (req, res, next) => {
 })
 
 // when admin wants to update the status of a specific order
-
-// router.put('/:productId', async (req, res, next) => {
-//   try {
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+router.put('/:orderId', async (req, res, next) => {
+  // try {
+  //   const user = await User.findById(req.user.dataValues.id)
+  //   const order = await Order.findById(req.params.orderId)
+  //   if (user.isAdmin) {
+  //     const updatedOrder = req.body.status ? await order.update({
+  //       status:
+  //     })
+  //     res.status(204).json(updatedOrder)
+  //   }
+  // } catch (err) {
+  //   next(err)
+  // }
+})
 
 // add new order to a specific user
 router.post('/', async (req, res, next) => {
