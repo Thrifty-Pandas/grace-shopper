@@ -3,7 +3,7 @@ import {OrderCard} from './index'
 import {Grid} from 'semantic-ui-react'
 
 const OrdersGrid = props => {
-  const {allOrders} = props
+  const allOrders = props.ordersToDisplay
 
   return (
     <Grid columns={3}>

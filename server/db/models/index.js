@@ -5,9 +5,9 @@ const Product = require('./product')
 const Review = require('./review')
 const Order = require('./order')
 const Cart = require('./cart')
+const OrderProduct = require('./orderProduct')
 const CartProduct = require('./cartProduct')
 const ProductCategory = db.define('productCategory')
-const OrderProduct = db.define('OrderProduct')
 
 //Category - Product
 Category.belongsToMany(Product, {through: ProductCategory})

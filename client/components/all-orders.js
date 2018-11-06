@@ -1,26 +1,20 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchOrders} from '../store'
-import {OrdersGrid, FilterForm} from './index'
+import {OrdersGrid, OrderFilterForm} from './index'
 
-const mapStateToProps = ({orders, filter}) => ({
+const mapStateToProps = ({orders, orderfilter}) => ({
   allOrders: orders.allOrders,
-  filter
+  orderfilter
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchAllOrders: () => dispatch(fetchOrders())
 })
 
-const filterOrders = (allOrders, statusFilters) => {
-  if (statusFilters.length) {
-    allOrders.filter(order => {
-      statusFilters.map(statusFilter => {
-        if (statusFilter === order.status) {
-          return order.status
-        }
-      })
-    })
+const filterOrders = (allOrders, statusFilter) => {
+  if (statusFilter.length) {
+    return allOrders.filter(order => statusFilter.includes(order.status))
   } else {
     return allOrders
   }
@@ -32,12 +26,13 @@ class AllOrders extends Component {
   }
 
   render() {
-    const {allOrders, filter} = this.props
-    const ordersToDisplay = filterOrders(allOrders, filter)
+    const {allOrders, orderfilter} = this.props
+    const ordersToDisplay = filterOrders(allOrders, orderfilter)
+    console.log('ordersToDisplay->', ordersToDisplay)
     return (
       <div>
-        <FilterForm />
-        <OrdersGrid allOrders={ordersToDisplay} />
+        <OrderFilterForm />
+        <OrdersGrid ordersToDisplay={ordersToDisplay} />
       </div>
     )
   }

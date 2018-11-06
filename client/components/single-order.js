@@ -1,16 +1,19 @@
 import React from 'react'
-import {Table, Link, Button, Image} from 'semantic-ui-react'
+import {Table} from 'semantic-ui-react'
+
+import OrderItem from './order-item'
 import {connect} from 'react-redux'
-import {fetchSinleOrder} from '../store/orders'
+import {fetchSingleOrder} from '../store/orders'
 
 class OrderDetail extends React.Component {
   componentDidMount() {
-    this.props.getProductsInOrder()
+    const orderId = Number(this.props.match.params.orderId)
+    this.props.getProductsInOrder(orderId)
   }
 
   render() {
-    console.log('selectedOrder -->', this.props.products)
-
+    console.log('props -->', this.props)
+    console.log('products: ', this.props.products)
     return (
       <Table celled padded>
         <Table.Header>
@@ -18,35 +21,35 @@ class OrderDetail extends React.Component {
             <Table.HeaderCell singleLine>Product</Table.HeaderCell>
             <Table.HeaderCell singleLine>Price</Table.HeaderCell>
             <Table.HeaderCell singleLine>Quantity</Table.HeaderCell>
+            <Table.HeaderCell singleLine>Product Total</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
-        {/* <Table.Body>
-          {this.props.products.map(product => {
-            return this.props.order.map(
-              orderProduct =>
-                product.id === orderProduct.productId ? (
-                  <CartItem
+        <Table.Body>
+          {this.props.products
+            ? this.props.products.map(product => {
+                return (
+                  <OrderItem
                     key={product.id}
-                    cartInfo={cartProduct}
+                    cartInfo={product.orderProduct}
                     productInfo={product}
                   />
-                ) : null
-            )
-          })}
-        </Table.Body> */}
+                )
+              })
+            : null}
+        </Table.Body>
       </Table>
     )
   }
 }
-const mapStateToProps = ({orders}) => {
+const mapStateToProps = state => {
   return {
-    selectedOrder: orders.selectedOrder
+    products: state.orders.selectedOrder.products
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  getProductsInOrder: () => dispatch(fetchSinleOrder())
+  getProductsInOrder: id => dispatch(fetchSingleOrder(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetail)

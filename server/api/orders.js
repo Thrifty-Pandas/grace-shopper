@@ -1,20 +1,21 @@
-const {User, Product, Order, OrderProduct} = require('../db/models')
+const {User, Product, Order, OrderProduct, Cart} = require('../db/models')
 const router = require('express').Router()
 
 module.exports = router
 
 // shows all the orders for a specific user
+
 router.get('/', async (req, res, next) => {
   try {
     let orders
+    if (!req.user) res.sendStatus(404)
     const user = await User.findById(req.user.dataValues.id)
     if (user.isAdmin) {
-      orders = await Order.findAll()
+      orders = await Order.findAll({include: [Product]})
     } else {
       orders = await Order.findAll({
-        where: {
-          userId: req.user.id
-        }
+        include: [Product],
+        where: {userId: req.user.id}
       })
     }
     res.status(200).json(orders)
@@ -77,20 +78,24 @@ router.post('/', async (req, res, next) => {
   const {
     shippingAddress,
     email,
-    price,
+    totalPrice,
+    temporaryUserId,
+    userId,
+    status,
+    cartId
+  } = req.body
+  const orderInfo = {
+    shippingAddress,
+    email,
+    totalPrice,
     temporaryUserId,
     userId,
     status
-  } = req.body
+  }
+
   try {
-    const order = await Order.create({
-      shippingAddress,
-      email,
-      price,
-      temporaryUserId,
-      userId,
-      status
-    })
+    const cart = await Cart.findById(cartId)
+    const order = await cart.createOrder({orderInfo})
     res.status(201).json(order)
   } catch (err) {
     next(err)
