@@ -23,14 +23,9 @@ export class CheckoutForm extends Component {
   handleStripe = async () => {
     let {token} = await this.props.stripe.createToken({name: 'Name'})
     // let res = await axios.post('api/charge', { token.id})
-    const {data} = await axios.post('/api/charge', {token})
-    // let response = await fetch('/api/charge', {
-    //   method: 'POST',
-    //   headers: {'Content-Type': 'text/plain'},
-    //   body: token.id
-    // })
+    const {status, data} = await axios.post('/api/charge', {token})
 
-    // if (response.ok) this.setState({complete: true})
+    if (status === 200) this.setState({complete: true})
   }
 
   handleForm = evt => {
@@ -38,10 +33,10 @@ export class CheckoutForm extends Component {
 
     const {shippingAddress, email} = this.state
     const {addNewOrder, cart, user} = this.props
-    const {userId} = user
+    const {id} = user
     const {cartId} = cart[0]
     const totalPrice = 5 //hard coding for now since I don't have access to this data
-    const order = {shippingAddress, email, userId, cartId, totalPrice}
+    const order = {shippingAddress, email, userId: id, cartId, totalPrice}
     addNewOrder(order)
     //clear cart upon success
     //redirect to success page
@@ -53,7 +48,7 @@ export class CheckoutForm extends Component {
   }
 
   render() {
-    if (this.state.complete) return <h1>Purchase Complete</h1>
+    if (this.state.complete) return <h1>Purchase Complete</h1> //ideally we'd just render a "success" component here
     const {email, shippingAddress} = this.state
     return (
       <Container>
