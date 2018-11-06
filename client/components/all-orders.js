@@ -14,12 +14,6 @@ const mapDispatchToProps = dispatch => ({
 
 const filterOrders = (allOrders, statusFilter) => {
   if (statusFilter.length) {
-    // console.log(
-    //   'mapping, filtering',
-    //   statusFilter.map(status =>
-    //     allOrders.filter(order => status === order.status)
-    //   )
-    // )
     return allOrders.filter(order => statusFilter.includes(order.status))
   } else {
     return allOrders
