@@ -190,21 +190,21 @@ const orders = [
   {
     shippingAddress: '123 Hello World Ln.',
     email: 'collin@email.com',
-    price: 44,
+    totalprice: 44,
     temporaryUserId: 413254,
     status: 'Created'
   },
   {
     shippingAddress: '234 Fullstack Rd.',
     email: 'ben@email.com',
-    price: 42,
+    totalprice: 42,
     temporaryUserId: 324125,
     status: 'Processing'
   },
   {
     shippingAddress: '200 Super st.',
     email: 'meow@amail.com',
-    price: 42,
+    totalprice: 42,
     temporaryUserId: 239875,
     userId: 2,
     status: 'Cancelled'
@@ -212,7 +212,7 @@ const orders = [
   {
     shippingAddress: '456 Milky Way',
     email: 'cody@email.com',
-    price: 15,
+    totalprice: 15,
     temporaryUserId: 12345,
     userId: 1,
     status: 'Completed'
@@ -220,7 +220,7 @@ const orders = [
   {
     shippingAddress: '456 Milky Way',
     email: 'cody@email.com',
-    price: 50,
+    totalprice: 50,
     temporaryUserId: 12345,
     userId: 1,
     status: 'Processing'
@@ -228,15 +228,15 @@ const orders = [
 ]
 
 const orderProducts = [
-  {orderId: 1, productId: 1, quantity: 1, price: 15},
-  {orderId: 1, productId: 2, quantity: 1, price: 15},
-  {orderId: 1, productId: 3, quantity: 1, price: 15},
-  {orderId: 2, productId: 1, quantity: 1, price: 15},
-  {orderId: 2, productId: 3, quantity: 1, price: 15},
-  {orderId: 3, productId: 2, quantity: 1, price: 15},
-  {orderId: 3, productId: 5, quantity: 1, price: 15},
-  {orderId: 4, productId: 2, quantity: 1, price: 15},
-  {orderId: 5, productId: 4, quantity: 1, price: 15}
+  {orderId: 1, productId: 1, quantity: 1, price: 3},
+  {orderId: 1, productId: 2, quantity: 2, price: 91},
+  {orderId: 1, productId: 3, quantity: 8, price: 8},
+  {orderId: 2, productId: 1, quantity: 2, price: 23},
+  {orderId: 2, productId: 3, quantity: 3, price: 17},
+  {orderId: 3, productId: 2, quantity: 2, price: 19},
+  {orderId: 3, productId: 5, quantity: 9, price: 26},
+  {orderId: 4, productId: 2, quantity: 6, price: 30},
+  {orderId: 5, productId: 4, quantity: 2, price: 1}
 ]
 
 const carts = [
