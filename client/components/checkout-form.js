@@ -44,9 +44,9 @@ export class CheckoutForm extends Component {
     //redirect to success page
   }
 
-  handleSubmit = () => {
-    this.handleStripe()
-    this.handleForm()
+  handleSubmit = evt => {
+    this.handleStripe(evt)
+    this.handleForm(evt)
   }
 
   render() {
@@ -54,7 +54,7 @@ export class CheckoutForm extends Component {
     const {email, shippingAddress} = this.state
     return (
       <Container>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleForm}>
           <Form.Field>
             <label>Email</label>
             <input value={email} onChange={this.handleChange} name="email" />
