@@ -42,12 +42,17 @@ async function findCart(req) {
       })
       originalProducts.forEach(async orgproduct => {
         if (
-          newProducts.filter(product => (product.id === orgproduct.id).length)
+          newProducts.filter(
+            product => product.productId !== orgproduct.productId
+          ).length
         ) {
           console.log('the if statement passed')
           console.log('unauthed cart id: ', unAuthedCart.id)
           console.log('orgproduct', orgproduct)
-          await orgproduct.update({cartId: unAuthedCart.id}, {force: true})
+          const neworgproduct = await orgproduct.update({
+            cartId: unAuthedCart.id
+          })
+          console.log('orgproduct after', neworgproduct)
         }
       })
       // if (originalCart) {
@@ -55,6 +60,7 @@ async function findCart(req) {
       //     {cartId: unAuthedCart.id},
       //     {where: {cartId: originalCart.id}}
       //   )}
+
       cart = unAuthedCart
     } else {
       const cartinstance = await Cart.findOrCreate({
