@@ -39,9 +39,9 @@ class OrderDetail extends React.Component {
     )
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = ({orders}) => {
   return {
-    selectedOrder: state.orders.selectedOrder
+    selectedOrder: orders.selectedOrder
   }
 }
 

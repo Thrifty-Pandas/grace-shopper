@@ -192,14 +192,14 @@ const orders = [
     email: 'collin@email.com',
     price: 44,
     temporaryUserId: 413254,
-    status: 'pending'
+    status: 'Created'
   },
   {
     shippingAddress: '234 Fullstack Rd.',
     email: 'ben@email.com',
     price: 42,
     temporaryUserId: 324125,
-    status: 'confirmed'
+    status: 'Processing'
   },
   {
     shippingAddress: '200 Super st.',
@@ -207,7 +207,7 @@ const orders = [
     price: 42,
     temporaryUserId: 239875,
     userId: 2,
-    status: 'shipped'
+    status: 'Cancelled'
   },
   {
     shippingAddress: '456 Milky Way',
@@ -215,7 +215,7 @@ const orders = [
     price: 15,
     temporaryUserId: 12345,
     userId: 1,
-    status: 'shipped'
+    status: 'Completed'
   },
   {
     shippingAddress: '456 Milky Way',
@@ -223,7 +223,7 @@ const orders = [
     price: 50,
     temporaryUserId: 12345,
     userId: 1,
-    status: 'delivered'
+    status: 'Processing'
   }
 ]
 
