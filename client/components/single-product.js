@@ -24,7 +24,7 @@ class SingleProduct extends React.Component {
     super()
     this.state = {
       quantity: 1,
-      editProductIsOpened: false
+      editProductDisplay: false
     }
     this.toggleEditProduct = this.toggleEditProduct.bind(this)
   }
@@ -36,9 +36,10 @@ class SingleProduct extends React.Component {
   }
 
   toggleEditProduct() {
-    const {editProductIsOpened} = this.state
+    const {editProductDisplay} = this.state
+    console.log('display? ', editProductDisplay)
     this.setState({
-      editProductIsOpened: !editProductIsOpened
+      editProductDisplay: !editProductDisplay
     })
   }
 
@@ -105,9 +106,11 @@ class SingleProduct extends React.Component {
             </Item>
           </Item.Group>
         )}
+
+        {this.state.editProductDisplay && <EditProduct />}
         <ProductReviews />
+
         <ReviewForm />
-        {this.state.editProductsOpened && <EditProduct />}
       </Container>
     )
   }
