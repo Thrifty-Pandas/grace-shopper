@@ -8,7 +8,14 @@ export {default as UserHome} from './user-home'
 export {default as ProductCard} from './product-card'
 export {default as ProductsGrid} from './products-grid'
 export {default as AllProducts} from './all-products'
+
+export {default as AddProduct} from './add-product'
+export {default as EditProduct} from './edit-product'
+export {default as ProductForm} from './product-form'
+export {default as AddCategoryForm} from './add-category-form'
+
 export {default as SingleProduct} from './single-product'
+
 export {default as Search} from './search'
 export {Login, Signup} from './auth-form'
 export {default as FilterForm} from './filter-form'

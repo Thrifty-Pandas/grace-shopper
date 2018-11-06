@@ -11,3 +11,13 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const {name} = req.body
+    const category = await Category.create({name})
+    res.json(category)
+  } catch (err) {
+    next(err)
+  }
+})

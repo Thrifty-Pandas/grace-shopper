@@ -15,8 +15,8 @@ import {
   CheckoutPage
 } from './components'
 
-import {me} from './store'
 import {getProductsInCartThunk} from './store/cart'
+import {me, fetchCategories, fetchProducts} from './store'
 import UserForm from './components/userForm'
 
 /**
@@ -72,6 +72,8 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getProductsInCartThunk())
+      dispatch(fetchCategories())
+      dispatch(fetchProducts())
     }
   }
 }

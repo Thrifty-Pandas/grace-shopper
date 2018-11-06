@@ -32,16 +32,12 @@ export class FilterForm extends Component {
     this.props.setFilters(this.state.filterSelection)
   }
 
-  componentDidMount() {
-    this.props.fetchCategories()
-  }
-
   render() {
     const {categories} = this.props
     return (
       <Form onSubmit={this.handleSubmit}>
+        <label htmlFor="">Categories</label>
         <Form.Group grouped>
-          <label>Categories</label>
           {categories.map(category => (
             <Form.Field
               type="checkbox"
