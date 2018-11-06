@@ -189,7 +189,7 @@ const reviews = [
 const orders = [
   {
     shippingAddress: '123 Hello World Ln.',
-    email: 'cody@email.com',
+    email: 'collin@email.com',
     price: 44,
     temporaryUserId: 413254,
     status: 'pending'
@@ -203,11 +203,19 @@ const orders = [
   },
   {
     shippingAddress: '456 Milky Way',
-    email: 'collin@email.com',
+    email: 'cody@email.com',
     price: 15,
     temporaryUserId: 12345,
     userId: 1,
     status: 'shipped'
+  },
+  {
+    shippingAddress: '456 Milky Way',
+    email: 'cody@email.com',
+    price: 50,
+    temporaryUserId: 12345,
+    userId: 1,
+    status: 'delivered'
   }
 ]
 
@@ -216,7 +224,10 @@ const orderProducts = [
   {orderId: 1, productId: 2},
   {orderId: 1, productId: 3},
   {orderId: 2, productId: 1},
-  {orderId: 2, productId: 3}
+  {orderId: 2, productId: 3},
+  {orderId: 3, productId: 2},
+  {orderId: 3, productId: 5},
+  {orderId: 4, productId: 2}
 ]
 
 const carts = [

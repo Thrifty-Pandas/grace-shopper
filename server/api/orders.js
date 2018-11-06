@@ -3,28 +3,11 @@ const router = require('express').Router()
 
 module.exports = router
 
-// async function findOrders(sessionInfo) {
-//   let existingUser = {}
-//   if (sessionInfo.user) {
-//     existingUser = await User.findById(sessionInfo.userId)
-//   }
-//   let orders = {}
-//   if (!existingUser.id) {
-//     orders = await Order.findAll({
-//       where: {
-//         temporaryUserId: sessionInfo.id
-//       }
-//     })
-//     return orders
-//   } else {
-//     orders = await Order.findAll({
-//       where: {
-//         userId: sessionInfo.id
-//       }
-//     })
-//     return orders
-//   }
-// }
+async function findOrders() {
+  let existingUser = {}
+  const orders = await Order.findAll()
+  return orders
+}
 
 // shows all the orders for a specific user
 router.get('/', async (req, res, next) => {
@@ -43,11 +26,12 @@ router.get('/', async (req, res, next) => {
 // shows one specific order for a specific user
 router.get('/:orderId', async (req, res, next) => {
   try {
-    const productsInOrder = await OrderProduct.findAll({
-      where: {
-        orderId: req.params.orderId
-      }
-    })
+    const productsInOrder = await findOrders()
+    // const productsInOrder = await OrderProduct.findAll({
+    //   where: {
+    //     orderId: req.params.orderId
+    //   }
+    // })
     res.status(200).json(productsInOrder)
   } catch (err) {
     next(err)

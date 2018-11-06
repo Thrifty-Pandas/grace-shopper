@@ -3,22 +3,24 @@ import {connect} from 'react-redux'
 import {fetchOrders} from '../store'
 import {OrdersGrid} from './index'
 
-const mapStateToProps = ({orders}) => ({orders})
+const mapStateToProps = ({orders}) => ({
+  allOrders: orders.allOrders
+})
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrders: () => dispatch(fetchOrders())
+  fetchAllOrders: () => dispatch(fetchOrders())
 })
 
 class AllOrders extends Component {
   componentDidMount() {
-    this.props.fetchOrders()
+    this.props.fetchAllOrders()
   }
+
   render() {
-    const {orders} = this.props
-    console.log('this.props-->', this.props)
+    const {allOrders} = this.props
     return (
       <div>
-        <OrdersGrid orders={orders} />
+        <OrdersGrid allOrders={allOrders} />
       </div>
     )
   }

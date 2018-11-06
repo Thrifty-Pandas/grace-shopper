@@ -19,7 +19,7 @@ const reducer = combineReducers({
   search: searchReducer,
   cart: cartReducer,
   reviews: reviewsReducer,
-  order: ordersReducer
+  orders: ordersReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
