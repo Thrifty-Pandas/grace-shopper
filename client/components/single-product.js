@@ -85,12 +85,17 @@ class SingleProduct extends React.Component {
         )}
         <ProductReviews />
         <ReviewForm />
+        {this.props.user.id && this.props.user.isAdmin ? <EditProduct /> : null}
       </Container>
     )
   }
 }
 
-const mapStateToProps = state => ({products: state.products, cart: state.cart})
+const mapStateToProps = state => ({
+  products: state.products,
+  cart: state.cart,
+  user: state.user
+})
 
 const mapDispatchToProps = dispatch => {
   return {

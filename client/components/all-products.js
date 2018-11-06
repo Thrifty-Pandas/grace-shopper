@@ -1,15 +1,21 @@
 import React, {Component} from 'react'
-import {PaginatedProducts, FilterForm} from './index'
-import {Header} from 'semantic-ui-react'
+import {
+  PaginatedProducts,
+  FilterForm,
+  AddCategoryForm,
+  AddProduct
+} from './index'
+import {Header, Button, Icon} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
 import {getProductsInCartThunk} from '../store/cart'
 
-const mapState = ({products, filter, search, cart}) => ({
+const mapState = ({products, filter, search, cart, user}) => ({
   products: products.allProducts,
   filter,
   search,
-  cart
+  cart,
+  user
 })
 
 const mapDispatch = dispatch => ({
@@ -50,9 +56,32 @@ const filterProducts = (products, categoryFilters, searchResultIds) => {
 }
 
 export class AllProducts extends Component {
+  constructor() {
+    super()
+    this.state = {
+      addProductisOpened: false,
+      addCategoryisOpened: false
+    }
+    this.toggleAddProduct = this.toggleAddProduct.bind(this)
+    this.toggleAddCategory = this.toggleAddCategory.bind(this)
+  }
   componentDidMount() {
     this.props.getProductsInCart()
     this.props.fetchProducts()
+  }
+
+  toggleAddProduct() {
+    const {addProductisOpened} = this.state
+    this.setState({
+      addProductisOpened: !addProductisOpened
+    })
+  }
+
+  toggleAddCategory() {
+    const {addCategoryisOpened} = this.state
+    this.setState({
+      addCategoryisOpened: !addCategoryisOpened
+    })
   }
 
   render() {
@@ -61,6 +90,28 @@ export class AllProducts extends Component {
     return (
       <div>
         <FilterForm />
+
+        {this.props.user.id && this.props.user.isAdmin ? (
+          <div>
+            <Button
+              onClick={() => {
+                this.toggleAddCategory()
+              }}
+            >
+              <Icon name="add" />Add a Category{' '}
+            </Button>
+            <Button
+              onClick={() => {
+                this.toggleAddProduct()
+              }}
+            >
+              <Icon name="add" />
+              Add a Product
+            </Button>
+          </div>
+        ) : null}
+        {this.state.addCategoryisOpened && <AddCategoryForm />}
+        {this.state.addProductisOpened && <AddProduct />}
         {search[0] === 'not found' ? (
           <Header>Sorry, we couldn't find any results</Header>
         ) : (

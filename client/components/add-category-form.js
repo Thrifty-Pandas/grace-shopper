@@ -38,7 +38,7 @@ export class AddCategoryForm extends Component {
               control={Input}
               placeholder="Category Name"
               name="name"
-              value={name}
+              value={this.state.name}
               onChange={this.handleChange}
             />
           </Form.Group>
