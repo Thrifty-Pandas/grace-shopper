@@ -3,7 +3,7 @@ import axios from 'axios'
 const initialState = {allOrders: [], selectedOrder: {}}
 
 export const GET_ORDERS = 'GET_ORDERS'
-export const GET_ONEORDER = 'GET_ONEORDER'
+export const GET_ONE_ORDER = 'GET_ONE_ORDER'
 export const ADD_ORDER = 'ADD_ORDER'
 export const EDIT_ORDER = 'EDIT_ORDER'
 
@@ -12,7 +12,7 @@ export const getOrders = orders => ({
   orders
 })
 export const getSingleOrder = order => ({
-  type: GET_ONEORDER,
+  type: GET_ONE_ORDER,
   order
 })
 export const addOrder = order => ({
@@ -60,8 +60,8 @@ export const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDERS:
       return {...state, allOrders: [...action.orders]}
-    case GET_ONEORDER:
-      return {...state, selectedOrder: action.singleOrder}
+    case GET_ONE_ORDER:
+      return {...state, selectedOrder: action.order}
     case ADD_ORDER:
       return {...state, allOrders: [...state.allOrders, action.order]}
     case EDIT_ORDER:
