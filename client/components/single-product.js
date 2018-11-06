@@ -20,14 +20,26 @@ import {
 } from '../store/cart'
 
 class SingleProduct extends React.Component {
-  state = {
-    quantity: 1
+  constructor() {
+    super()
+    this.state = {
+      quantity: 1,
+      editProductIsOpened: false
+    }
+    this.toggleEditProduct = this.toggleEditProduct.bind(this)
   }
 
   async componentDidMount() {
     const productId = Number(this.props.match.params.productId)
     await this.props.fetchProduct(productId)
     this.props.getProductsInCart()
+  }
+
+  toggleEditProduct() {
+    const {editProductIsOpened} = this.state
+    this.setState({
+      editProductIsOpened: !editProductIsOpened
+    })
   }
 
   handleChange = evt => this.setState({[evt.target.name]: evt.target.value})
@@ -79,13 +91,23 @@ class SingleProduct extends React.Component {
                     onChange={this.handleChange}
                   />
                 </Item.Extra>
+                {this.props.user.id &&
+                  this.props.user.isAdmin && (
+                    <Button
+                      onClick={() => {
+                        this.toggleEditProduct()
+                      }}
+                    >
+                      <Icon name="add" />Edit Product
+                    </Button>
+                  )}
               </Item.Content>
             </Item>
           </Item.Group>
         )}
         <ProductReviews />
         <ReviewForm />
-        {this.props.user.id && this.props.user.isAdmin ? <EditProduct /> : null}
+        {this.state.editProductsOpened && <EditProduct />}
       </Container>
     )
   }
