@@ -23,20 +23,41 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// router.get('/:orderId', async (req, res, next) => {
+//   try {
+//     const order = await Order.findOne({
+//       where: {
+//         userId: req.user.dataValues.id,
+//         id: req.params.orderId
+//       },
+//       include: {
+//         model: Product
+//       }
+//     })
+//     console.log('req.body-->', req.body)
+//     res.status(200).json(order)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
 // shows one specific order for a specific user
 router.get('/:orderId', async (req, res, next) => {
   try {
-    let productsInOrder
+    let singleOrder
     const user = await User.findById(req.user.dataValues.id)
     const order = await Order.findById(req.params.orderId)
     if (user.isAdmin || order.userId === user.id) {
-      productsInOrder = await OrderProduct.findAll({
+      singleOrder = await Order.findOne({
         where: {
-          orderId: req.params.orderId
+          id: req.params.orderId
+        },
+        include: {
+          model: Product
         }
       })
     }
-    res.status(200).json(productsInOrder)
+    res.status(200).json(singleOrder)
   } catch (err) {
     next(err)
   }

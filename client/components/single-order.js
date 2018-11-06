@@ -1,17 +1,14 @@
 import React from 'react'
 import {Table, Link, Button, Image} from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {fetchProductsInOrder} from '../store/orders'
-import {fetchProducts} from '../store'
+import {fetchSinleOrder} from '../store/orders'
 
 class OrderDetail extends React.Component {
   componentDidMount() {
     this.props.getProductsInOrder()
-    this.props.fetchProducts()
   }
 
   render() {
-    console.log('products -->', this.props.products)
     console.log('selectedOrder -->', this.props.selectedOrder)
 
     return (
@@ -44,16 +41,14 @@ class OrderDetail extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    products: state.products.allProducts,
     selectedOrder: state.orders.selectedOrder
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  getProductsInOrder: () => dispatch(fetchProductsInOrder()),
-  fetchProducts: () => dispatch(fetchProducts())
+  getProductsInOrder: () => dispatch(fetchSinleOrder())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetail)
 
-//fail to dispatch 'action getProductsInOrder'
+//fail to dispatch 'action getSingleOrder'
