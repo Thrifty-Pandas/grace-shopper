@@ -49,7 +49,7 @@ export const fetchOneProduct = productId => async dispatch => {
 
 export const addNewProduct = product => async dispatch => {
   try {
-    const {data} = await axios.post(`api/products`, product)
+    const {data} = await axios.post(`/api/products`, product)
     dispatch(addProduct(data))
   } catch (err) {
     console.error(err)
@@ -58,7 +58,7 @@ export const addNewProduct = product => async dispatch => {
 
 export const editOneProduct = (id, product) => async dispatch => {
   try {
-    const {data} = await axios.put(`api/products/${id}`, product)
+    const {data} = await axios.put(`/api/products/${id}`, product)
     dispatch(editProduct(data))
   } catch (err) {
     console.error(err)
