@@ -23,8 +23,8 @@ class OrderCard extends React.Component {
             description={`Status: ${status}`}
             extra={`Total: $${totalPrice}.00`}
           />
-          {statusUpdate}
         </Link>
+        {statusUpdate}
       </div>
     )
   }
