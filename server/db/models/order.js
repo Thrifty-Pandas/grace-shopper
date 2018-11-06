@@ -2,7 +2,8 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const nodemailer = require('nodemailer')
 let transporter = nodemailer.createTransport(
-  'smtps://user%40gmail.com:pass@smtp.gmail.com'
+  `smtps://api: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
+@smtp.example.com/?pool=true`
 )
 
 const Order = db.define('order', {
