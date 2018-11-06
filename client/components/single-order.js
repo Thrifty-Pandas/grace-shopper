@@ -9,7 +9,7 @@ class OrderDetail extends React.Component {
   }
 
   render() {
-    console.log('selectedOrder -->', this.props.selectedOrder)
+    console.log('selectedOrder -->', this.props.products)
 
     return (
       <Table celled padded>

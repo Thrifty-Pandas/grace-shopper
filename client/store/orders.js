@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const initialState = {allOrders: [], selectedOrder: []}
+const initialState = {allOrders: [], selectedOrder: {}}
 
 export const GET_ORDERS = 'GET_ORDERS'
 export const GET_ONEORDER = 'GET_ONEORDER'
