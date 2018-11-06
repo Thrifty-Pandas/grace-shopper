@@ -3,7 +3,7 @@ import {Card, Button} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 const OrderCard = props => {
-  const {id, createdAt, status} = props
+  const {id, createdAt, status, totalPrice} = props
 
   return (
     <div>
@@ -12,6 +12,7 @@ const OrderCard = props => {
           header={`Order ID: ${id}`}
           meta={`Order placed: ${createdAt}`}
           description={`Status: ${status}`}
+          extra={`Total: $${totalPrice}.00`}
         />
       </Link>
     </div>

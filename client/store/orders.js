@@ -32,7 +32,7 @@ export const fetchOrders = () => async dispatch => {
     console.error(err)
   }
 }
-export const fetchSinleOrder = orderId => async dispatch => {
+export const fetchSingleOrder = orderId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/orders/${orderId}`)
     dispatch(getSingleOrder(data))
