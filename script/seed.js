@@ -228,15 +228,15 @@ const orders = [
 ]
 
 const orderProducts = [
-  {orderId: 1, productId: 1},
-  {orderId: 1, productId: 2},
-  {orderId: 1, productId: 3},
-  {orderId: 2, productId: 1},
-  {orderId: 2, productId: 3},
-  {orderId: 3, productId: 2},
-  {orderId: 3, productId: 5},
-  {orderId: 4, productId: 2},
-  {orderId: 5, productId: 4}
+  {orderId: 1, productId: 1, quantity: 1, price: 15},
+  {orderId: 1, productId: 2, quantity: 1, price: 15},
+  {orderId: 1, productId: 3, quantity: 1, price: 15},
+  {orderId: 2, productId: 1, quantity: 1, price: 15},
+  {orderId: 2, productId: 3, quantity: 1, price: 15},
+  {orderId: 3, productId: 2, quantity: 1, price: 15},
+  {orderId: 3, productId: 5, quantity: 1, price: 15},
+  {orderId: 4, productId: 2, quantity: 1, price: 15},
+  {orderId: 5, productId: 4, quantity: 1, price: 15}
 ]
 
 const carts = [
