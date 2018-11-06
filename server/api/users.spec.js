@@ -34,6 +34,12 @@ describe('User routes', () => {
       expect(res.body[0].email).to.be.equal(codysEmail)
     })
 
-    // it('')
+    it('GET /api/users/:id', async () => {
+      const res = await request(app)
+        .get('/api/users/1')
+        .expect(200)
+      expect(res.body).to.be.an('object')
+      expect(res.body.email).to.be.equal(codysEmail)
+    })
   }) // end describe('/api/users')
 }) // end describe('User routes')
