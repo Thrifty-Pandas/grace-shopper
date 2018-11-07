@@ -1,10 +1,15 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 const nodemailer = require('nodemailer')
-let transporter = nodemailer.createTransport(
-  `smtps://api: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
-@smtp.example.com/?pool=true`
-)
+const sgTransport = require('nodemailer-sendgrid-transport')
+if (process.env.NODE_ENV !== 'production') require('../../../secrets')
+const options = {
+  auth: {
+    api_user: 'lgrees',
+    api_key: process.env.SEND_GRID_API_KEY
+  }
+}
+let transporter = nodemailer.createTransport(sgTransport(options))
 
 const Order = db.define('order', {
   shippingAddress: {
@@ -43,13 +48,22 @@ const Order = db.define('order', {
 
 Order.afterCreate(order => {
   const message = {
-    from: 'sender@server.com',
+    from: 'panda-express@foo.com',
     to: order.email,
     subject: `🐼 You got panda'd`,
     text: 'Congrats on your new panda!',
-    html: '<p>Congrats on your new panda!</p>'
+    html: `<p>Congrats on your new panda!</p><p>Shipping Address: ${
+      order.shippingAddress
+    }</p><p>Order Status: ${order.status}</p>
+    `
   }
-  transporter.sendMail(message)
+  transporter.sendMail(message, (err, info) => {
+    if (err) {
+      console.error(err)
+    } else {
+      console.log('Message sent: ' + info.response)
+    }
+  })
 })
 
 module.exports = Order
