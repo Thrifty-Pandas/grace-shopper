@@ -11,4 +11,16 @@ const CartProduct = db.define('cartProduct', {
   }
 })
 
+CartProduct.updateOrCreate = async (originalCartId, newCartId) => {
+  const newCartProducts = await CartProduct.findAll({
+    where: {cartId: newCartId}
+  })
+  newCartProducts.forEach(product => {
+    CartProduct.destroy({
+      where: {productId: product.productId, cartId: originalCartId}
+    })
+  })
+  CartProduct.update({cartId: newCartId}, {where: {cartId: originalCartId}})
+}
+
 module.exports = CartProduct

@@ -1,37 +1,43 @@
 const router = require('express').Router()
 const {User, Cart, Product, CartProduct} = require('../db/models')
 
-async function findCart(sessionInfo) {
-  let existingUser = {}
-  if (sessionInfo.user) {
-    // if there is an authenticated user logged in, load that user
-    existingUser = await User.findById(sessionInfo.userId)
-  }
+async function findCart(req) {
   let cart = {}
-  if (!existingUser.id) {
-    // if there is no authenticated user , create or find a cart for the guest
-    const cartinstance = await Cart.findOrCreate({
-      where: {
-        temporaryUserId: sessionInfo.id
-      }
-    })
-    sessionInfo.temporaryUserId = sessionInfo.temporaryUserId
-      ? sessionInfo.temporaryUserId
-      : sessionInfo.id
-    cart = cartinstance[0]
-  } else {
-    // if there is an authenticated user, create or find a cart for that user
-    const cartinstance = await Cart.findOrCreate({
+  const existingUser = req.user && (await User.findById(req.user.id))
+  const cartinstance = await Cart.findOrCreate({
+    where: {
+      temporaryUserId: req.session.id
+    }
+  })
+  req.session.temporaryUserId = req.session.temporaryUserId
+    ? req.session.temporaryUserId
+    : req.session.id
+  cart = cartinstance[0]
+  if (existingUser) {
+    const originalCart = await Cart.find({
       where: {userId: existingUser.id}
     })
-    cart = cartinstance[0]
+    const currentProductsInCart = await CartProduct.findAll({
+      where: {cartId: cart.id}
+    })
+    if (originalCart) {
+      if (currentProductsInCart) {
+        await CartProduct.updateOrCreate(originalCart.id, cart.id)
+        await cart.update({userId: existingUser.id})
+        await originalCart.destroy()
+      } else {
+        await cart.destroy()
+        cart = originalCart
+      }
+    }
   }
+
   return cart
 }
 
 router.get('/', async (req, res, next) => {
   try {
-    const cart = await findCart(req.session)
+    const cart = await findCart(req)
     const productsInCart = await CartProduct.findAll({
       where: {
         cartId: cart.id
@@ -45,7 +51,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/current', async (req, res, next) => {
   try {
-    const cart = await findCart(req.session)
+    const cart = await findCart(req)
     const productsInCart = await Product.findAll({
       include: [
         {
@@ -62,7 +68,7 @@ router.get('/current', async (req, res, next) => {
 
 router.post('/:productId', async (req, res, next) => {
   try {
-    const cart = await findCart(req.session)
+    const cart = await findCart(req)
     const product = await Product.findById(req.params.productId)
     const newProductInCart = await CartProduct.create({
       cartId: cart.id,
@@ -77,7 +83,7 @@ router.post('/:productId', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    const cart = await findCart(req.session)
+    const cart = await findCart(req)
     const product = await Product.findById(req.params.productId)
     const currentProductInCart = await CartProduct.find({
       where: {
@@ -85,11 +91,12 @@ router.put('/:productId', async (req, res, next) => {
         productId: product.id
       }
     })
-    const updatedProduct = req.body.quantity ? await currentProductInCart.update({quantity: req.body.quantity}) : await currentProductInCart.increment({quantity: 1})
+    const updatedProduct = req.body.quantity
+      ? await currentProductInCart.update({quantity: req.body.quantity})
+      : await currentProductInCart.increment({quantity: 1})
     // const updatedProduct = await currentProductInCart.increment({
     //   quantity: req.body.quantity ? req.body.quantity : 1
     // })
-    console.log('updatedProduct', updatedProduct)
     res.status(204).json(updatedProduct)
   } catch (err) {
     next(err)
@@ -98,7 +105,7 @@ router.put('/:productId', async (req, res, next) => {
 
 router.delete('/:productId', async (req, res, next) => {
   try {
-    const cart = await findCart(req.session)
+    const cart = await findCart(req)
     await CartProduct.destroy({
       where: {
         cartId: cart.id,
