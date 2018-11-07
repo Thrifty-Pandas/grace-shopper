@@ -64,7 +64,9 @@ export class ReviewForm extends Component {
           placeholder="Tell us your thoughts about this product"
           onChange={this.handleChange}
         />
-        <Form.Button type="submit">Submit Review</Form.Button>
+        <Button color="teal" type="submit">
+          Submit Review
+        </Button>
       </Form>
     )
   }

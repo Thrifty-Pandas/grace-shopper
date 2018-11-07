@@ -69,6 +69,7 @@ class SingleProduct extends React.Component {
                   <Input
                     action={
                       <Button
+                        color="teal"
                         onClick={() => {
                           if (
                             this.props.cart.findIndex(
