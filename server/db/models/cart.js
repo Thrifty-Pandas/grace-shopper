@@ -14,7 +14,6 @@ const Cart = db.define('cart', {
 
 Cart.prototype.createOrder = async function({orderInfo}) {
   //create an order
-  console.log('orderInfo in instance method: ', orderInfo)
   const order = await Order.create({...orderInfo})
   const cart = await Cart.findById(this.id, {include: [Product]})
 
@@ -29,6 +28,7 @@ Cart.prototype.createOrder = async function({orderInfo}) {
       })
     })
   )
+  await cart.destroy()
 }
 
 module.exports = Cart

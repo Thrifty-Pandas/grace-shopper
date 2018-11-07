@@ -29,5 +29,10 @@ export {default as OrderCard} from './order-card'
 export {default as OrdersGrid} from './orders-grid'
 export {default as Cart} from './user-cart'
 export {default as OrderDetail} from './single-order'
+export {default as CheckoutForm} from './checkout-form'
+export {default as CheckoutPage} from './checkout-page'
 export {default as OrderFilterForm} from './order-filter-form'
+export {default as SuccessPage} from './success-page'
+
 export {default as OrderStatusUpdate} from './order-status'
+
