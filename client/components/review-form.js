@@ -41,14 +41,7 @@ export class ReviewForm extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Form.Group>
-          <Form.Input
-            label="Title"
-            name="title"
-            placeholder="My Product Review"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
+        <Form.Field>
           <Rating
             rating={this.state.rating}
             name="rating"
@@ -56,9 +49,18 @@ export class ReviewForm extends Component {
             onRate={this.handleChange}
             maxRating={5}
           />
-        </Form.Group>
+        </Form.Field>
+        <Form.Field>
+          <Form.Input
+            label="Title"
+            name="title"
+            placeholder="My Product Review"
+            value={this.state.title}
+            onChange={this.handleChange}
+          />
+        </Form.Field>
         <Form.TextArea
-          label="Text"
+          label="Comment"
           name="text"
           value={this.state.text}
           placeholder="Tell us your thoughts about this product"

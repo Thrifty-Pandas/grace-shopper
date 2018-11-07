@@ -9,7 +9,8 @@ import {
   Button,
   Icon,
   Input,
-  Item
+  Item,
+  Message
 } from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
 import {ProductReviews, ReviewForm, EditProduct, AddProduct} from './index'
@@ -54,9 +55,9 @@ class SingleProduct extends React.Component {
         {product.id && (
           <Item.Group>
             <Item>
-              <Item.Image src={imageUrl} size="large" />
+              <Item.Image size="large" src={imageUrl} />
               <Item.Content>
-                <Item.Header>{name}</Item.Header>
+                <Header as="h1">{name}</Header>
                 <Item.Meta>
                   <span>${price}</span>
                   <br />
@@ -109,9 +110,12 @@ class SingleProduct extends React.Component {
         )}
 
         {this.state.editProductDisplay && <EditProduct />}
+        {/* <Divider /> */}
         <ProductReviews />
-
-        <ReviewForm />
+        <Message>
+          <Header>Write a review</Header>
+          <ReviewForm />
+        </Message>
       </Container>
     )
   }
