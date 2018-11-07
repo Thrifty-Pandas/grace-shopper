@@ -47,7 +47,9 @@ class Search extends Component {
               value={this.state.searchString}
               onChange={this.handleChange}
             />
-            <Button type="submit">Search</Button>
+            <Button color="teal" type="submit">
+              Search
+            </Button>
           </div>
         </form>
       </div>

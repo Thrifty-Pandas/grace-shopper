@@ -76,6 +76,72 @@ const products = [
     imageUrl: '/images/bowl.jpg',
     stock: 25,
     price: 10
+  },
+  {
+    name: 'Pandana',
+    description:
+      'For when you really just need that extra dose of cute in your life',
+    imageUrl: '/images/headband.jpg',
+    stock: 25,
+    price: 10
+  },
+  {
+    name: 'Practical Panda',
+    description: "We've all got to get back to work some time, after all",
+    imageUrl: '/images/stapler.jpg',
+    stock: 43,
+    price: 10
+  },
+  {
+    name: 'Pancho',
+    description: 'Not so good for those rainy days but definitely a snuggler',
+    imageUrl: '/images/poncho.jpg',
+    stock: 9,
+    price: 27
+  },
+  {
+    name: 'Panda plush',
+    description: 'Amazing stress relief !',
+    imageUrl: '/images/roundplush.jpg',
+    stock: 22,
+    price: 7
+  },
+  {
+    name: 'Bear on a wall',
+    description:
+      "honestly we don't know why you would want this but you should buy it anyway",
+    imageUrl: '/images/wall.jpg',
+    stock: 1,
+    price: 37
+  },
+  {
+    name: 'Toothpick holder',
+    description:
+      'Toothpicks are made with the same bamboo that pandas eat! You can be a panda too, if you buy this toothpick holder.',
+    imageUrl: '/images/toothpick.jpg',
+    stock: 8,
+    price: 9
+  },
+  {
+    name: 'Magnetic',
+    description: "Who doesn't want adorable pandas climbing up their fridge?!",
+    imageUrl: '/images/magnets.jpg',
+    stock: 2,
+    price: 3
+  },
+  {
+    name: 'Hair clips',
+    description: 'a few cute hair clips',
+    imageUrl: '/images/hairclips.jpg',
+    stock: 30,
+    price: 2
+  },
+  {
+    name: 'Pandapron',
+    description: 'we love this apron!',
+    imageUrl: '/images/apron.jpg',
+    stock: 8,
+    price: 10
   }
 ]
 
@@ -124,7 +190,16 @@ const productCategories = [
   {productId: 6, categoryId: 2},
   {productId: 7, categoryId: 1},
   {productId: 8, categoryId: 2},
-  {productId: 9, categoryId: 3}
+  {productId: 9, categoryId: 3},
+  {productId: 10, categoryId: 2},
+  {productId: 11, categoryId: 1},
+  {productId: 12, categoryId: 2},
+  {productId: 13, categoryId: 4},
+  {productId: 14, categoryId: 2},
+  {productId: 15, categoryId: 1},
+  {productId: 16, categoryId: 1},
+  {productId: 17, categoryId: 2},
+  {productId: 18, categoryId: 1}
 ]
 
 const reviews = [

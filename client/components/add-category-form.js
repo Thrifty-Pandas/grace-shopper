@@ -42,7 +42,7 @@ export class AddCategoryForm extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Button>
+          <Form.Button color="teal">
             <Icon name="add" />
             Add Category
           </Form.Button>

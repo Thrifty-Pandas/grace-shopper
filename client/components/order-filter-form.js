@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {fetchOrders, setOrderFilters} from '../store'
-import {Button, Icon, Form} from 'semantic-ui-react'
+import {Button, Icon, Form, Menu, Checkbox} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 const mapDispatch = {fetchOrders, setOrderFilters}
@@ -39,25 +39,26 @@ export class OrderFilterForm extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Form.Group grouped>
-          <label>Status</label>
+        <Menu text vertical>
+          <Menu.Item header>Order Status</Menu.Item>
           {statusArr.map(status => (
-            <Form.Field
-              type="checkbox"
-              control="input"
-              key={status}
-              name="status"
-              label={status}
-              value={status}
-              onChange={this.handleUpdate}
-            />
+            <Menu.Item key={status}>
+              <Checkbox
+                control="input"
+                name="status"
+                label={status}
+                value={status}
+                onChange={this.handleUpdate}
+              />
+            </Menu.Item>
           ))}
-        </Form.Group>
-
-        <Button type="submit">
-          <Icon name="filter" />
-          Apply Filter
-        </Button>
+          <Menu.Item>
+            <Button color="teal" type="submit">
+              <Icon name="filter" />
+              Apply Filter
+            </Button>
+          </Menu.Item>
+        </Menu>
       </Form>
     )
   }

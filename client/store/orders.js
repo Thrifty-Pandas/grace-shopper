@@ -42,15 +42,16 @@ export const fetchSingleOrder = orderId => async dispatch => {
 }
 export const addNewOrder = order => async dispatch => {
   try {
-    const {data} = await axios.post(`/api/orders`, cartId, orderinfo)
+    const {data} = await axios.post(`/api/orders`, order)
     dispatch(addOrder(data))
   } catch (err) {
     console.error(err)
   }
 }
-export const editOneOrder = (id, order) => async dispatch => {
+export const editOneOrder = (id, status) => async dispatch => {
   try {
-    const {data} = await axios.put(`api/products/${id}`, order)
+    await axios.put(`api/orders/${id}`, {status: status})
+    const {data} = await axios.get(`/api/orders/${id}`)
     dispatch(editOrder(data))
   } catch (err) {
     console.error(err)

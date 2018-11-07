@@ -7,13 +7,12 @@ import {fetchSingleOrder} from '../store/orders'
 
 class OrderDetail extends React.Component {
   componentDidMount() {
-    const orderId = Number(this.props.match.params.orderId)
+    const orderId = Number(this.props.match.params.ordersId)
+
     this.props.getProductsInOrder(orderId)
   }
 
   render() {
-    console.log('props -->', this.props)
-    console.log('products: ', this.props.products)
     return (
       <Table celled padded>
         <Table.Header>

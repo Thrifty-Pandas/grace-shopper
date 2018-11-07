@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {fetchCategories, setFilters} from '../store'
-import {Button, Icon, Form} from 'semantic-ui-react'
+import {Button, Icon, Form, Checkbox, Menu} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 const mapState = ({categories}) => ({categories})
@@ -36,26 +36,28 @@ export class FilterForm extends Component {
     const {categories} = this.props
     return (
       <Form onSubmit={this.handleSubmit}>
-        <label htmlFor="">Categories</label>
-        <Form.Group grouped>
+        <Menu text vertical>
+          <Menu.Item header>Categories</Menu.Item>
           {categories.map(category => (
-            <Form.Field
-              type="checkbox"
-              id={category.id}
-              key={category.id}
-              control="input"
-              name="category"
-              label={category.name}
-              value={category.id}
-              onChange={this.handleUpdate}
-            />
+            <Menu.Item key={category.id}>
+              <Checkbox
+                id={category.id}
+                control="input"
+                name="category"
+                label={category.name}
+                value={category.id}
+                onChange={this.handleUpdate}
+              />
+            </Menu.Item>
           ))}
-        </Form.Group>
 
-        <Button type="submit">
-          <Icon name="filter" />
-          Apply Filter
-        </Button>
+          <Menu.Item>
+            <Button color="teal" type="submit">
+              <Icon name="filter" />
+              Apply Filter
+            </Button>
+          </Menu.Item>
+        </Menu>
       </Form>
     )
   }
