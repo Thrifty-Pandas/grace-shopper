@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -6,7 +6,7 @@ import {Search} from './index'
 import {logout} from '../store'
 import {Menu, Image, Divider} from 'semantic-ui-react'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, user}) => (
   <Menu>
     <Menu.Item header>
       <Link to="/products">
@@ -33,6 +33,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             Logout
           </a>
         </Menu.Item>
+
+        {user.id && user.isAdmin ? (
+          <Menu.Item>
+            <Link to="/adminUserMgmt">User Management</Link>{' '}
+          </Menu.Item>
+        ) : null}
       </React.Fragment>
     ) : (
       <React.Fragment>
@@ -58,7 +64,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
@@ -66,7 +73,8 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
+    getCurrentUser: () => dispatch(me())
   }
 }
 
