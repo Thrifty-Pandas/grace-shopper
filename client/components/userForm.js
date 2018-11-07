@@ -41,7 +41,7 @@ class UserForm extends Component {
 
     return (
       <div className="signup">
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} className="signupForm">
           {error && error.response && <div> {error.response.data} </div>}
 
           <Divider horizontal>User Name</Divider>
