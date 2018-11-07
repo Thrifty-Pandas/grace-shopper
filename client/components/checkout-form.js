@@ -44,7 +44,7 @@ export class CheckoutForm extends Component {
     const {id} = user
     const {cartId} = cart[0]
     const totalPrice = 5 //hard coding for now since I don't have access to this data
-    const order = {shippingAddress, email, userId: id, cartId, totalPrice}
+    const order = {shippingAddress, email, userId: id, totalPrice, cartId}
     addNewOrder(order)
     //clear cart upon success
     //redirect to success page
