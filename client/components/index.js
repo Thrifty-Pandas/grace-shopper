@@ -33,3 +33,6 @@ export {default as CheckoutForm} from './checkout-form'
 export {default as CheckoutPage} from './checkout-page'
 export {default as OrderFilterForm} from './order-filter-form'
 export {default as SuccessPage} from './success-page'
+
+export {default as OrderStatusUpdate} from './order-status'
+

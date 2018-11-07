@@ -23,6 +23,7 @@ const ProductCard = props => {
         />
       </Link>
       <Button
+        color="teal"
         onClick={() => {
           if (
             props.cart.findIndex(product => product.productId === id) === -1
