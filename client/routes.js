@@ -15,6 +15,7 @@ import {
 } from './components'
 import {me, fetchCategories, fetchProducts} from './store'
 import UserForm from './components/userForm'
+import AdminUserMgmt from './components/adminUserMgmt'
 
 /**
  * COMPONENT
@@ -37,6 +38,7 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/orders/:orderId" component={OrderDetail} />
         <Route path="/orders" component={AllOrders} />
+        <Route path="/adminUserMgmt" component={AdminUserMgmt} />
         <Route exact path="/" component={AllProducts} />
 
         {isLoggedIn && (
