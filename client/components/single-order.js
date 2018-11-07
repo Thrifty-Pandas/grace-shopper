@@ -7,7 +7,8 @@ import {fetchSingleOrder} from '../store/orders'
 
 class OrderDetail extends React.Component {
   componentDidMount() {
-    const orderId = Number(this.props.match.params.orderId)
+    const orderId = Number(this.props.match.params.ordersId)
+
     this.props.getProductsInOrder(orderId)
   }
 
