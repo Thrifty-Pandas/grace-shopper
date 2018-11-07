@@ -99,7 +99,7 @@ export class AllProducts extends Component {
               <Header.Content>Panda Products</Header.Content>
             </Header>
           </Grid.Row>
-          <Grid.Column width={3} padded stretched>
+          <Grid.Column width={3} stretched>
             <Grid.Row>
               <FilterForm />
             </Grid.Row>
@@ -126,16 +126,15 @@ export class AllProducts extends Component {
             </Grid.Row>
           </Grid.Column>
           <Grid.Column width={13}>
-            <GridRow>{this.state.addProductisOpened && <AddProduct />}</GridRow>
-
-            <Grid.Row>
-              {this.state.addCategoryisOpened && <AddCategoryForm />}
-            </Grid.Row>
             {search[0] === 'not found' ? (
               <Header>Sorry, we couldn't find any results</Header>
             ) : (
               <PaginatedProducts products={productsToDisplay} />
             )}
+            <GridRow>{this.state.addProductisOpened && <AddProduct />}</GridRow>
+            <Grid.Row>
+              {this.state.addCategoryisOpened && <AddCategoryForm />}
+            </Grid.Row>
           </Grid.Column>
         </Grid>
       </div>

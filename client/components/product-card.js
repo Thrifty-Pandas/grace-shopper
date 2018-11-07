@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Icon, Image, Button} from 'semantic-ui-react'
+import {Card, Icon, Button, Image} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {
   getProductsInCartThunk,
@@ -11,23 +11,21 @@ import {connect} from 'react-redux'
 //expects an entire product object as props
 const ProductCard = props => {
   const {id, name, description, price, imageUrl} = props
+  const productExists =
+    props.cart.findIndex(product => product.productId === id) === -1
   return (
-    <div>
+    <React.Fragment>
       <Link to={`/products/${id}`}>
-        <Card
-          size="large"
-          image={imageUrl}
-          header={name}
-          meta={`$ ${price}`}
-          description={description}
-        />
+        <Card size="medium" image={imageUrl}>
+          <Card.Content header={name} />
+          <Image src={imageUrl} height={175} width="auto" overflow="hidden" />
+          <Card.Content extra>{`$ ${price}`}</Card.Content>
+        </Card>
       </Link>
       <Button
         color="teal"
         onClick={() => {
-          if (
-            props.cart.findIndex(product => product.productId === id) === -1
-          ) {
+          if (productExists) {
             props.addToCart(id)
           } else {
             props.editProductInCart(id)
@@ -37,7 +35,7 @@ const ProductCard = props => {
         <Icon name="cart" />
         Add to Cart
       </Button>
-    </div>
+    </React.Fragment>
   )
 }
 
