@@ -6,24 +6,24 @@ const Order = db.define('order', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      allowEmpty: false
+      notEmpty: true
     }
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      allowEmpty: false,
+      notEmpty: true,
       isEmail: true
     }
   },
-  price: {
+  totalPrice: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {isNumeric: true, min: 0}
   },
   temporaryUserId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: true
   },
   userId: {
@@ -31,8 +31,8 @@ const Order = db.define('order', {
     allowNull: true
   },
   status: {
-    type: Sequelize.ENUM('pending', 'confirmed', 'shipped', 'delivered'),
-    defaultValue: 'pending'
+    type: Sequelize.ENUM('Created', 'Processing', 'Cancelled', 'Completed'),
+    defaultValue: 'Created'
   }
 })
 

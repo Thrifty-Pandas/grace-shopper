@@ -1,52 +1,54 @@
 import React, {Component} from 'react'
-import {fetchCategories, setFilters} from '../store'
+import {fetchOrders, setOrderFilters} from '../store'
 import {Button, Icon, Form} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
-const mapState = ({categories}) => ({categories})
+const mapDispatch = {fetchOrders, setOrderFilters}
 
-const mapDispatch = {fetchCategories, setFilters}
+const statusArr = ['Created', 'Processing', 'Cancelled', 'Completed']
 
-export class FilterForm extends Component {
+export class OrderFilterForm extends Component {
   constructor() {
     super()
     this.state = {filterSelection: []}
   }
 
   handleUpdate = e => {
-    const categoryId = Number(e.target.id)
-    if (this.state.filterSelection.includes(categoryId)) {
+    if (this.state.filterSelection.includes(e.target.value)) {
       this.setState({
         filterSelection: this.state.filterSelection.filter(
-          id => id !== categoryId
+          status => status !== e.target.value
         )
       })
     } else {
       this.setState({
-        filterSelection: [...this.state.filterSelection, categoryId]
+        filterSelection: [...this.state.filterSelection, e.target.value]
       })
     }
   }
+
   handleSubmit = e => {
     e.preventDefault()
-    this.props.setFilters(this.state.filterSelection)
+    this.props.setOrderFilters(this.state.filterSelection)
+  }
+
+  componentDidMount() {
+    this.props.fetchOrders()
   }
 
   render() {
-    const {categories} = this.props
     return (
       <Form onSubmit={this.handleSubmit}>
-        <label htmlFor="">Categories</label>
         <Form.Group grouped>
-          {categories.map(category => (
+          <label>Status</label>
+          {statusArr.map(status => (
             <Form.Field
               type="checkbox"
-              id={category.id}
-              key={category.id}
               control="input"
-              name="category"
-              label={category.name}
-              value={category.id}
+              key={status}
+              name="status"
+              label={status}
+              value={status}
               onChange={this.handleUpdate}
             />
           ))}
@@ -61,4 +63,4 @@ export class FilterForm extends Component {
   }
 }
 
-export default connect(mapState, mapDispatch)(FilterForm)
+export default connect(null, mapDispatch)(OrderFilterForm)

@@ -6,14 +6,14 @@ import PropTypes from 'prop-types'
 import {
   Login,
   Signup,
+  OrderDetail,
   UserHome,
   AllProducts,
   AllOrders,
   SingleProduct,
   Cart
 } from './components'
-
-import {me} from './store'
+import {me, fetchCategories, fetchProducts} from './store'
 import UserForm from './components/userForm'
 
 /**
@@ -35,6 +35,7 @@ class Routes extends Component {
         <Route path="/signup" component={UserForm} />
         <Route path="/products" component={AllProducts} />
         <Route path="/cart" component={Cart} />
+        <Route path="/orders/:orderId" component={OrderDetail} />
         <Route path="/orders" component={AllOrders} />
         <Route exact path="/" component={AllProducts} />
 
@@ -66,6 +67,8 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(fetchCategories())
+      dispatch(fetchProducts())
     }
   }
 }

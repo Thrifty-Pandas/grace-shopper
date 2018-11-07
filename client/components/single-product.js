@@ -1,8 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Container, Button, Icon, Input, Item} from 'semantic-ui-react'
+import {
+  Container,
+  Grid,
+  Card,
+  Divider,
+  Header,
+  Button,
+  Icon,
+  Input,
+  Item
+} from 'semantic-ui-react'
 import {fetchOneProduct} from '../store/products'
-import {ProductReviews, ReviewForm} from './index'
+import {ProductReviews, ReviewForm, EditProduct, AddProduct} from './index'
 import {
   getProductsInCartThunk,
   addToCartThunk,
@@ -10,14 +20,27 @@ import {
 } from '../store/cart'
 
 class SingleProduct extends React.Component {
-  state = {
-    quantity: 1
+  constructor() {
+    super()
+    this.state = {
+      quantity: 1,
+      editProductDisplay: false
+    }
+    this.toggleEditProduct = this.toggleEditProduct.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const productId = Number(this.props.match.params.productId)
-    this.props.fetchProduct(productId)
+    await this.props.fetchProduct(productId)
     this.props.getProductsInCart()
+  }
+
+  toggleEditProduct() {
+    const {editProductDisplay} = this.state
+    console.log('display? ', editProductDisplay)
+    this.setState({
+      editProductDisplay: !editProductDisplay
+    })
   }
 
   handleChange = evt => this.setState({[evt.target.name]: evt.target.value})
@@ -69,18 +92,35 @@ class SingleProduct extends React.Component {
                     onChange={this.handleChange}
                   />
                 </Item.Extra>
+                {this.props.user.id &&
+                  this.props.user.isAdmin && (
+                    <Button
+                      onClick={() => {
+                        this.toggleEditProduct()
+                      }}
+                    >
+                      <Icon name="add" />Edit Product
+                    </Button>
+                  )}
               </Item.Content>
             </Item>
           </Item.Group>
         )}
+
+        {this.state.editProductDisplay && <EditProduct />}
         <ProductReviews />
+
         <ReviewForm />
       </Container>
     )
   }
 }
 
-const mapStateToProps = state => ({products: state.products, cart: state.cart})
+const mapStateToProps = state => ({
+  products: state.products,
+  cart: state.cart,
+  user: state.user
+})
 
 const mapDispatchToProps = dispatch => {
   return {

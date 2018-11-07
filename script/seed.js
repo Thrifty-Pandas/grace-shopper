@@ -60,7 +60,7 @@ const products = [
     name: 'Comfy panda',
     description: 'pillow',
     imageUrl: '/images/pillow.jpg',
-    stock: 6,
+    stock: 0,
     price: 20
   },
   {
@@ -189,34 +189,54 @@ const reviews = [
 const orders = [
   {
     shippingAddress: '123 Hello World Ln.',
-    email: 'cody@email.com',
-    price: 44,
+    email: 'collin@email.com',
+    totalPrice: 44,
     temporaryUserId: 413254,
-    status: 'pending'
+    status: 'Created'
   },
   {
     shippingAddress: '234 Fullstack Rd.',
     email: 'ben@email.com',
-    price: 42,
+    totalPrice: 42,
     temporaryUserId: 324125,
-    status: 'confirmed'
+    status: 'Processing'
+  },
+  {
+    shippingAddress: '200 Super st.',
+    email: 'meow@amail.com',
+    totalPrice: 42,
+    temporaryUserId: 239875,
+    userId: 2,
+    status: 'Cancelled'
   },
   {
     shippingAddress: '456 Milky Way',
-    email: 'collin@email.com',
-    price: 15,
+    email: 'cody@email.com',
+    totalPrice: 15,
     temporaryUserId: 12345,
     userId: 1,
-    status: 'shipped'
+    status: 'Completed'
+  },
+  {
+    shippingAddress: '456 Milky Way',
+    email: 'cody@email.com',
+    totalPrice: 50,
+    temporaryUserId: 12345,
+    userId: 1,
+    status: 'Processing'
   }
 ]
 
 const orderProducts = [
-  {orderId: 1, productId: 1},
-  {orderId: 1, productId: 2},
-  {orderId: 1, productId: 3},
-  {orderId: 2, productId: 1},
-  {orderId: 2, productId: 3}
+  {orderId: 1, productId: 1, quantity: 1, price: 3},
+  {orderId: 1, productId: 2, quantity: 2, price: 91},
+  {orderId: 1, productId: 3, quantity: 8, price: 8},
+  {orderId: 2, productId: 1, quantity: 2, price: 23},
+  {orderId: 2, productId: 3, quantity: 3, price: 17},
+  {orderId: 3, productId: 2, quantity: 2, price: 19},
+  {orderId: 3, productId: 5, quantity: 9, price: 26},
+  {orderId: 4, productId: 2, quantity: 6, price: 30},
+  {orderId: 5, productId: 4, quantity: 2, price: 1}
 ]
 
 const carts = [

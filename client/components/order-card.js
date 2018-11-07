@@ -1,21 +1,19 @@
 import React from 'react'
-import {Card, Icon, Button} from 'semantic-ui-react'
+import {Card, Button} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
+
 const OrderCard = props => {
-  const {id, createdAt, status} = props
+  const {id, createdAt, status, totalPrice} = props
+
   return (
     <div>
-      <Card
-        size="large"
-        header={`Order ID: ${id}`}
-        meta={`Order placed: ${createdAt}`}
-        description={`Status: ${status}`}
-      />
       <Link to={`/orders/${id}`}>
-        <Button>
-          <Icon name="order" />
-          View Details
-        </Button>
+        <Card
+          header={`Order ID: ${id}`}
+          meta={`Order placed: ${createdAt}`}
+          description={`Status: ${status}`}
+          extra={`Total: $${totalPrice}.00`}
+        />
       </Link>
     </div>
   )
