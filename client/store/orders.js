@@ -40,7 +40,7 @@ export const fetchSingleOrder = orderId => async dispatch => {
     console.error(err)
   }
 }
-export const addNewOrder = (cartId, orderinfo) => async dispatch => {
+export const addNewOrder = order => async dispatch => {
   try {
     const {data} = await axios.post(`/api/orders`, order)
     dispatch(addOrder(data))
