@@ -66,13 +66,20 @@ router.put('/:productId', permit('Admin'), async (req, res, next) => {
       productCategories
     } = req.body
     const product = await Product.findById(Number(req.params.productId))
-    const updatedProduct = await product.update({
-      name,
-      description,
-      stock,
-      price,
-      imageUrl
-    })
+    const updatedProduct = imageUrl
+      ? await product.update({
+          name,
+          description,
+          stock,
+          price,
+          imageUrl
+        })
+      : await product.update({
+          name,
+          description,
+          stock,
+          price
+        })
     await updatedProduct.setCategories(productCategories)
     const finalProduct = await Product.findById(Number(req.params.productId), {
       include: [Category]
