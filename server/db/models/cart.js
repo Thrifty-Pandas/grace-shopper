@@ -28,7 +28,7 @@ Cart.prototype.createOrder = async function({orderInfo}) {
       })
     })
   )
-  //cart.destroy()
+  await cart.destroy()
 }
 
 module.exports = Cart

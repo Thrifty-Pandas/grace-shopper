@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Form, Icon, Button, Container, Divider, Item} from 'semantic-ui-react'
+import {Form, Icon, Button, Container, Divider, Header} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {addNewOrder} from '../store'
 import {
@@ -80,15 +80,22 @@ export class CheckoutForm extends Component {
         </Form>
         <Container>
           {/* <CardElement /> */}
-          <div className="ui items">
-            <div className="item">
-              <label className="header bold">Card Number</label>
-              <CardNumberElement />
-            </div>
+          <Container>
+            <Header as="h5">Card Number</Header>
+            <CardNumberElement />
+          </Container>
+          <Container>
+            <Header as="h5">Expiration Date</Header>
             <CardExpiryElement />
+          </Container>
+          <Container>
+            <Header as="h5">CVC</Header>
             <CardCVCElement />
+          </Container>
+          <Container>
+            <Header as="h5">Billing ZIP Code</Header>
             <PostalCodeElement />
-          </div>
+          </Container>
         </Container>
         <Divider />
         <Button type="button" onClick={this.handleSubmit}>
