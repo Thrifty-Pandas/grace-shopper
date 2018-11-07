@@ -2,73 +2,36 @@ const router = require('express').Router()
 const {User, Cart, Product, CartProduct} = require('../db/models')
 
 async function findCart(req) {
-  let existingUser = {}
-  if (req.user) {
-    console.log('req.user.dataValues.id: ', req.user.dataValues.id)
-    // if there is an authenticated user logged in, load that user and assign it to existingUser
-    existingUser = await User.findById(req.user.id)
-  }
   let cart = {}
-  if (!existingUser.id) {
-    // if there is no authenticated user , create or find a cart for the guest
-    const cartinstance = await Cart.findOrCreate({
-      where: {
-        temporaryUserId: req.session.id
-      }
+  const existingUser = req.user && (await User.findById(req.user.id))
+  const cartinstance = await Cart.findOrCreate({
+    where: {
+      temporaryUserId: req.session.id
+    }
+  })
+  req.session.temporaryUserId = req.session.temporaryUserId
+    ? req.session.temporaryUserId
+    : req.session.id
+  cart = cartinstance[0]
+  if (existingUser) {
+    const originalCart = await Cart.find({
+      where: {userId: existingUser.id}
     })
-    req.session.temporaryUserId = req.session.temporaryUserId
-      ? req.session.temporaryUserId
-      : req.session.id
-    cart = cartinstance[0]
-  } else {
-    // if there is an authenticated user, find a cart for the current session Id and update it with userId, or else find or create a new cart with just userId
-    const unAuthedCart = await Cart.find({
-      where: {
-        temporaryUserId: req.session.id
-      }
+    const currentProductsInCart = await CartProduct.findAll({
+      where: {cartId: cart.id}
     })
-    if (unAuthedCart) {
-      const originalCart = await Cart.findOne({
-        where: {userId: existingUser.id}
-      })
-      const originalProducts = await CartProduct.findAll({
-        where: {cartId: originalCart.id}
-      })
-      await unAuthedCart.update({
-        userId: req.user.dataValues.id
-      })
-      const newProducts = await CartProduct.findAll({
-        where: {cartId: unAuthedCart.id}
-      })
-      originalProducts.forEach(async orgproduct => {
-        if (
-          newProducts.filter(
-            product => product.productId !== orgproduct.productId
-          ).length
-        ) {
-          console.log('the if statement passed')
-          console.log('unauthed cart id: ', unAuthedCart.id)
-          console.log('orgproduct', orgproduct)
-          const neworgproduct = await orgproduct.update({
-            cartId: unAuthedCart.id
-          })
-          console.log('orgproduct after', neworgproduct)
-        }
-      })
-      // if (originalCart) {
-      //   await CartProduct.update(
-      //     {cartId: unAuthedCart.id},
-      //     {where: {cartId: originalCart.id}}
-      //   )}
-
-      cart = unAuthedCart
-    } else {
-      const cartinstance = await Cart.findOrCreate({
-        where: {userId: existingUser.id}
-      })
-      cart = cartinstance[0]
+    if (originalCart) {
+      if (currentProductsInCart) {
+        await CartProduct.updateOrCreate(originalCart.id, cart.id)
+        await cart.update({userId: existingUser.id})
+        await originalCart.destroy()
+      } else {
+        await cart.destroy()
+        cart = originalCart
+      }
     }
   }
+
   return cart
 }
 
@@ -134,7 +97,6 @@ router.put('/:productId', async (req, res, next) => {
     // const updatedProduct = await currentProductInCart.increment({
     //   quantity: req.body.quantity ? req.body.quantity : 1
     // })
-    console.log('updatedProduct', updatedProduct)
     res.status(204).json(updatedProduct)
   } catch (err) {
     next(err)
