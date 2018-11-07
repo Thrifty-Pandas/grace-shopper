@@ -15,10 +15,17 @@ nav a {
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
+} */
+
+.signupForm {
+  margin: 1em;
+  width: 25%;
+  display: inline-block;
 }
+
 .signup {
   display: block;
   text-align: center;

@@ -28,7 +28,6 @@ class AllOrders extends Component {
   render() {
     const {allOrders, orderfilter} = this.props
     const ordersToDisplay = filterOrders(allOrders, orderfilter)
-    console.log('ordersToDisplay->', ordersToDisplay)
     return (
       <div>
         <OrderFilterForm />
