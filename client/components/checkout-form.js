@@ -3,6 +3,7 @@ import {Form, Icon, Button, Container, Divider} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {addNewOrder} from '../store'
 import {CardElement, injectStripe} from 'react-stripe-elements'
+import {SuccessPage} from '../components'
 import axios from 'axios'
 
 const mapState = ({cart, user}) => ({cart, user})
@@ -48,7 +49,7 @@ export class CheckoutForm extends Component {
   }
 
   render() {
-    if (this.state.complete) return <h1>Purchase Complete</h1> //ideally we'd just render a "success" component here
+    if (this.state.complete) return <SuccessPage />
     const {email, shippingAddress} = this.state
     return (
       <Container>
