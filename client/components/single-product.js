@@ -97,6 +97,7 @@ class SingleProduct extends React.Component {
                 {this.props.user.id &&
                   this.props.user.isAdmin && (
                     <Button
+                      color="teal"
                       onClick={() => {
                         this.toggleEditProduct()
                       }}

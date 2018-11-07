@@ -94,6 +94,7 @@ export class AllProducts extends Component {
         {this.props.user.id && this.props.user.isAdmin ? (
           <div>
             <Button
+              color="teal"
               onClick={() => {
                 this.toggleAddCategory()
               }}
@@ -101,6 +102,7 @@ export class AllProducts extends Component {
               <Icon name="add" />Add a Category{' '}
             </Button>
             <Button
+              color="teal"
               onClick={() => {
                 this.toggleAddProduct()
               }}

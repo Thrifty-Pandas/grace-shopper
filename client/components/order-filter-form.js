@@ -54,7 +54,7 @@ export class OrderFilterForm extends Component {
           ))}
         </Form.Group>
 
-        <Button type="submit">
+        <Button color="teal" type="submit">
           <Icon name="filter" />
           Apply Filter
         </Button>
