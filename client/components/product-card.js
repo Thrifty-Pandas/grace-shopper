@@ -16,7 +16,7 @@ const ProductCard = props => {
   return (
     <React.Fragment>
       <Link to={`/products/${id}`}>
-        <Card size="medium" image={imageUrl}>
+        <Card size="medium">
           <Card.Content header={name} />
           <Image src={imageUrl} height={175} width="auto" overflow="hidden" />
           <Card.Content extra>{`$ ${price}`}</Card.Content>
