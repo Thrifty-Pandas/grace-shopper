@@ -86,7 +86,7 @@ class UserForm extends Component {
           />
           <Divider horizontal />
 
-          <Form.Button content="Submit" />
+          <Form.Button color="teal" content="Submit" />
         </Form>
       </div>
     )
