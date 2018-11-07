@@ -5,7 +5,7 @@ import {
   AddCategoryForm,
   AddProduct
 } from './index'
-import {Header, Button, Icon} from 'semantic-ui-react'
+import {Header, Button, Icon, Grid, GridRow, Image} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
 import {getProductsInCartThunk} from '../store/cart'
@@ -89,34 +89,55 @@ export class AllProducts extends Component {
     const productsToDisplay = filterProducts(products, filter, search)
     return (
       <div>
-        <FilterForm />
+        <Grid>
+          <Grid.Row>
+            <Header as="h2" icon textAlign="center">
+              <Image
+                src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c39a.png"
+                circular
+              />
+              <Header.Content>Panda Products</Header.Content>
+            </Header>
+          </Grid.Row>
+          <Grid.Column width={3} padded stretched>
+            <Grid.Row>
+              <FilterForm />
+            </Grid.Row>
+            <Grid.Row>
+              {this.props.user.id && this.props.user.isAdmin ? (
+                <div>
+                  <Button
+                    onClick={() => {
+                      this.toggleAddCategory()
+                    }}
+                  >
+                    <Icon name="add" />Add a Category{' '}
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      this.toggleAddProduct()
+                    }}
+                  >
+                    <Icon name="add" />
+                    Add a Product
+                  </Button>
+                </div>
+              ) : null}
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column width={13}>
+            <GridRow>{this.state.addProductisOpened && <AddProduct />}</GridRow>
 
-        {this.props.user.id && this.props.user.isAdmin ? (
-          <div>
-            <Button
-              onClick={() => {
-                this.toggleAddCategory()
-              }}
-            >
-              <Icon name="add" />Add a Category{' '}
-            </Button>
-            <Button
-              onClick={() => {
-                this.toggleAddProduct()
-              }}
-            >
-              <Icon name="add" />
-              Add a Product
-            </Button>
-          </div>
-        ) : null}
-        {this.state.addCategoryisOpened && <AddCategoryForm />}
-        {this.state.addProductisOpened && <AddProduct />}
-        {search[0] === 'not found' ? (
-          <Header>Sorry, we couldn't find any results</Header>
-        ) : (
-          <PaginatedProducts products={productsToDisplay} />
-        )}
+            <Grid.Row>
+              {this.state.addCategoryisOpened && <AddCategoryForm />}
+            </Grid.Row>
+            {search[0] === 'not found' ? (
+              <Header>Sorry, we couldn't find any results</Header>
+            ) : (
+              <PaginatedProducts products={productsToDisplay} />
+            )}
+          </Grid.Column>
+        </Grid>
       </div>
     )
   }
